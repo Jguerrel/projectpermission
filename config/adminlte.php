@@ -336,6 +336,12 @@ return [
             'icon'    => 'fas fa-fw fa-mobile',
             'can'         => 'show-departamento',
         ],
+        [
+            'text' => 'Cuentas',
+            'url'  => 'accounts',
+            'icon'    => 'fas fa-fw fa-tag',
+            'can'         => 'show-account',
+        ],
       /*  [
             'text'        => 'pages',
             'url'         => 'admin/pages',
@@ -409,7 +415,7 @@ return [
             'url'        => '#',
         ],   */
         [
-             'text'    => 'CONFIGURACION',
+             'text'    => 'CONFIGURsACION',
              'icon'    => 'fas fa-fw fa-lock',
                 'submenu' =>
                 [
@@ -430,6 +436,12 @@ return [
                         'url'  => 'permissions',
                         'icon'    => 'fas fa-lock',
                         'can'         => 'show-permission',
+                    ],
+                    [
+                        'text' => 'Cuentas',
+                        'url'  => 'accounts',
+                        'icon'    => 'fas fa-lock',
+                        'can'         => 'show-account',
                     ],
                 ]
         ]

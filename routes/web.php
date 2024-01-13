@@ -11,6 +11,7 @@ use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\CargoController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TypedeviceController;
+use App\Http\Controllers\AccountController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -51,4 +52,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('cargos', CargoController::class);
     Route::resource('typedevices', TypedeviceController::class);
     Route::resource('employees', EmployeeController::class);
+    Route::resource('accounts', AccountController::class);
 });
