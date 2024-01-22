@@ -20,9 +20,13 @@ class AccountController extends Controller
 
     public function index(): View
     {
-        return view('account.index', [
+        return view('accounts.index', [
             'accounts' => Account::orderBy('id','ASC')->paginate(20)
         ]);
     }
+    public function create(): View
+    {
+        return view('accounts.create');
 
+    }
 }

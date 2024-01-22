@@ -29,17 +29,17 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('employees.store') }}" method="post">
+                <form action="{{ route('employees.store') }}" method="post"  enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3 row">
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start">Nombre</label>
-                        <div class="col-md-6">
+                        <d class="col-md-6">
                           <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
                             @if ($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
                             @endif
-                        </div>
+                        </d iv>
                     </div>
 
                     <div class="mb-3 row">
@@ -99,6 +99,15 @@
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Foto</label>
+                        <div class="col-md-6">
+                          <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo" value="{{ old('photo') }}">
+                            @if ($errors->has('photo'))
+                                <span class="text-danger">{{ $errors->first('photo') }}</span>
+                            @endif
                         </div>
                     </div>
                     <div class="mb-3 row">

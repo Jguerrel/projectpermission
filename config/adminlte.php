@@ -342,14 +342,14 @@ return [
             'icon'    => 'fas fa-fw fa-tag',
             'can'         => 'show-account',
         ],
-      /*  [
+    /*   [
             'text'        => 'pages',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+         ['header' => 'account_settings'],
         [
             'text' => 'profile',
             'url'  => 'admin/settings',
@@ -437,12 +437,7 @@ return [
                         'icon'    => 'fas fa-lock',
                         'can'         => 'show-permission',
                     ],
-                    [
-                        'text' => 'Cuentas',
-                        'url'  => 'accounts',
-                        'icon'    => 'fas fa-lock',
-                        'can'         => 'show-account',
-                    ],
+
                 ]
         ]
     ],

@@ -15,8 +15,10 @@ class Employee extends Model
         'lastname',
         'compania_id',
         'departamento_id',
-        'cargo_id'
+        'cargo_id',
+        'photo'
     ];
+
 
     public function cargo()
     {

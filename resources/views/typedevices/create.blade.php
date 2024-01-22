@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>>Tipo de dispositivo</h1>
+                    <h1>Tipo de dispositivo</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -42,7 +42,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="card-footer">
+                                <div class="form-group">
                                 <button type="submit" class="btn btn-info">Confirmar</button>
 
                                 </div>

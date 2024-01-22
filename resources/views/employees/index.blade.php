@@ -32,6 +32,7 @@
                 <th scope="col">Compañia</th>
                 <th scope="col">Departamento</th>
                 <th scope="col">Cargo</th>
+                <th scope="col">Foto</th>
                 <th scope="col" style="width: 20%;">Accion</th>
                 </tr>
             </thead>
@@ -44,6 +45,7 @@
                     <td>{{ $employee->compania->name }}</td>
                     <td>{{ $employee->departamento->name }}</td>
                     <td>{{ $employee->cargo->name }}</td>
+                    <td><img src="{{asset( $employee->photo)}}" alt="" class="img-fluid" width="120px"></td>
                     <td>
                             <form action="{{ route('employees.destroy', $employee->id) }}" method="post">
                                 @csrf

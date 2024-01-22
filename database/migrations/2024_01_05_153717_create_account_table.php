@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('account', function (Blueprint $table) {
+        Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('name',50)->nullable();
@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('link',300)->nullable();
             $table->string('description',300)->nullable();
         });
+        Schema::rename('account', 'accounts');
     }
 
     /**

@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('employees.update', $employee->id) }}" method="post">
+                <form action="{{ route('employees.update', $employee->id) }}" method="post"  enctype="multipart/form-data">
                     @csrf
                     @method("PUT")
                         <div class="mb-3 row">
@@ -43,9 +43,9 @@
                         <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Apellido</label>
                             <div class="col-md-6">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $employee->lastname }}">
-                                @if ($errors->has('name'))
-                                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                            <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" name="lastname" value="{{ $employee->lastname }}">
+                                @if ($errors->has('lastname'))
+                                    <span class="text-danger">{{ $errors->first('lastname') }}</span>
                                 @endif
                             </div>
                         </div>
@@ -91,6 +91,16 @@
                                    </select>
                         </div>
                       </div>
+                      <div class="mb-3 row">
+                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Foto</label>
+                            <div class="col-md-6">
+                            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo" value="{{ old('photo') }}"  placeholder="foto">
+                            @if ($errors->has('photo'))
+                                    <span class="text-danger">{{ $errors->first('photo') }}</span>
+                            @endif
+                                    <img src="{{asset( $employee->photo)}}" width="300px">
+                            </div>
+                        </div>
                     <div class="mb-3 row">
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-info" value="Actualizar">
                     </div>

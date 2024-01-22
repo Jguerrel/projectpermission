@@ -49,8 +49,17 @@ class EmployeeController extends Controller
 
     public function store(StoreEmployeeRequest $request): RedirectResponse
     {
+          $input = $request->all();
         ///$compania=Compania::findorFail($companiaid);
-        Employee::create($request->all());
+        if ($image = $request->file('photo')) {
+            $destinationPath = 'photos/';
+            $postImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $postImage);
+            $input['photo'] =$destinationPath . $postImage;
+
+        }
+        // dd($input['photo']);
+        Employee::create($input);
 
         return redirect()->route('employees.index')
                 ->withSuccess('Colaborador ha sido creado correctamente.');
@@ -71,7 +80,21 @@ class EmployeeController extends Controller
     }
     public function update(UpdateEmployeeRequest $request, Employee $employee): RedirectResponse
     {
-        $employee->update($request->all());
+        $input = $request->all();
+
+        ///$compania=Compania::findorFail($companiaid);
+        if ($image = $request->file('photo')) {
+            $destinationPath = 'photos/';
+            $postImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $postImage);
+            $input['photo'] =$destinationPath . $postImage;
+        }
+        else{
+            unset($input['photo']);
+        }
+
+        $employee->update($input);
+
         return redirect()->route('employees.index')
                 ->withSuccess('Colaborador ha sido actualizado correctamente.');
     }

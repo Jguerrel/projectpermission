@@ -26,7 +26,8 @@ class StoreEmployeeRequest extends FormRequest
             'lastname' => 'required|string|max:250',
             'compania_id' => 'required|exists:companias,id',
             'departamento_id' => 'required|exists:departamentos,id',
-            'cargo_id' => 'required|exists:cargos,id'
+            'cargo_id' => 'required|exists:cargos,id',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ];
     }
 }
