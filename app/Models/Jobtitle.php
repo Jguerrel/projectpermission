@@ -6,13 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
 
-class Departamento extends Model
+class Jobtitle extends Model
 {
     use HasFactory,HasRoles ;
 
     protected $fillable = [
-        'name',
-        'lastname'
+        'name'
     ];
 
     public function employees()

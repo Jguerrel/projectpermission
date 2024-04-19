@@ -25,21 +25,14 @@
                     <!-- general form elements -->
                     <div class="card card-info">
                             <div class="card-header">
-                            <a href="{{ route('companias.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
+                            <a href="{{ route('branches.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
                             </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                        <form action="{{ route('companias.store') }}"  method="post" id='permiso'>
+                        <form action="{{ route('branches.store') }}"  method="post" id='permiso'>
                         @csrf
                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="name">Codigo Eskema</label>
-                                    <input type="text" class="form-control"  name="ciacod" id="ciacod" placeholder="codigo eskema">
 
-                                    @error('ciacod')
-                                    <p class='text-danger inputerror'>{{ $message }} </p>
-                                    @enderror
-                                </div>
                                 <div class="form-group">
                                     <label for="name">Nombre </label>
                                     <input type="text" class="form-control" name="name"  id="name" placeholder="nombre" value=''>

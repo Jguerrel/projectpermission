@@ -11,7 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-         Schema::rename('account', 'accounts');
+        Schema::create('ipaddresses', function (Blueprint $table) {
+            $table->id();
+            $table->string('ip',20)->unique()->nullable(false);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('account');
+        Schema::dropIfExists('ipaddresses');
     }
 };

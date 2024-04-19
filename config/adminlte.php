@@ -210,7 +210,7 @@ return [
     |
     */
 
-    'sidebar_mini' => 'lg',
+    'sidebar_mini' => null,
     'sidebar_collapse' => false,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
@@ -308,13 +308,13 @@ return [
         ],
         [
             'text' => 'Compañias',
-            'url'  => 'admin/companias',
+            'url'  => 'admin/branches',
             'icon'    => 'fas fa-fw fa-landmark',
             'can'         => 'show-compania',
         ],
         [
             'text' => 'Departamentos',
-            'url'  => 'admin/departamentos',
+            'url'  => 'admin/departments',
             'icon'    => 'fas fa-fw fa-building ',
             'can'         => 'show-departamento',
         ],
@@ -326,7 +326,7 @@ return [
         ],
         [
             'text' => 'Cargos',
-            'url'  => 'admin/cargos',
+            'url'  => 'admin/jobtitles',
             'icon'    => 'fas fa-fw fa-file ',
             'can'         => 'show-cargo',
         ],
@@ -339,6 +339,12 @@ return [
         [
             'text' => 'Cuentas',
             'url'  => 'admin/accounts',
+            'icon'    => 'fas fa-fw fa-tag',
+            'can'         => 'show-account',
+        ],
+        [
+            'text' => 'Sucursales',
+            'url'  => 'admin/branchoffices',
             'icon'    => 'fas fa-fw fa-tag',
             'can'         => 'show-account',
         ],
@@ -415,7 +421,7 @@ return [
             'url'        => '#',
         ],   */
         [
-             'text'    => 'CONFIGURsACION',
+             'text'    => 'CONFIGURACION',
              'icon'    => 'fas fa-fw fa-lock',
                 'submenu' =>
                 [

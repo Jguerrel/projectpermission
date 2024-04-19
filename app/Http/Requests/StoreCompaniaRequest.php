@@ -22,7 +22,6 @@ class StoreCompaniaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ciacod'=>'required|string',
             'name'=>'required|string',
         ];
     }
@@ -30,7 +29,7 @@ class StoreCompaniaRequest extends FormRequest
     public function messages()
     {
         return [
-            'ciacod.required' => 'El :attribute es obligatorio.',
+
             'name.required' => 'El :attribute es obligatorio.',
         ];
 
@@ -40,7 +39,7 @@ class StoreCompaniaRequest extends FormRequest
     public function attributes()
         {
             return [
-                'ciacod' => 'codigo',
+
                 'name' => 'nombre ',
             ];
         }

@@ -23,7 +23,7 @@
 
     <div class="card-body">
        @can('create-departamento')
-            <a href="{{ route('departamentos.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
+            <a href="{{ route('departments.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
         <table class="table table-striped table-bordered "  id ="departamento">
         <thead>
@@ -34,19 +34,19 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($departamentos as $departamento)
+                @forelse ($departments as $department)
                 <tr>
                    <th scope="row">{{ $loop->iteration }}</th>
-                   <td>{{ $departamento->name }}</td>
+                   <td>{{ $department->name }}</td>
                    <td>
-                        <form action="{{ route('departamentos.destroy', $departamento->id) }}" method="post">
+                        <form action="{{ route('departments.destroy', $department->id) }}" method="post">
                             @csrf
                             @method('DELETE')
 
-                            <a href="{{ route('departamentos.show', $departamento->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>
+                            <a href="{{ route('departments.show', $department->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>
 
                                 @can('edit-departamento')
-                                    <a href="{{ route('departamentos.edit', $departamento->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>
+                                    <a href="{{ route('departments.edit', $department->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>
                                 @endcan
 
                                 @can('delete-departamento')

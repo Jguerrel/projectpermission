@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
-class Cargo extends Model
+
+class Department extends Model
 {
     use HasFactory,HasRoles ;
 
     protected $fillable = [
-        'name'
+        'name',
+        'lastname'
     ];
 
     public function employees()

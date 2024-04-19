@@ -5,11 +5,12 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Employee;
-use App\Models\Cargo;
-use App\Models\Departamento;
-use App\Models\Compania;
+use App\Models\Jobtitle;
+use App\Models\Department;
+use App\Models\Branch;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+
 class EmployeeController extends Controller
 {
 
@@ -24,7 +25,7 @@ class EmployeeController extends Controller
 
     public function index(): View
     {
-        $employees = Employee::with('compania', 'departamento','cargo')
+        $employees = Employee::with('branch', 'department','jobtitle')
         ->orderBy('id','DESC')
         ->paginate(10);
 
@@ -33,10 +34,10 @@ class EmployeeController extends Controller
 
     public function create(): View
     {
-        $companias = Compania::get();
-        $cargos = Cargo::get();
-        $departamentos = Departamento::get();
-        return view('employees.create',compact('companias','cargos','departamentos'));
+        $branches = Branch::get();
+        $jobtitles = Jobtitle::get();
+        $departments = Department::get();
+        return view('employees.create',compact('branches','jobtitles','departments'));
 
     }
     public function show(Employee $employee): View
@@ -49,6 +50,7 @@ class EmployeeController extends Controller
 
     public function store(StoreEmployeeRequest $request): RedirectResponse
     {
+
           $input = $request->all();
         ///$compania=Compania::findorFail($companiaid);
         if ($image = $request->file('photo')) {
@@ -56,6 +58,8 @@ class EmployeeController extends Controller
             $postImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $postImage);
             $input['photo'] =$destinationPath . $postImage;
+
+
 
         }
         // dd($input['photo']);
@@ -67,15 +71,15 @@ class EmployeeController extends Controller
 
     public function edit($id)
     {
-        $employee = Employee::with('compania', 'departamento','cargo')->findOrFail($id);;
-        $companias = Compania::all();
-        $cargos = Cargo::get();
-        $departamentos = Departamento::get();
+        $employee = Employee::with('branch', 'department','jobtitle')->findOrFail($id);;
+        $branches = Branch::all();
+        $jobtitles = Jobtitle::get();
+        $departments = Department::get();
 
         // return view('employees.edit', [
         //     'employee' => $employee
         // ]);
-        return view('employees.edit',compact('employee','companias','cargos','departamentos'));
+        return view('employees.edit',compact('employee','branches','jobtitles','departments'));
 
     }
     public function update(UpdateEmployeeRequest $request, Employee $employee): RedirectResponse

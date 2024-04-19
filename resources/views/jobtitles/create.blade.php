@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('cargos.index') }}">Cargos</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('jobtitles.index') }}">Cargos</a></li>
                     <li class="breadcrumb-item active">Nuevo</li>
                     </ol>
                 </div>
@@ -27,11 +27,11 @@
                     <!-- general form elements -->
                     <div class="card card-outline card-info">
                             <div class="card-header">
-                            <a href="{{ route('cargos.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
+                            <a href="{{ route('jobtitles.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
                             </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                        <form action="{{ route('cargos.store') }}"  method="post" id='cargos'>
+                        <form action="{{ route('jobtitles.store') }}"  method="post" id='cargos'>
                          @csrf
                            <div class="card-body">
                                 <div class="form-group">

@@ -13,25 +13,25 @@ class Employee extends Model
     protected $fillable = [
         'name',
         'lastname',
-        'compania_id',
-        'departamento_id',
-        'cargo_id',
+        'branch_id',
+        'department_id',
+        'jobtitle_id',
         'photo'
     ];
 
 
-    public function cargo()
+    public function Jobtitle()
     {
-        return $this->belongsTo(Cargo::class);
+        return $this->belongsTo(Jobtitle::class);
     }
 
-    public function compania()
+    public function branch()
     {
-        return $this->belongsTo(Compania::class);
+        return $this->belongsTo(Branch::class);
     }
-    public function departamento()
+    public function department()
     {
-        return $this->belongsTo(Departamento::class);
+        return $this->belongsTo(Department::class);
     }
 
 }

@@ -24,10 +24,10 @@ class StoreEmployeeRequest extends FormRequest
         return [
             'name' => 'required|string|max:250',
             'lastname' => 'required|string|max:250',
-            'compania_id' => 'required|exists:companias,id',
-            'departamento_id' => 'required|exists:departamentos,id',
-            'cargo_id' => 'required|exists:cargos,id',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'branch_id' => 'required|exists:branches,id',
+            'department_id' => 'required|exists:departments,id',
+            'jobtitle_id' => 'required|exists:jobtitles,id'
+           // 'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ];
     }
 }

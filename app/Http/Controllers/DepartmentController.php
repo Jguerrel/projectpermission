@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Departamento;
+use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Requests\UpdateDepartamentoRequest;
@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use App\http\Requests\StoreDepartamentoRequest;
 
 
-class DepartamentoController extends Controller
+class DepartmentController extends Controller
 {
     public function __construct()
     {
@@ -22,8 +22,8 @@ class DepartamentoController extends Controller
     }
     public function index(): View
     {
-        return view('departamentos.index', [
-            'departamentos' => departamento::orderBy('id','ASC')->paginate(20)
+        return view('departments.index', [
+            'departments' => Department::orderBy('id','ASC')->paginate(20)
         ]);
     }
 
@@ -36,31 +36,31 @@ class DepartamentoController extends Controller
     public function store(StoreDepartamentoRequest $request): RedirectResponse
     {
 
-        Departamento::create($request->all());
+        Department::create($request->all());
         return redirect()->route('departamentos.index')
                 ->withSuccess('Departmento ha sido agregado correctamente.');
     }
 
-    public function show(Departamento $departamento): View
+    public function show(Department $departamento): View
     {
         return view('departamentos.show', [
             'departamento' => $departamento
         ]);
     }
 
-    public function edit(Departamento $departamento)
+    public function edit(Department $departamento)
     {
         return view('departamentos.edit', [
             'departamento' => $departamento
         ]);
     }
-    public function update(UpdateDepartamentoRequest $request, Departamento $departamento): RedirectResponse
+    public function update(UpdateDepartamentoRequest $request, Department $departamento): RedirectResponse
     {
         $departamento->update($request->all());
         return redirect()->route('departamentos.index')
                 ->withSuccess('Departamento ha sido actualizado correctamente.');
     }
-    public function destroy(Departamento $departamento): RedirectResponse
+    public function destroy(Department $departamento): RedirectResponse
     {
         $departamento->delete();
         return redirect()->route('departamentos.index')

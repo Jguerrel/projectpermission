@@ -7,14 +7,14 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class DepartamentoSeeder extends Seeder
+class DepartmentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('Departamentos')->insert([
+        DB::table('departments')->insert([
             ['name' => 'Administracion Contabilidad','created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Administracion CSC & IT','created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Administracion Gerencia','created_at' => Carbon::now(), 'updated_at' => Carbon::now()],

@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Cargo;
+use App\Models\Jobtitle;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\UpdateCargoRequest;
 use App\Http\Requests\StoreCargoRequest;
-class CargoController extends Controller
+
+
+class JobtitleController extends Controller
 {
     public function __construct()
     {
@@ -22,47 +24,47 @@ class CargoController extends Controller
 
     public function index(): View
     {
-        return view('cargos.index', [
-            'cargos' => Cargo::orderBy('id','ASC')->paginate(20)
+        return view('jobtitles.index', [
+            'jobtitles' => jobtitle::orderBy('id','ASC')->paginate(20)
         ]);
     }
 
     public function create(): View
     {
-        return view('cargos.create');
+        return view('jobtitles.create');
 
     }
     public function store(StoreCargoRequest $request): RedirectResponse
     {
-        Cargo::create($request->all());
-        return redirect()->route('cargos.index')
+        jobtitle::create($request->all());
+        return redirect()->route('jobtitles.index')
         ->with('success','Cargo creado correctamente');
 
     }
-    public function show(Cargo $cargo)
+    public function show(Jobtitle $jobtitle)
     {
-        return view('cargos.show', [
-            'cargo' => $cargo
+        return view('jobtitles.show', [
+            'jobtitle' => $jobtitle
         ]);
     }
 
-    public function edit(Cargo $cargo)
+    public function edit(Jobtitle $jobtitle)
     {
-        return view('cargos.edit', [
-            'cargo' => $cargo
+        return view('jobtitles.edit', [
+            'cargo' => $jobtitle
         ]);
     }
-    public function update(UpdateCargoRequest $request, Cargo $cargo): RedirectResponse
+    public function update(UpdateCargoRequest $request, Jobtitle $jobtitle): RedirectResponse
     {
-        $cargo->update($request->all());
-        return redirect()->route('cargos.index')
+        $jobtitle->update($request->all());
+        return redirect()->route('jobtitles.index')
                 ->withSuccess('Cargo ha sido actualizado correctamente.');
     }
 
-    public function destroy(Cargo $cargo): RedirectResponse
+    public function destroy(Jobtitle $jobtitle): RedirectResponse
     {
-        $cargo->delete();
-        return redirect()->route('cargos.index')
+        $jobtitle->delete();
+        return redirect()->route('jobtitles.index')
                 ->withSuccess('Cargo ha sido eliminado correctamente.');
     }
 

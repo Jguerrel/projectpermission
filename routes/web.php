@@ -6,12 +6,13 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\CompaniaController;
-use App\Http\Controllers\DepartamentoController;
-use App\Http\Controllers\CargoController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\JobtitleController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TypedeviceController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\BranchOfficeController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -47,10 +48,11 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
 	Route::resource('users', UserController::class);
 	Route::resource('permissions', PermissionController::class);
     Route::resource('products', ProductController::class);
-    Route::resource('companias', CompaniaController::class);
-    Route::resource('departamentos', DepartamentoController::class);
-    Route::resource('cargos', CargoController::class);
+    Route::resource('branches', BranchController::class);
+    Route::resource('departments', DepartmentController::class);
+    Route::resource('jobtitles', JobtitleController::class);
     Route::resource('typedevices', TypedeviceController::class);
     Route::resource('employees', EmployeeController::class);
     Route::resource('accounts', AccountController::class);
+    Route::resource('branchoffices', BranchOfficeController::class);
 });

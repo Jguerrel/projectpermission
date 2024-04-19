@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             RoleSeeder::class,
             SuperAdminSeeder::class,
-            CompaniaSeeder::class,
-            DepartamentoSeeder::class,
-            BranchSeeder::class
+            BranchSeeder::class,
+            DepartmentSeeder::class,
+            Branch_OfficeSeeder::class
         ]);
     }
 }

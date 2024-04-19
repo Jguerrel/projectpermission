@@ -41,11 +41,11 @@
                 <tr>
                    <th scope="row">{{ $loop->iteration }}</th>
                    <td>{{ $account->name }}</td>
-                   <td>{{ $account->password }}</td>
+                   <td class="hidetext">{{ $account->password }}</td>
                    <td>{{ $account->link }}</td>
                    <td>{{ $account->description }}</td>
                    <td>
-                        <form action="{{ route('accounts.destroy', $accounts->id) }}" method="post">
+                        <form action="{{ route('accounts.destroy', $account->id) }}" method="post">
                             @csrf
                             @method('DELETE')
 
@@ -91,3 +91,6 @@ $(document).ready(function() {
 
 @endsection
 
+<!-- <style>  incluir en estilo para no mostrar contraseña
+    .hidetext { -webkit-text-security: disc; /* Default */ }
+</style> -->

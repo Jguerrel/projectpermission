@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class BranchSeeder extends Seeder
 {
@@ -14,13 +13,11 @@ class BranchSeeder extends Seeder
      */
     public function run(): void
     {
-
-        DB::table('Branches')->insert([
-            ['name' => 'Ricardo J. Alfaro','compania_id'=>1,'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Ricardo J. Alfaro','compania_id'=>2,'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+        DB::table('branches')->insert([
+            ['name' => 'Bahia Motors S.A.'],
+            ['name' => 'Bay Motors S.A.'],
+            ['name' => 'Sanae'],
             // Agrega más registros según sea necesario
         ]);
-
-
-     }
+    }
 }

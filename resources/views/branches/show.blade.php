@@ -25,7 +25,7 @@
                     Información de Compañia
                 </div>
                 <div class="float-end">
-                    <a href="{{ route('companias.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
+                    <a href="{{ route('branches.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
                 </div>
             </div>
             <div class="card-body">
@@ -33,7 +33,7 @@
                     <div class="mb-3 row">
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Nombre:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                            {{ $compania->name }}
+                            {{ $branch->name }}
                         </div>
                     </div>
 

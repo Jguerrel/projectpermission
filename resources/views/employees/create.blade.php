@@ -57,11 +57,11 @@
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Compañia</label>
                         <div class="col-md-6">
                           <div class="form-group">
-                                    <select class="form-control js-example-basic-single select2 @error('companias') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="companias" id="companias" name="compania_id">
+                                    <select class="form-control js-example-basic-single select2 @error('branches') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="companias" id="companias" name="compania_id">
                                                <option value="" disabled selected>Seleccione Item</option>
-                                        @foreach ($companias as $compania)
-                                             <option value="{{ $compania->id }}" {{ in_array($compania->id, old('companias') ?? []) ? 'selected' : '' }}>
-                                               {{ $compania->name }}
+                                        @foreach ($branches as $branch)
+                                             <option value="{{ $branch->id }}" {{ in_array($branch->id, old('branches') ?? []) ? 'selected' : '' }}>
+                                               {{ $branch->name }}
                                             </option>
 
                                         @endforeach
@@ -73,11 +73,11 @@
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Departamentos</label>
                         <div class="col-md-6">
                           <div class="form-group">
-                                <select class="form-control js-example-basic-single select2 @error('departamentos') is-invalid @enderror "  data-placeholder="Seleccione Item"   id="departamento" name="departamento_id">
+                                <select class="form-control js-example-basic-single select2 @error('departments') is-invalid @enderror "  data-placeholder="Seleccione Item"   id="departamento" name="departamento_id">
                                 <option value="" disabled selected>Seleccione Item</option>
-                                  @foreach ($departamentos as $departamento)
-                                        <option value="{{ $departamento->id }}" {{ in_array($departamento->id, old('departamentos') ?? []) ? 'selected' : '' }}>
-                                            {{ $departamento->name }}
+                                  @foreach ($departments as $department)
+                                        <option value="{{ $department->id }}" {{ in_array($department->id, old('departments') ?? []) ? 'selected' : '' }}>
+                                            {{ $department->name }}
                                         </option>
 
                                     @endforeach
@@ -89,11 +89,11 @@
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Cargo</label>
                         <div class="col-md-6">
                           <div class="form-group">
-                                <select class="form-control js-example-basic-single select2 @error('cargos') is-invalid @enderror "  data-placeholder="Seleccione Item"   id="cargo" name="cargo_id">
+                                <select class="form-control js-example-basic-single select2 @error('jobtitles') is-invalid @enderror "  data-placeholder="Seleccione Item"   id="cargo" name="cargo_id">
                                  <option value="" disabled selected>Seleccione Item</option>
-                                    @foreach ($cargos as $cargo)
-                                        <option value="{{ $cargo->id }}" >
-                                            {{ $cargo->name }}
+                                    @foreach ($jobtitles as $jobtitle)
+                                        <option value="{{ $jobtitle->id }}" >
+                                            {{ $jobtitle->name }}
                                         </option>
 
                                     @endforeach

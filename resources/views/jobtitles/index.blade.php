@@ -6,25 +6,26 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Compañias</h1>
+                    <h1>Cargos</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active"><a href="#">Compañias</a></li>
+                    <li class="breadcrumb-item active"><a href="#">Cargos</a></li>
 
                     </ol>
                 </div>
                 </div>
             </div><!-- /.container-fluid -->
 </section>
+
 <div class="card card-info card-outline">
-    <!-- <div class="card-header">Permisos</div> -->
+    <!-- <div class="card-header">Cargos</div> -->
 
     <div class="card-body">
-       @can('create-compania')
-            <a href="{{ route('companias.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
+       @can('create-cargo')
+            <a href="{{ route('jobtitles.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
-        <table class="table table-striped table-bordered dataTable dtr-inline" id ="compania">
+        <table class="table table-striped table-bordered dataTable dtr-inline" id='cargos'>
         <thead>
                 <tr>
                 <th scope="col">#</th>
@@ -33,22 +34,22 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($companias as $compania)
+                @forelse ($jobtitles as $jobtitle)
                 <tr>
                    <th scope="row">{{ $loop->iteration }}</th>
-                   <td>{{ $compania->name }}</td>
+                   <td>{{ $jobtitle->name }}</td>
                    <td>
-                        <form action="{{ route('companias.destroy', $compania->id) }}" method="post">
+                        <form action="{{ route('jobtitles.destroy', $jobtitle->id) }}" method="post">
                             @csrf
                             @method('DELETE')
 
-                            <a href="{{ route('companias.show', $compania->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>
+                            <a href="{{ route('jobtitles.show', $jobtitle->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>
 
-                                @can('edit-compania')
-                                    <a href="{{ route('companias.edit', $compania->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>
+                                @can('edit-cargo')
+                                    <a href="{{ route('jobtitles.edit', $jobtitle->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>
                                 @endcan
 
-                                @can('delete-compania')
+                                @can('delete-cargo')
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this user?');"><i class="fas fa-trash"></i> Eliminar</button>
                                 @endcan
 
@@ -72,7 +73,7 @@
 
 $(document).ready(function() {
 
-    var table = $('#compania').DataTable({
+    var table = $('#cargos').DataTable({
         language: {
         url: 'https://cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json',
          }
