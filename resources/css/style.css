@@ -1,0 +1,5 @@
+.hidetext {
+    -webkit-text-security: circle;
+   -webkit-text-stroke: 0.7px;
+
+}

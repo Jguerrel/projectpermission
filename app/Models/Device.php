@@ -5,18 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BranchOffice extends Model
+class Device extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'name',
-        'branch_id'
-
+        'serialnumber',
+        'model'
     ];
-
-    public function Branch()
-    {
-        return $this->belongsTo(Branch::class);
-    }
 }

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 use Illuminate\View\View;
 use App\Models\BranchOffice;
+use App\Models\Branch;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-
+use App\Http\Requests\StoreBranchOfficeRequest;
+use App\Http\Requests\UpdateBranchOfficeRequest;
 class BranchOfficeController extends Controller
 {
 
@@ -21,15 +23,61 @@ class BranchOfficeController extends Controller
     }
 
     public function index(): View
-    {
-        // return view('branch_offices.index', [
+    {   // return view('branch_offices.index', [
         //     'branchoffices' => BranchOffice::orderBy('id','ASC')->paginate(20)
         // ]);
         $branchoffices = BranchOffice::with('branch')
         ->orderBy('id','DESC')
-        ->paginate(10);
+        ->paginate(20);
 
         return view('branchoffices.index', compact('branchoffices'));
+    }
+    public function show(BranchOffice $branchoffice): View
+    {
+          
+        return view('branchoffices.show', [
+            'branchoffice' => $branchoffice
+        ]);
+    }
+
+    public function create(): View
+    {   
+        $branches = Branch::all();
+        return view('branchoffices.create',compact('branches') );
+
+    }
+//3421110600004 cuenta de mas movil panama
+    public function edit($id)
+    {
+        $branchoffice = BranchOffice::with('branch')->findOrFail($id);;
+        $branches = Branch::all();
+        return view('branchoffices.edit',compact('branchoffice','branches'));
+
+    }
+
+    public function update(UpdateBranchOfficeRequest $request, BranchOffice $branchoffice): RedirectResponse
+    {
+        $input = $request->all();
+
+        $branchoffice->update($input);
+
+        return redirect()->route('branchoffices.index')
+                ->withSuccess('Sucursal ha sido actualizada correctamente.');
+    }
+
+    public function store(StoreBranchOfficeRequest $request): RedirectResponse
+    {
+       
+        BranchOffice::create($request->all());
+        return redirect()->route('branchoffices.index')
+                ->withSuccess('Sucursal ha sido agregado correctamente.');
+    }
+
+    public function destroy(BranchOffice $branchoffice): RedirectResponse
+    {
+        $branchoffice->delete();
+        return redirect()->route('branchoffices.index')
+                ->withSuccess('Sucursal ha sido eliminado correctamente');
     }
 
 }

@@ -29,7 +29,7 @@ class DepartmentController extends Controller
 
     public function create(): View
     {
-        return view('departamentos.create');
+        return view('departments.create');
 
     }
 
@@ -37,33 +37,33 @@ class DepartmentController extends Controller
     {
 
         Department::create($request->all());
-        return redirect()->route('departamentos.index')
+        return redirect()->route('departments.index')
                 ->withSuccess('Departmento ha sido agregado correctamente.');
     }
 
-    public function show(Department $departamento): View
+    public function show(Department $department): View
     {
-        return view('departamentos.show', [
-            'departamento' => $departamento
+        return view('departments.show', [
+            'department' => $department
         ]);
     }
 
-    public function edit(Department $departamento)
+    public function edit(Department $department)
     {
-        return view('departamentos.edit', [
-            'departamento' => $departamento
+        return view('departments.edit', [
+            'department' => $department
         ]);
     }
-    public function update(UpdateDepartamentoRequest $request, Department $departamento): RedirectResponse
+    public function update(UpdateDepartamentoRequest $request, Department $department): RedirectResponse
     {
-        $departamento->update($request->all());
-        return redirect()->route('departamentos.index')
+        $department->update($request->all());
+        return redirect()->route('departments.index')
                 ->withSuccess('Departamento ha sido actualizado correctamente.');
     }
-    public function destroy(Department $departamento): RedirectResponse
+    public function destroy(Department $department): RedirectResponse
     {
-        $departamento->delete();
-        return redirect()->route('departamentos.index')
+        $department->delete();
+        return redirect()->route('departments.index')
                 ->withSuccess('departamento ha sido eliminado correctamente');
     }
 

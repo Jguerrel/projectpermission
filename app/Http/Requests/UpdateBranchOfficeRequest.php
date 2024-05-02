@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateEmployeeRequest extends FormRequest
+class UpdateBranchOfficeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,27 @@ class UpdateEmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:250',
-            'lastname' => 'required|string|max:250',
-            'branch_id' => 'required|exists:branches,id',
-            'department_id' => 'required|exists:departments,id',
-            'jobtitle_id' => 'required|exists:jobtitles,id',
-           // 'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+
+            'name'=>'required|string',
         ];
     }
+
+    public function messages()
+    {
+        return [
+
+            'name.required' => 'El :attribute es obligatorio.',
+        ];
+
+
+    }
+
+    public function attributes()
+        {
+            return [
+
+                'name' => 'nombre ',
+            ];
+        }
+
 }

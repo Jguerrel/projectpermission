@@ -7,7 +7,7 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\UpdateCargoRequest;
 use App\Http\Requests\StoreCargoRequest;
-
+use DataTables;
 
 class JobtitleController extends Controller
 {
@@ -25,8 +25,23 @@ class JobtitleController extends Controller
     public function index(): View
     {
         return view('jobtitles.index', [
-            'jobtitles' => jobtitle::orderBy('id','ASC')->paginate(20)
+            'jobtitles' => jobtitle::orderBy('id','ASC')->paginate(10)
         ]);
+    }
+
+    public function pagination()
+    {
+
+        if(request()->ajax()) {
+
+	        return Datatables()->of(jobtitle::select('*'))
+	        ->addColumn('action', 'blog-action')
+	        ->rawColumns(['action'])
+	        ->addIndexColumn()
+	        ->make(true);
+	    }
+        return view('jobtitles.pagination', compact('jobtitles'));
+
     }
 
     public function create(): View
@@ -51,7 +66,7 @@ class JobtitleController extends Controller
     public function edit(Jobtitle $jobtitle)
     {
         return view('jobtitles.edit', [
-            'cargo' => $jobtitle
+            'jobtitle' => $jobtitle
         ]);
     }
     public function update(UpdateCargoRequest $request, Jobtitle $jobtitle): RedirectResponse

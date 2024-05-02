@@ -52,11 +52,11 @@
                         <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Compañia</label>
                             <div class="col-md-6">
-                            <select class="form-control js-example-basic-single select2 @error('companias') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="companias" id="compania_id" name="compania_id">
+                            <select class="form-control js-example-basic-single select2 @error('branches') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="branches" id="branch_id" name="branch_id">
                                         <option value="" disabled selected>Seleccione Item</option>
-                                        @foreach ($companias as $compania)
-                                         <option value="{{ $compania->id }}"  {{ $employee->compania->id == $compania->id ? 'selected' : '' }}>
-                                               {{ $compania->name }}
+                                        @foreach ($branches as $branch)
+                                         <option value="{{ $branch->id }}"  {{ $employee->branch->id == $branch->id ? 'selected' : '' }}>
+                                               {{ $branch->name }}
                                         </option>
 
                                         @endforeach
@@ -66,11 +66,11 @@
                       <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Departamento</label>
                             <div class="col-md-6">
-                            <select class="form-control js-example-basic-single select2 @error('departamentos') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="departamentos" id="departamento_id" name="departamento_id">
+                            <select class="form-control js-example-basic-single select2 @error('departamentos') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="departments" id="department_id" name="department_id">
                                         <option value="" disabled selected>Seleccione Item</option>
-                                        @foreach ($departamentos as $departamento)
-                                         <option value="{{ $departamento->id }}"  {{ $employee->departamento->id == $departamento->id ? 'selected' : '' }}>
-                                               {{ $departamento->name }}
+                                        @foreach ($departments as $department)
+                                         <option value="{{ $department->id }}"  {{ $employee->department->id == $department->id ? 'selected' : '' }}>
+                                               {{ $department->name }}
                                         </option>
 
                                         @endforeach
@@ -80,11 +80,11 @@
                       <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Cargo</label>
                             <div class="col-md-6">
-                            <select class="form-control js-example-basic-single select2 @error('cargos') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="cargos" id="cargo_id" name="cargo_id">
+                            <select class="form-control js-example-basic-single select2 @error('jobtitles') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="cargos" id="jobtitle_id" name="jobtitle_id">
                                         <option value="" disabled selected>Seleccione Item</option>
-                                        @foreach ($cargos as $cargo)
-                                         <option value="{{ $cargo->id }}"  {{ $employee->cargo->id == $cargo->id ? 'selected' : '' }}>
-                                               {{ $cargo->name }}
+                                        @foreach ($jobtitles as $jobtitle)
+                                         <option value="{{ $jobtitle->id }}"  {{ $employee->jobtitle->id == $jobtitle->id ? 'selected' : '' }}>
+                                               {{ $jobtitle->name }}
                                         </option>
 
                                         @endforeach

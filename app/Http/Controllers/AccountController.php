@@ -1,9 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\StoreAccountRequest;
+use Carbon\Carbon;
+use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class AccountController extends Controller
 {
@@ -12,16 +17,16 @@ class AccountController extends Controller
     {
 
         $this->middleware('auth');
-         $this->middleware('permission:create-account|edit-account|delete-account', ['only' => ['index']]);
-         $this->middleware('permission:create-account', ['only' => ['create','store']]);
-         $this->middleware('permission:edit-account', ['only' => ['edit','update']]);
-        $this->middleware('permission:delete-account', ['only' => ['destroy']]);
+         $this->middleware('permission:crear-cuenta|editar-cuenta|eliminar-cuenta', ['only' => ['index']]);
+         $this->middleware('permission:crear-cuenta', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-cuenta', ['only' => ['edit','update']]);
+        $this->middleware('permission:eliminar-cuenta', ['only' => ['destroy']]);
     }
 
     public function index(): View
     {
         return view('accounts.index', [
-            'accounts' => Account::orderBy('id','ASC')->paginate(20)
+            'accounts' => Account::orderBy('id','ASC')->paginate(400)
         ]);
     }
     public function create(): View
@@ -29,4 +34,41 @@ class AccountController extends Controller
         return view('accounts.create');
 
     }
+
+    public function store(StoreAccountRequest $request,Account $account): RedirectResponse
+    {
+        account::create($request->all());
+        return redirect()->route('accounts.index')
+        ->with('success','Cuenta creada correctamente');
+
+    }
+
+    public function show(Account $account)
+    {
+        return view('accounts.show', [
+            'account' => $account
+        ]);
+    }
+
+    public function edit(Account $account)
+    {
+        return view('accounts.edit', [
+            'account' => $account
+        ]);
+    }
+
+    public function update(UpdateAccountRequest $request, Account $account): RedirectResponse
+    {
+        $account->updated_at= Carbon::now();
+        $account->update($request->all());
+        return redirect()->route('accounts.index')
+                ->withSuccess('Cuenta ha sido actualizado correctamente.');
+    }
+    public function destroy(Account $account): RedirectResponse
+    {
+        $account->delete();
+        return redirect()->route('accounts.index')
+                ->withSuccess('Cuenta ha sido eliminada correctamente');
+    }
+
 }

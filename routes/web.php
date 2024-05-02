@@ -13,6 +13,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TypedeviceController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BranchOfficeController;
+use App\Http\Controllers\DeviceController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -55,4 +56,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::resource('employees', EmployeeController::class);
     Route::resource('accounts', AccountController::class);
     Route::resource('branchoffices', BranchOfficeController::class);
+    Route::resource('devices', DeviceController::class);
+
 });
+Route::get('employees', [EmployeeController::class, 'pagination'])->name('employees.pagination');
+//Route::get('employees/getemployee', 'EmployeeController@getemployee')->name('employees.getemployee');

@@ -36,58 +36,48 @@
                 <th scope="col" style="width: 20%;">Accion</th>
                 </tr>
             </thead>
-            <tbody>
-                 @forelse ($employees as $employee)
-                 <tr>
-                    <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $employee->name }}</td>
-                    <td>{{ $employee->lastname }}</td>
-                    <td>{{ $employee->compania->name }}</td>
-                    <td>{{ $employee->departamento->name }}</td>
-                    <td>{{ $employee->cargo->name }}</td>
-                    <td><img src="{{asset( $employee->photo)}}" alt="" class="img-fluid" width="120px"></td>
-                    <td>
-                            <form action="{{ route('employees.destroy', $employee->id) }}" method="post">
-                                @csrf
-                                @method('DELETE')
 
-                                <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>
-
-                                    @can('edit-employee')
-                                        <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>
-                                    @endcan
-
-                                    @can('delete-employee')
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this user?');"><i class="fas fa-trash"></i> Eliminar</button>
-                                    @endcan
-
-
-                            </form>
-                        </td>
-                    </tr>
-                 @empty
-                    <td colspan="5">
-                        <span class="text-danger">
-                            <strong>No User Found!</strong>
-                        </span>
-                    </td>
-                @endforelse
-            </tbody>
        </table>
     </div>
 </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
 <script type="text/javascript">
-
+let rutaTabla = "{{route('employees.index')}}";
 $(document).ready(function() {
+    $.ajaxSetup({
+    headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
 
-    var table = $('#employeedatatable').DataTable({
-        language: {
-        url: 'https://cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json',
-         }
+  $('#employeedatatable').DataTable({
+           processing: true,
+           serverSide: true,
+           ajax: {
+                url: "{{ route('employees.pagination') }}",
+                type: "GET",
+                // success:function(data){
+                //  alert(JSON.stringify(data))
+                // },
+                 error : function(xhr, textStatus, errorThrown){
 
+                    console.log('error'+JSON.stringify(xhr))
+                }
+            },
+           columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'name', name: 'name' },
+                    { data: 'lastname', name: 'lastname' },
+                    { data: 'branch.name', name: 'branch.name' },
+                    { data: 'department.name', name: 'department.name' },
+                    { data: 'jobtitle.name', name: 'jobtitle.name' },
+                    { data: 'photo', name: 'photo' , orderable: false},
+                     {data: 'action', name: 'action', orderable: false},
+                 ],
+                 order: [[0, 'desc']]
+       });
 
-    });
 });
 </script>
 

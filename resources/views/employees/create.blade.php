@@ -57,7 +57,7 @@
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Compañia</label>
                         <div class="col-md-6">
                           <div class="form-group">
-                                    <select class="form-control js-example-basic-single select2 @error('branches') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="companias" id="companias" name="compania_id">
+                                    <select class="form-control js-example-basic-single select2 @error('branches') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="branches" id="branches" name="branch_id">
                                                <option value="" disabled selected>Seleccione Item</option>
                                         @foreach ($branches as $branch)
                                              <option value="{{ $branch->id }}" {{ in_array($branch->id, old('branches') ?? []) ? 'selected' : '' }}>
@@ -73,7 +73,7 @@
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Departamentos</label>
                         <div class="col-md-6">
                           <div class="form-group">
-                                <select class="form-control js-example-basic-single select2 @error('departments') is-invalid @enderror "  data-placeholder="Seleccione Item"   id="departamento" name="departamento_id">
+                                <select class="form-control js-example-basic-single select2 @error('departments') is-invalid @enderror "  data-placeholder="Seleccione Item"   id="department" name="department_id">
                                 <option value="" disabled selected>Seleccione Item</option>
                                   @foreach ($departments as $department)
                                         <option value="{{ $department->id }}" {{ in_array($department->id, old('departments') ?? []) ? 'selected' : '' }}>
@@ -89,7 +89,7 @@
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Cargo</label>
                         <div class="col-md-6">
                           <div class="form-group">
-                                <select class="form-control js-example-basic-single select2 @error('jobtitles') is-invalid @enderror "  data-placeholder="Seleccione Item"   id="cargo" name="cargo_id">
+                                <select class="form-control js-example-basic-single select2 @error('jobtitles') is-invalid @enderror "  data-placeholder="Seleccione Item"   id="jobtitle" name="jobtitle_id">
                                  <option value="" disabled selected>Seleccione Item</option>
                                     @foreach ($jobtitles as $jobtitle)
                                         <option value="{{ $jobtitle->id }}" >

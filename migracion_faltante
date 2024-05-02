@@ -1,0 +1,3 @@
+
+php artisan make:migration modify_column_on_jobtitle_table --table=jobtitles
+php artisan migrate

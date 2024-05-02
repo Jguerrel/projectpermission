@@ -24,11 +24,11 @@
                     Nuevo Departamento
                 </div>
                 <div class="float-end">
-                    <a href="{{ route('departamentos.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
+                    <a href="{{ route('departments.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('departamentos.store') }}" method="post">
+                <form action="{{ route('departments.store') }}" method="post">
                     @csrf
 
                     <div class="mb-3 row">

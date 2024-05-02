@@ -218,7 +218,7 @@ return [
     'sidebar_scrollbar_theme' => 'os-theme-light',
     'sidebar_scrollbar_auto_hide' => 'l',
     'sidebar_nav_accordion' => true,
-    'sidebar_nav_animation_speed' => 300,
+    'sidebar_nav_animation_speed' => 600,
 
     /*
     |--------------------------------------------------------------------------
@@ -310,43 +310,49 @@ return [
             'text' => 'Compañias',
             'url'  => 'admin/branches',
             'icon'    => 'fas fa-fw fa-landmark',
-            'can'         => 'show-compania',
+            'can'         => 'mostrar-compania',
         ],
         [
             'text' => 'Departamentos',
             'url'  => 'admin/departments',
             'icon'    => 'fas fa-fw fa-building ',
-            'can'         => 'show-departamento',
+            'can'         => 'mostrar-departamento',
         ],
         [
             'text' => 'Colaboradores',
             'url'  => 'admin/employees',
             'icon'    => 'fas fa-fw fa-address-card',
-            'can'         => 'show-departamento',
+            'can'         => 'mostrar_colaboradores',
         ],
         [
             'text' => 'Cargos',
             'url'  => 'admin/jobtitles',
             'icon'    => 'fas fa-fw fa-file ',
-            'can'         => 'show-cargo',
+            'can'         => 'mostrar-cargo',
         ],
         [
             'text' => 'Tipos de Dispositivos',
             'url'  => 'admin/typedevices',
             'icon'    => 'fas fa-fw fa-mobile',
-            'can'         => 'show-departamento',
+            'can'         => 'mostrar-tipos_dispositivo',
         ],
         [
             'text' => 'Cuentas',
             'url'  => 'admin/accounts',
             'icon'    => 'fas fa-fw fa-tag',
-            'can'         => 'show-account',
+            'can'         => 'mostrar-cuenta',
         ],
         [
             'text' => 'Sucursales',
             'url'  => 'admin/branchoffices',
             'icon'    => 'fas fa-fw fa-tag',
-            'can'         => 'show-account',
+            'can'         => 'mostrar-sucursal',
+        ],
+        [
+            'text' => 'Dispositivos',
+            'url'  => 'admin/devices',
+            'icon'    => 'fas fa-fw fa-desktop',
+            'can'         => 'mostrar-dispositivo',
         ],
     /*   [
             'text'        => 'pages',
@@ -429,19 +435,19 @@ return [
                         'text' => 'Usuarios',
                         'url'  => 'admin/users',
                         'icon'    => 'fas fa-users-cog',
-                        'can'         => 'show-user',
+                        'can'         => 'mostrar-usuario',
                     ],
                     [
                         'text' => 'Roles',
                         'url'  => 'admin/roles',
                         'icon'    => 'fas fa-dice-d20',
-                        'can'         => 'show-role',
+                        'can'         => 'mostrar-rol',
                     ],
                     [
                         'text' => 'Permisos',
                         'url'  => 'admin/permissions',
                         'icon'    => 'fas fa-lock',
-                        'can'         => 'show-permission',
+                        'can'         => 'mostrar-permisos',
                     ],
 
                 ]

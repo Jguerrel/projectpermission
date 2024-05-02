@@ -41,7 +41,7 @@
                 <tr>
                    <th scope="row">{{ $loop->iteration }}</th>
                    <td>{{ $account->name }}</td>
-                   <td class="hidetext">{{ $account->password }}</td>
+                   <td  style ="-webkit-text-security: circle;" >{{ $account->password }}</td>
                    <td>{{ $account->link }}</td>
                    <td>{{ $account->description }}</td>
                    <td>
@@ -51,11 +51,11 @@
 
                             <a href="{{ route('accounts.show', $account->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>
 
-                                @can('edit-account')
+                                @can('editar-cuenta')
                                     <a href="{{ route('accounts.edit', $account->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>
                                 @endcan
 
-                                @can('delete-account')
+                                @can('eliminar-cuenta')
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Seguro que deseas eliminar la cuenta?');"><i class="fas fa-trash"></i> Eliminar</button>
                                 @endcan
 
@@ -90,7 +90,3 @@ $(document).ready(function() {
 </script>
 
 @endsection
-
-<!-- <style>  incluir en estilo para no mostrar contraseña
-    .hidetext { -webkit-text-security: disc; /* Default */ }
-</style> -->

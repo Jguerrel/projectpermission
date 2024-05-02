@@ -24,17 +24,17 @@
                     Editar Departamento
                 </div>
                 <div class="float-end">
-                    <a href="{{ route('departamentos.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
+                    <a href="{{ route('departments.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('departamentos.update', $departamento->id) }}" method="post">
+                <form action="{{ route('departments.update', $department->id) }}" method="post">
                     @csrf
                     @method("PUT")
                         <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Nombre</label>
                             <div class="col-md-6">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $departamento->name }}">
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $department->name }}">
                                 @if ($errors->has('name'))
                                     <span class="text-danger">{{ $errors->first('name') }}</span>
                                 @endif
