@@ -8,7 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\JobtitleController;
+use App\Http\Controllers\JobTitleController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TypedeviceController;
 use App\Http\Controllers\AccountController;

@@ -46,7 +46,6 @@ class BranchOfficeController extends Controller
         return view('branchoffices.create',compact('branches') );
 
     }
-//3421110600004 cuenta de mas movil panama
     public function edit($id)
     {
         $branchoffice = BranchOffice::with('branch')->findOrFail($id);;
