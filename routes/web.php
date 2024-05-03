@@ -51,7 +51,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::resource('products', ProductController::class);
     Route::resource('branches', BranchController::class);
     Route::resource('departments', DepartmentController::class);
-    Route::resource('jobtitles', JobtitleController::class);
+    Route::resource('jobtitles', JobTitleController::class);
     Route::resource('typedevices', TypedeviceController::class);
     Route::resource('employees', EmployeeController::class);
     Route::resource('accounts', AccountController::class);
