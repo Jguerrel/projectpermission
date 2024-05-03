@@ -9,7 +9,7 @@ use App\Http\Requests\UpdateCargoRequest;
 use App\Http\Requests\StoreCargoRequest;
 use DataTables;
 
-class JobtitleController extends Controller
+class JobTitleController extends Controller
 {
     public function __construct()
     {
