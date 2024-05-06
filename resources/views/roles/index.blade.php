@@ -21,7 +21,7 @@
 <div class="card card-info card-outline">
     <!-- <div class="card-header">Manage Roles</div> -->
     <div class="card-body">
-        @can('create-role')
+        @can('crear-roles')
             <a href="{{ route('roles.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
         <table class="table table-striped table-bordered datatable dtr-inline" id ="roles">
@@ -45,11 +45,11 @@
                             <a href="{{ route('roles.show', $role->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>
 
                             @if ($role->name!='Super Admin')
-                                @can('edit-role')
+                                @can('editar-roles')
                                     <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>
                                 @endcan
 
-                                @can('delete-role')
+                                @can('eliminar-roles')
                                     @if ($role->name!=Auth::user()->hasRole($role->name))
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Estas seguro que quieres eliminar este rol?');"><i class="fas fa-trash"></i> Eliminar</button>
                                     @endif

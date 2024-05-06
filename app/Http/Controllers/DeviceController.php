@@ -41,7 +41,7 @@ class DeviceController extends Controller
 
                 $btn = '<form action='.route("devices.destroy",$device->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
                 $onclick='return confirm("Do you want to delete this user?");';
-                if ($user->can('ver-devices'))
+                if ($user->can('ver-dispositivos'))
                 {
                    $btn  = $btn . '<a href="'.route("devices.show",$device->id).'" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>';
                 }

@@ -66,4 +66,5 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
 Route::get('employees', [EmployeeController::class, 'pagination'])->name('employees.pagination');
 Route::get('devices', [DeviceController::class, 'pagination'])->name('devices.pagination');
 Route::get('permissions', [PermissionController::class, 'pagination'])->name('permissions.pagination');
+Route::get('accounts', [AccountController::class, 'pagination'])->name('accounts.pagination');
 //Route::get('employees/getemployee', 'EmployeeController@getemployee')->name('employees.getemployee');

@@ -22,10 +22,10 @@
     <!-- <div class="card-header">Cargos</div> -->
 
     <div class="card-body">
-       @can('create-account')
+       @can('crear-cuentas')
             <a href="{{ route('accounts.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
-        <table class="table table-striped table-bordered dataTable dtr-inline" id='accounts'>
+        <table class="table table-striped table-bordered dataTable dtr-inline" id='cuentas'>
         <thead>
                 <tr>
                 <th scope="col">#</th>
@@ -36,56 +36,42 @@
                 <th scope="col" style="width: 20%;">Accion</th>
                 </tr>
             </thead>
-            <tbody>
-                @forelse ($accounts as $account)
-                <tr>
-                   <th scope="row">{{ $loop->iteration }}</th>
-                   <td>{{ $account->name }}</td>
-                   <td  style ="-webkit-text-security: circle;" >{{ $account->password }}</td>
-                   <td>{{ $account->link }}</td>
-                   <td>{{ $account->description }}</td>
-                   <td>
-                        <form action="{{ route('accounts.destroy', $account->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-
-                            <a href="{{ route('accounts.show', $account->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>
-
-                                @can('editar-cuenta')
-                                    <a href="{{ route('accounts.edit', $account->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>
-                                @endcan
-
-                                @can('eliminar-cuenta')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Seguro que deseas eliminar la cuenta?');"><i class="fas fa-trash"></i> Eliminar</button>
-                                @endcan
-
-
-                        </form>
-                    </td>
-                </tr>
-                @empty
-                    <td colspan="5">
-                        <span class="text-danger">
-                            <strong>No User Found!</strong>
-                        </span>
-                    </td>
-                @endforelse
-            </tbody>
+         
        </table>
    </div>
 </div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
 <script type="text/javascript">
 
 $(document).ready(function() {
 
-    var table = $('#accounts').DataTable({
+
+
+    $('#cuentas').DataTable({
         language: {
         url: 'https://cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json',
-         }
+         },
+           processing: true,
+           serverSide: true,
+           ajax: {
+                url: "{{ route('accounts.pagination') }}",
+                type: "GET",
+                 error : function(xhr, textStatus, errorThrown){
 
+                    console.log('error'+JSON.stringify(xhr))
+                }
+            },
+           columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'name', name: 'name' },
+                    { data: 'password', name: 'password' },
+                    { data: 'link', name: 'link' },
+                    { data: 'description', name: 'description' },
+                     {data: 'action', name: 'action', orderable: false},
+                 ],
+                 order: [[0, 'desc']]
+       });
 
-    });
 });
 </script>
 

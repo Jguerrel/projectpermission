@@ -45,11 +45,11 @@
 
                             <a href="{{ route('departments.show', $department->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>
 
-                                @can('edit-departamento')
+                                @can('editar-departamentos')
                                     <a href="{{ route('departments.edit', $department->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>
                                 @endcan
 
-                                @can('delete-departamento')
+                                @can('eliminar-departamentos')
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Estas seguro de eliminar este departamento?');"><i class="fas fa-trash"></i> Eliminar</button>
                                 @endcan
                         </form>

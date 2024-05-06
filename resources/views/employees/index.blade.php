@@ -20,7 +20,7 @@
 
 <div class="card card-info card-outline">
     <div class="card-body">
-         @can('create-employee')
+         @can('crear-colaboradores')
             <a href="{{ route('employees.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
         <table class="table table-striped table-bordered dataTable dtr-inline" id ="employeedatatable">

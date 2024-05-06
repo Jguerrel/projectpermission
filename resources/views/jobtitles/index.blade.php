@@ -22,7 +22,7 @@
     <!-- <div class="card-header">Cargos</div> -->
 
     <div class="card-body">
-       @can('create-cargo')
+       @can('crear-cargo')
             <a href="{{ route('jobtitles.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
         <table class="table table-striped table-bordered dataTable dtr-inline" id='cargos'>
@@ -45,11 +45,11 @@
 
                             <a href="{{ route('jobtitles.show', $jobtitle->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>
 
-                                @can('edit-cargo')
+                                @can('editar-cargo')
                                     <a href="{{ route('jobtitles.edit', $jobtitle->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>
                                 @endcan
 
-                                @can('delete-cargo')
+                                @can('eliminar-cargo')
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this user?');"><i class="fas fa-trash"></i> Eliminar</button>
                                 @endcan
 
