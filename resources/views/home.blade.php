@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Dashboards') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -21,7 +21,7 @@
                         <a class="btn btn-primary" href="{{ route('roles.index') }}">
                             <i class="bi bi-person-fill-gear"></i> Manage Roles</a>
                     @endcanany
-                    @canany(['create-user', 'edit-user', 'delete-user'])
+                    @canany(['create-users', 'edit-users', 'delete-users'])
                         <a class="btn btn-success" href="{{ route('users.index') }}">
                             <i class="bi bi-people"></i> Manage Users</a>
                     @endcanany

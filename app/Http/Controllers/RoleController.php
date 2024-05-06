@@ -9,7 +9,8 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
+
+
 
 
 class RoleController extends Controller
@@ -17,7 +18,7 @@ class RoleController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:mostrar-roles', ['only' => ['index','show']]);
+        $this->middleware('permission:ver-roles', ['only' => ['index','show']]);
         $this->middleware('permission:crear-roles', ['only' => ['create','store']]);
         $this->middleware('permission:editar-roles', ['only' => ['edit','update']]);
         $this->middleware('permission:eliminar-roles', ['only' => ['destroy']]);

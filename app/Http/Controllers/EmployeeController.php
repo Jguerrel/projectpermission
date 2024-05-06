@@ -20,7 +20,7 @@ class EmployeeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:mostrar-colaboradores|editar-colaboradores|eliminar-colaboradores', ['only' => ['index','show']]);
+        $this->middleware('permission:ver-colaboradores', ['only' => ['index','show']]);
         $this->middleware('permission:crear-colaboradores', ['only' => ['create','store']]);
         $this->middleware('permission:editar-colaboradores', ['only' => ['edit','update']]);
         $this->middleware('permission:eliminar-colaboradores', ['only' => ['destroy']]);
@@ -51,16 +51,16 @@ class EmployeeController extends Controller
 
                 $btn = '<form action='.route("employees.destroy",$employee->id).' method="post"><input type="hidden" name="_token" value="CFBNenxDwWPoyJ1YgORiS6JyrnK663TuxbIJUeDu" autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
                 $onclick='return confirm("Do you want to delete this user?");';
-                if ($user->can('mostrar_colaboradores'))
+                if ($user->can('ver-colaboradores'))
                 {
                    $btn  = $btn . '<a href="'.route("employees.show",$employee->id).'" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>';
                 }
 
-                if ($user->can('editar_colaboradores'))
+                if ($user->can('editar-colaboradores'))
                 {
                     $btn =$btn.'<a href="'.route("employees.edit",$employee->id).'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>';
                 }
-                if ($user->can('eliminar_colaboradores'))
+                if ($user->can('eliminar-colaboradores'))
                 {
                     $btn =$btn.'<button type="submit" class="btn btn-danger btn-sm" onclick="'. $onclick.'"><i class="fas fa-trash"></i> Eliminar</button>';
                 }

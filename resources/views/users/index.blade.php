@@ -19,7 +19,7 @@
 <div class="card card-info card-outline">
     <!-- <div class="card-header">Usuarios</div> -->
     <div class="card-body">
-        @can('create-user')
+        @can('crear-usuarios')
             <a href="{{ route('users.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
         <table class="table table-striped table-bordered" id ='usuarios'>

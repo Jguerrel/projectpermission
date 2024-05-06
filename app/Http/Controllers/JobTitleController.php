@@ -15,7 +15,7 @@ class JobTitleController extends Controller
     {
 
         $this->middleware('auth');
-         $this->middleware('permission:mostrar-cargos|editar-cargos|eliminar-cargos', ['only' => ['index']]);
+         $this->middleware('permission:ver-cargos', ['only' => ['index']]);
          $this->middleware('permission:crear-cargos', ['only' => ['create','store']]);
          $this->middleware('permission:editar-cargos', ['only' => ['edit','update']]);
         $this->middleware('permission:eliminar-cargos', ['only' => ['destroy']]);

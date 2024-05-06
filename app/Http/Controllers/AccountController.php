@@ -17,7 +17,7 @@ class AccountController extends Controller
     {
 
         $this->middleware('auth');
-         $this->middleware('permission:mostrar-cuentas|editar-cuentas|eliminar-cuentas', ['only' => ['index']]);
+         $this->middleware('permission:ver-cuentas|editar-cuentas|eliminar-cuentas', ['only' => ['index']]);
          $this->middleware('permission:crear-cuentas', ['only' => ['create','store']]);
          $this->middleware('permission:editar-cuentas', ['only' => ['edit','update']]);
         $this->middleware('permission:eliminar-cuentas', ['only' => ['destroy']]);

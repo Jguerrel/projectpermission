@@ -19,7 +19,7 @@
 </section>
 <div class="card card-info card-outline">
     <div class="card-body">
-         @can('create-typedevice')
+         @can('crear-tipodispositivos')
             <a href="{{ route('typedevices.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
         <table class="table table-striped table-bordered dataTable dtr-inline" id ="tabledatatypedevice">
@@ -42,11 +42,11 @@
 
                                 <a href="{{ route('typedevices.show', $typedevice->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>
 
-                                    @can('edit-typedevice')
+                                    @can('editar-tipodispositivos')
                                         <a href="{{ route('typedevices.edit', $typedevice->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>
                                     @endcan
 
-                                    @can('delete-typedevice')
+                                    @can('eliminar-tipodispositivos')
                                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Esta seguro de eliminar el tipo de dispositivo?');"><i class="fas fa-trash"></i> Eliminar</button>
                                     @endcan
 
