@@ -4,19 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Permission\Traits\HasRoles;
 
-class Typedevice extends Model
+class Disktype extends Model
 {
-    use HasFactory,HasRoles ;
+    use HasFactory;
+
 
     protected $fillable = [
         'name'
     ];
-  
+
     public function Devices()
     {
         return $this->hasMany(Device::class);
     }
-    
 }

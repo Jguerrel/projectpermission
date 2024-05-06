@@ -33,5 +33,9 @@ class Employee extends Model
     {
         return $this->belongsTo(Department::class);
     }
+    public function Devices()
+    {
+        return $this->hasMany(Device::class);
+    }
 
 }

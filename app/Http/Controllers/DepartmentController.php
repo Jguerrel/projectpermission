@@ -15,10 +15,10 @@ class DepartmentController extends Controller
     {
 
         $this->middleware('auth');
-        $this->middleware('permission:create-departamento|edit-departamento|delete-departamento', ['only' => ['index']]);
-        $this->middleware('permission:create-departamento', ['only' => ['create','store']]);
-        $this->middleware('permission:edit-departamento', ['only' => ['edit','update']]);
-        $this->middleware('permission:delete-departamento', ['only' => ['destroy']]);
+        $this->middleware('permission:crear-departamento|editar-departamento|eliminar-departamento', ['only' => ['index']]);
+        $this->middleware('permission:crear-departamento', ['only' => ['create','store']]);
+        $this->middleware('permission:editar-departamento', ['only' => ['edit','update']]);
+        $this->middleware('permission:eliminar-departamento', ['only' => ['destroy']]);
     }
     public function index(): View
     {

@@ -5,8 +5,8 @@ use App\Models\Typedevice;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Http\Requests\StoreTypedeviceRequest;
-use App\Http\Requests\UpdateTypedeviceRequest;
+use App\Http\Requests\StoreTypeDeviceRequest;
+use App\Http\Requests\UpdateTypeDeviceRequest;
 
 class TypedeviceController extends Controller
 {
@@ -37,7 +37,7 @@ class TypedeviceController extends Controller
             'typedevice' => $typedevice
         ]);
     }
-    public function store(StoreTypedeviceRequest $request): RedirectResponse
+    public function store(StoreTypeDeviceRequest $request): RedirectResponse
     {
         Typedevice::create($request->all());
         return redirect()->route('typedevices.index')

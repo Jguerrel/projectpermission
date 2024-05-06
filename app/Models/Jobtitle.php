@@ -18,4 +18,8 @@ class Jobtitle extends Model
     {
         return $this->hasMany(Employee::class);
     }
+    public function Devices()
+    {
+        return $this->hasMany(Device::class);
+    }
 }

@@ -1,20 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\StoreDeviceRequest;
+use App\Http\Requests\UpdateDeviceRequest;
 use App\Models\Device;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-
+use App\Models\Typedevice;
+use App\Models\Branch;
+use App\Models\BranchOffice;
+use App\Models\Employee;
+use App\Models\Disktype;
 class DeviceController extends Controller
 {
     public function __construct()
     {
 
         $this->middleware('auth');
-        $this->middleware('permission:create-device|edit-device|delete-device', ['only' => ['index']]);
-        $this->middleware('permission:create-device', ['only' => ['create','store']]);
-        $this->middleware('permission:edit-device', ['only' => ['edit','update']]);
-        $this->middleware('permission:delete-device', ['only' => ['destroy']]);
+        $this->middleware('permission:crear-dispositivo|editar-dispositivo|eliminar-dispositivo', ['only' => ['index']]);
+        $this->middleware('permission:crear-dispositivo', ['only' => ['create','store']]);
+        $this->middleware('permission:editar-dispositivo', ['only' => ['edit','update']]);
+        $this->middleware('permission:eliminar-dispositivo', ['only' => ['destroy']]);
     }
 
     public function index(): View
@@ -22,5 +29,132 @@ class DeviceController extends Controller
         return view('devices.index', [
             'devices' => Device::orderBy('id','ASC')->paginate(20)
         ]);
+    }
+
+    public function pagination()
+    {
+        $user = Auth()->user();
+        if(request()->ajax()) {
+
+	        return Datatables()->of(Device::with('typedevice', 'branch','branch_office','employee','disktype')->select('*'))
+	        ->addColumn('action', function (Device $device) use ($user) {
+
+                $btn = '<form action='.route("devices.destroy",$device->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
+                $onclick='return confirm("Do you want to delete this user?");';
+                if ($user->can('mostrar_colaboradores'))
+                {
+                   $btn  = $btn . '<a href="'.route("devices.show",$device->id).'" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>';
+                }
+
+                if ($user->can('editar_colaboradores'))
+                {
+                    $btn =$btn.'<a href="'.route("devices.edit",$device->id).'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>';
+                }
+                if ($user->can('eliminar_colaboradores'))
+                {
+                    $btn =$btn.'<button type="submit" class="btn btn-danger btn-sm" onclick="'. $onclick.'"><i class="fas fa-trash"></i> Eliminar</button>';
+                }
+
+                  $btn =$btn .'</form>';
+                  return $btn;
+
+            })
+
+            ->rawColumns(['action'])
+            ->addIndexColumn()
+	        ->make(true);
+	    }
+        return view('devices.pagination', compact('devices'));
+
+    }
+
+    public function create()
+    {
+        $branches = Branch::all();
+        $employees = Employee::all();
+        $branchoffices = BranchOffice::all();
+        $typedevices = Typedevice::all();
+        $disktypes = Disktype::all();
+        return view('devices.create',compact('branches','employees','branchoffices','typedevices','disktypes') );
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreDeviceRequest $request)
+    {
+        $input = $request->all();
+        ///$compania=Compania::findorFail($companiaid);
+        if ($image = $request->file('photo')) {
+            $destinationPath = 'photos/';
+            $postImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $postImage);
+            $input['photo'] =$destinationPath . $postImage;
+        }
+
+        Device::create($input);
+
+        return redirect()->route('devices.index')
+                ->withSuccess('Dispositivo ha sido creado correctamente.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Device $device) : View
+    {
+        return view('devices.show', [
+            'device' => $device
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $device = Device::with('branch', 'branch_office','typedevice','disktype','employee')->findOrFail($id);;
+        $branches = Branch::all();
+        $typedevices = Typedevice::get();
+        $branch_offices = BranchOffice::get();
+        $employees = Employee::get();
+        $disktypes = Disktype::get();
+        // return view('employees.edit', [
+        //     'employee' => $employee
+        // ]);
+        return view('devices.edit',compact('device','branches', 'branch_offices','typedevices','disktypes','employees'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateDeviceRequest $request, Device $device)
+    {
+        dd("llegue");
+         $input = $request->all();
+        if ($image = $request->file('photo')) {
+            $destinationPath = 'photos/';
+            $postImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $postImage);
+            $input['photo'] =$destinationPath . $postImage;
+        }
+        else{
+            unset($input['photo']);
+        }
+      //  dd("llegue");
+        $device->update($input);
+
+        return redirect()->route('devices.index')
+                ->withSuccess('Dispositivo ha sido actualizado correctamente.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Device $device)
+    {
+        $device->delete();
+        return redirect()->route('devices.index')
+                ->withSuccess('Dispositivo ha sido eliminado correctamente');
     }
 }

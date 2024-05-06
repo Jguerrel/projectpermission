@@ -29,7 +29,7 @@
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.csss') }}">
         <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
-        <link type="text/javascript" href="{{ asset('vendor/select2/js/jquery-1.7.1.min.js') }}">
+        
 
         @if(config('adminlte.google_fonts.allowed', true))
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -50,7 +50,7 @@
             <livewire:styles />
         @endif
     @endif
-    <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet"> -->
     {{-- Custom Stylesheets (post AdminLTE) --}}
     @yield('adminlte_css')
     <link type="text/javascript" href="{{ asset('public/css/style.css') }}">
@@ -76,7 +76,7 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
-    <script src="{{ asset('vendor/select2/js/jquery-1.7s.1.min.js') }}"></script>
+  
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
@@ -87,8 +87,8 @@
     {{-- Base Scripts --}}
     @if(!config('adminlte.enabled_laravel_mix'))
 
-        <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-
+          
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
@@ -114,7 +114,7 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
 </html>

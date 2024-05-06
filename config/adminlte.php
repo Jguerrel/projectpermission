@@ -354,7 +354,13 @@ return [
             'icon'    => 'fas fa-fw fa-desktop',
             'can'         => 'mostrar-dispositivo',
         ],
-    /*   [
+        [
+            'text' => 'Tipos de Discos',
+            'url'  => 'admin/disktypes',
+            'icon'    => 'fas fa-fw fa-disease',
+            'can'         => 'mostrar-tipodiscos',
+        ],
+    /*   [<i class="fas fa-disc-drive
             'text'        => 'pages',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-fw fa-file',

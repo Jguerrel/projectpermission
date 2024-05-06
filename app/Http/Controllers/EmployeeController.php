@@ -11,7 +11,7 @@ use App\Models\Branch;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use Yajra\DataTables\Contracts\DataTable;
-use Yajra\Datatables\Facades\Datatables;
+
 
 
 class EmployeeController extends Controller
@@ -49,7 +49,7 @@ class EmployeeController extends Controller
 	        return Datatables()->of(Employee::with('branch', 'department','jobtitle')->select('*'))
 	        ->addColumn('action', function (Employee $employee) use ($user) {
 
-                $btn = '<form action='.route("employees.destroy",$employee->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
+                $btn = '<form action='.route("employees.destroy",$employee->id).' method="post"><input type="hidden" name="_token" value="CFBNenxDwWPoyJ1YgORiS6JyrnK663TuxbIJUeDu" autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
                 $onclick='return confirm("Do you want to delete this user?");';
                 if ($user->can('mostrar_colaboradores'))
                 {

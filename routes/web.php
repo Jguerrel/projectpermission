@@ -14,6 +14,8 @@ use App\Http\Controllers\TypedeviceController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BranchOfficeController;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\DisktypeController;
+
 /*
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +59,10 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::resource('accounts', AccountController::class);
     Route::resource('branchoffices', BranchOfficeController::class);
     Route::resource('devices', DeviceController::class);
-
+    Route::resource('disktypes', DisktypeController::class);
 });
+
+//Rutas de paginacion////
 Route::get('employees', [EmployeeController::class, 'pagination'])->name('employees.pagination');
+Route::get('devices', [DeviceController::class, 'pagination'])->name('devices.pagination');
 //Route::get('employees/getemployee', 'EmployeeController@getemployee')->name('employees.getemployee');

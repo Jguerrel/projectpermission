@@ -19,4 +19,8 @@ class BranchOffice extends Model
     {
         return $this->belongsTo(Branch::class);
     }
+    public function Devices()
+    {
+        return $this->hasMany(Device::class);
+    }
 }
