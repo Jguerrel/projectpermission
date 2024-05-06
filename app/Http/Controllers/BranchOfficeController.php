@@ -16,10 +16,10 @@ class BranchOfficeController extends Controller
     {
 
         $this->middleware('auth');
-         $this->middleware('permission:create-sucursal|edit-sucursal|delete-sucursal', ['only' => ['index']]);
-         $this->middleware('permission:create-sucursal', ['only' => ['create','store']]);
-         $this->middleware('permission:edit-sucursal', ['only' => ['edit','update']]);
-        $this->middleware('permission:delete-sucursal', ['only' => ['destroy']]);
+         $this->middleware('permission:mostrar-sucursales', ['only' => ['index']]);
+         $this->middleware('permission:crear-sucursales', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-sucursales', ['only' => ['edit','update']]);
+        $this->middleware('permission:eliminar-sucursales', ['only' => ['destroy']]);
     }
 
     public function index(): View
@@ -34,14 +34,14 @@ class BranchOfficeController extends Controller
     }
     public function show(BranchOffice $branchoffice): View
     {
-          
+
         return view('branchoffices.show', [
             'branchoffice' => $branchoffice
         ]);
     }
 
     public function create(): View
-    {   
+    {
         $branches = Branch::all();
         return view('branchoffices.create',compact('branches') );
 
@@ -66,7 +66,7 @@ class BranchOfficeController extends Controller
 
     public function store(StoreBranchOfficeRequest $request): RedirectResponse
     {
-       
+
         BranchOffice::create($request->all());
         return redirect()->route('branchoffices.index')
                 ->withSuccess('Sucursal ha sido agregado correctamente.');

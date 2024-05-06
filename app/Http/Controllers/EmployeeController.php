@@ -20,10 +20,10 @@ class EmployeeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:mostrar_colaboradores|editar_colaboradores|eliminar_colaboradores', ['only' => ['index','show']]);
-        $this->middleware('permission:crear_colaboradores', ['only' => ['create','store']]);
-        $this->middleware('permission:editar_colaboradores', ['only' => ['edit','update']]);
-        $this->middleware('permission:eliminar_colaboradores', ['only' => ['destroy']]);
+        $this->middleware('permission:mostrar-colaboradores|editar-colaboradores|eliminar-colaboradores', ['only' => ['index','show']]);
+        $this->middleware('permission:crear-colaboradores', ['only' => ['create','store']]);
+        $this->middleware('permission:editar-colaboradores', ['only' => ['edit','update']]);
+        $this->middleware('permission:eliminar-colaboradores', ['only' => ['destroy']]);
     }
 
     // public function index(Request $request): View
@@ -144,7 +144,7 @@ class EmployeeController extends Controller
     }
 
     public function create(): View
-    {   
+    {
         $branches = Branch::all();
         $jobtitles = Jobtitle::all();
         $departments = Department::all();
@@ -158,6 +158,6 @@ class EmployeeController extends Controller
                 ->withSuccess('Colaborador ha sido eliminado correctamente');
     }
 
-    
+
 
 }

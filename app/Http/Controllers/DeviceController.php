@@ -18,10 +18,10 @@ class DeviceController extends Controller
     {
 
         $this->middleware('auth');
-        $this->middleware('permission:crear-dispositivo|editar-dispositivo|eliminar-dispositivo', ['only' => ['index']]);
-        $this->middleware('permission:crear-dispositivo', ['only' => ['create','store']]);
-        $this->middleware('permission:editar-dispositivo', ['only' => ['edit','update']]);
-        $this->middleware('permission:eliminar-dispositivo', ['only' => ['destroy']]);
+        $this->middleware('permission:mostrar-dispositivos|editar-dispositivos|eliminar-dispositivos', ['only' => ['index']]);
+        $this->middleware('permission:crear-dispositivos', ['only' => ['create','store']]);
+        $this->middleware('permission:editar-dispositivos', ['only' => ['edit','update']]);
+        $this->middleware('permission:eliminar-dispositivos', ['only' => ['destroy']]);
     }
 
     public function index(): View

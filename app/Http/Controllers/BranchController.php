@@ -15,10 +15,10 @@ class BranchController extends Controller
     {
 
         $this->middleware('auth');
-         $this->middleware('permission:create-compania|edit-compania|delete-compania', ['only' => ['index']]);
-         $this->middleware('permission:create-compania', ['only' => ['create','store']]);
-         $this->middleware('permission:edit-compania', ['only' => ['edit','update']]);
-        $this->middleware('permission:delete-compania', ['only' => ['destroy']]);
+         $this->middleware('permission:mostrar-companias|editar-companias|elininar-companias', ['only' => ['index']]);
+         $this->middleware('permission:crear-companias', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-companias', ['only' => ['edit','update']]);
+        $this->middleware('permission:elininar-companias', ['only' => ['destroy']]);
     }
 
 

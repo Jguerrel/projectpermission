@@ -13,10 +13,10 @@ class TypedeviceController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:create-typedevice|edit-typedevice|delete-typedevice', ['only' => ['index','show']]);
-        $this->middleware('permission:create-typedevice', ['only' => ['create','store']]);
-        $this->middleware('permission:edit-typedevice', ['only' => ['edit','update']]);
-        $this->middleware('permission:delete-typedevice', ['only' => ['destroy']]);
+        $this->middleware('permission:mostrar-tipodispositivos', ['only' => ['index','show']]);
+        $this->middleware('permission:crear-tipodispositivos', ['only' => ['create','store']]);
+        $this->middleware('permission:editar-tipodispositivos', ['only' => ['edit','update']]);
+        $this->middleware('permission:eliminar-tipodispositivos', ['only' => ['destroy']]);
     }
 
     public function index(): View

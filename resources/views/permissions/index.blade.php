@@ -30,40 +30,11 @@
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Permiso</th>
+                <th scope="col">Fecha de Creación</th>
                 <th scope="col"  style="width: 20%;">Accion</th>
                 </tr>
             </thead>
-            <tbody>
-                @forelse ($permissions as $permission)
-                <tr>
-                   <th scope="row">{{ $loop->iteration }}</th>
-                   <td>{{ $permission->name }}</td>
-                   <td>
-                        <form action="{{ route('permissions.destroy', $permission->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-
-                            <a href="{{ route('permissions.show', $permission->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>
-
-                                @can('edit-permission')
-                                    <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>
-                                @endcan
-
-                                @can('delete-permission')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Estas seguro que quieres eliminar este permiso?');"><i class="fas fa-trash"></i> Eliminar</button>
-                                @endcan
-
-
-                        </form>
-                    </td>
-                </tr>
-                @empty
-                    <td colspan="5">
-                        <span class="text-danger">
-                            <strong>No User Found!</strong>
-                        </span>
-                    </td>
-                @endforelse
+           
             </tbody>
        </table>
    </div>
@@ -73,13 +44,33 @@
 
 $(document).ready(function() {
 
-    var table = $('#tablepermiso').DataTable({
-        language: {
-        url: 'https://cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json',
-         }
 
+    $('#tablepermiso').DataTable({
+           processing: true,
+           serverSide: true,
+           language: {
+           url: 'https://cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json',
+            },
+           ajax: {
+                url: "{{ route('permissions.pagination') }}",
+                type: "GET",
+                //  success:function(data){
+                //  alert(JSON.stringify(data))
+                // },
+                 error : function(xhr, textStatus, errorThrown){
 
-    });
+                    console.log('error'+JSON.stringify(xhr))
+                }
+            },
+           columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'name', name: 'name' },
+                    { data: 'created_at', name: 'created_at' },
+                     {data: 'action', name: 'action', orderable: false},
+                 ],
+                 order: [[0, 'desc']]
+       });
+
 });
 </script>
 

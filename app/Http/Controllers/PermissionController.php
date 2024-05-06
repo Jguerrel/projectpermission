@@ -21,17 +21,55 @@ class PermissionController extends Controller
     {
 
         $this->middleware('auth');
-         $this->middleware('permission:show-permission', ['only' => ['index']]);
-         $this->middleware('permission:create-permission', ['only' => ['create','store']]);
-         $this->middleware('permission:edit-permission', ['only' => ['edit','update']]);
-        $this->middleware('permission:delete-permission', ['only' => ['destroy']]);
+         $this->middleware('permission:mostrar-permisos', ['only' => ['index']]);
+         $this->middleware('permission:crear-permisos', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-permisos', ['only' => ['edit','update']]);
+        $this->middleware('permission:eliminar-permisos', ['only' => ['destroy']]);
     }
 
-    public function index(Request $request): View
+    public function index()
     {
-        return view('permissions.index', [
-            'permissions' => Permission::orderBy('id','DESC')->paginate(20)
-        ]);
+        return view('permissions.index');
+        // , [
+        //     'permissions' => Permission::orderBy('id','DESC')->paginate(20)
+        // ]);
+
+
+    }
+    public function pagination()
+    {
+        $user = Auth()->user();
+        if(request()->ajax()) {
+
+            return Datatables()->of(Permission::select('*'))
+            ->addColumn('action', function (Permission $permission) use ($user) {
+
+                $btn = '<form action='.route("permissions.destroy",$permission->id).' method="post"><input type="hidden" name="_token" value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
+                $onclick='return confirm("Do you want to delete this user?");';
+                if ($user->can('mostrar-colaboradores'))
+                {
+                   $btn  = $btn . '<a href="'.route("permissions.show",$permission->id).'" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>';
+                }
+
+                if ($user->can('editar-colaboradores'))
+                {
+                    $btn =$btn.'<a href="'.route("permissions.edit",$permission->id).'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>';
+                }
+                if ($user->can('eliminar-colaboradores'))
+                {
+                    $btn =$btn.'<button type="submit" class="btn btn-danger btn-sm" onclick="'. $onclick.'"><i class="fas fa-trash"></i> Eliminar</button>';
+                }
+
+                  $btn =$btn .'</form>';
+                  return $btn;
+
+            })
+
+            ->rawColumns(['action'])
+            ->addIndexColumn()
+            ->make(true);
+        }
+        return view('permissions.index', compact('permissions'));
     }
 
     /**
@@ -40,7 +78,6 @@ class PermissionController extends Controller
     public function create(): View
     {
         return view('permissions.create');
-
     }
 
     /**

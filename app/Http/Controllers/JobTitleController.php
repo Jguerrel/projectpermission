@@ -15,10 +15,10 @@ class JobTitleController extends Controller
     {
 
         $this->middleware('auth');
-         $this->middleware('permission:crear-cargo|editar-cargo|eliminar-cargo', ['only' => ['index']]);
-         $this->middleware('permission:crear-cargo', ['only' => ['create','store']]);
-         $this->middleware('permission:editar-cargo', ['only' => ['edit','update']]);
-        $this->middleware('permission:eliminar-cargo', ['only' => ['destroy']]);
+         $this->middleware('permission:mostrar-cargos|editar-cargos|eliminar-cargos', ['only' => ['index']]);
+         $this->middleware('permission:crear-cargos', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-cargos', ['only' => ['edit','update']]);
+        $this->middleware('permission:eliminar-cargos', ['only' => ['destroy']]);
     }
 
 
