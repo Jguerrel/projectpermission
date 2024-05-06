@@ -22,7 +22,7 @@
     <!-- <div class="card-header">Permisos</div> -->
 
     <div class="card-body">
-       @can('create-departamento')
+       @can('crear-departamentos')
             <a href="{{ route('departments.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
         <table class="table table-striped table-bordered "  id ="departamento">
