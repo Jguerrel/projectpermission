@@ -18,7 +18,7 @@ class DeviceController extends Controller
     {
 
         $this->middleware('auth');
-        $this->middleware('permission:ver-dispositivos|editar-dispositivos|eliminar-dispositivos', ['only' => ['index']]);
+        $this->middleware('permission:ver-dispositivos', ['only' => ['index']]);
         $this->middleware('permission:crear-dispositivos', ['only' => ['create','store']]);
         $this->middleware('permission:editar-dispositivos', ['only' => ['edit','update']]);
         $this->middleware('permission:eliminar-dispositivos', ['only' => ['destroy']]);

@@ -17,7 +17,7 @@ class DisktypeController extends Controller
     {
 
         $this->middleware('auth');
-        $this->middleware('permission:mostrar-tipodiscos|editar-tipodiscos|eliminar-tipodiscos', ['only' => ['index']]);
+        $this->middleware('permission:ver-tipodiscos', ['only' => ['index']]);
         $this->middleware('permission:crear-tipodiscos', ['only' => ['create','store']]);
         $this->middleware('permission:editar-tipodiscos', ['only' => ['edit','update']]);
         $this->middleware('permission:eliminar-tipodiscos', ['only' => ['destroy']]);

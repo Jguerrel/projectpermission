@@ -15,7 +15,7 @@ class DepartmentController extends Controller
     {
 
         $this->middleware('auth');
-        $this->middleware('permission:ver-departamentos |editar-departamentos|eliminar-departamentos', ['only' => ['index']]);
+        $this->middleware('permission:ver-departamentos', ['only' => ['index']]);
         $this->middleware('permission:crear-departamentos', ['only' => ['create','store']]);
         $this->middleware('permission:editar-departamentos', ['only' => ['edit','update']]);
         $this->middleware('permission:eliminar-departamentos', ['only' => ['destroy']]);
