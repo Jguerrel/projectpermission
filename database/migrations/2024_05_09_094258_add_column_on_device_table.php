@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('devices', function (Blueprint $table) {
             $table->unsignedBigInteger('ipaddress_id');
-            $table->foreign('ipaddress_id')->references('id')->on('Ipaddresses')->onDelete('cascade');;
-    
+            $table->foreign('ipaddress_id')->references('id')->on('ipaddresses')->onDelete('cascade');
+
         });
     }
 
