@@ -98,19 +98,16 @@
                             </div>
                         </div>
                         <div class="mb-3 row input-group">
-                        <label for="textarea" class="col-md-4 col-form-label text-md-end text-start">Comentarios</label>
-                        <div class="col-md-6">
-                          <textarea  type="text" rows="3" cols="1" class="form-control @error('devicecomment') is-invalid @enderror" id="comentario" name="devicecomment" value="{{ $device->devicecomment}}">
-
-                                  {{ $device->devicecomment}}
-
-                         </textarea>
-                        </div>
-                    </div>
+                          <label for="textarea" class="col-md-4 col-form-label text-md-end text-start">Comentarios</label>
+                                <div class="col-md-6">
+                                   <textarea  type="text" rows="3" cols="1" class="form-control @error('devicecomment') is-invalid @enderror" id="comentario" name="devicecomment" value="{{ $device->devicecomment}}">{{ $device->devicecomment}}
+                                  </textarea>
+                               </div>
+                         </div>
                         <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Compañia</label>
                             <div class="col-md-6">
-                            <select class="form-control js-example-basic-single select2 @error('branches') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="branches" id="compania" name="branch_id">
+                                <select class="form-control js-example-basic-single select2 @error('branches') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="branches" id="compania" name="branch_id">
                                         <option value="" disabled selected>Seleccione Item</option>
                                         @foreach ($branches as $branch)
                                          <option value="{{ $branch->id }}"  {{ $device->branch->id == $branch->id ? 'selected' : '' }}>
@@ -118,23 +115,37 @@
                                         </option>
 
                                         @endforeach
-                                   </select>
-                        </div>
+                                 </select>
+                            </div>
                       </div>
-                      <div class="mb-3 row">
+                        <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Sucursal</label>
-                            <div class="col-md-6">
-                            <select class="form-control js-example-basic-single select2 @error('branch_offices') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="sucursal" id="sucursal" name="branch_office_id">
+                                <div class="col-md-6">
+                                    <select class="form-control js-example-basic-single select2 @error('branch_offices') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="sucursal" id="sucursal" name="branch_office_id">
                                         <option value="" disabled selected>Seleccione Item</option>
                                         @foreach ($branch_offices as $branch_office)
                                          <option value="{{ $branch_office->id }}"  {{ $device->branch_office->id == $branch_office->id ? 'selected' : '' }}>
                                                {{ $branch_office->name }}
                                         </option>
-
                                         @endforeach
                                    </select>
+                               </div>
                         </div>
-                      </div>
+                        <div class="mb-3 row">
+                            <label for="roles" class="col-md-4 col-form-label text-md-end text-start">IP</label>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select id="direccionip" name="ipaddress_id" class="form-control js-example-basic-single select2">
+                                          <option value="" disabled selected>Seleccione un ip</option>    
+                                         @foreach ($ipaddresses as $ipaddress)
+                                            <option value="{{ $ipaddress->id }}"  {{ $device->ipaddress->id == $ipaddress->id ? 'selected' : '' }}>
+                                               {{ $ipaddress->ip }}
+                                            </option>
+                                        @endforeach
+                                   </select>
+                                </div>
+                            </div>
+                        </div>
                       <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Colaborador</label>
                             <div class="col-md-6 ">
@@ -204,6 +215,46 @@
         $('.select2').select2({
         placeholder: 'Select an option'
     });
+    
+    $('#sucursal').on('select2:select', function (e) {
+          
+          var sucursal = e.params.data;
+         console.log(sucursal.id);
+       //   Limpiar las opciones del segundo select
+          var direccionip = document.getElementById('direccionip');
+          direccionip.innerHTML = '<option value="">Selecciona un IP</option>';
+       
+          // Obtener los ip de la categoría seleccionada
+          if (sucursal.id) {
+            var id=sucursal.id;
+            
+            let token = '@csrf';
+            token = token.substr(42, 40);
+            $.ajax({ 
+            url: "{{ route('ipaddresses.direccionesip') }}",
+            type: 'POST', 
+            dataType: "json",
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: {id: id},
+            success: function (response) {
+                for (var clave in response) {
+                if (response.hasOwnProperty(clave)) {
+                         var option = document.createElement('option');
+                          option.value = response[clave].id;
+                          option.textContent = response[clave].ip;
+                          direccionip.appendChild(option);
+                }}
+
+              },
+                 error : function(xhr, textStatus, errorThrown){
+
+                        console.log('error'+JSON.stringify(xhr))
+                        }
+           });
+    
+          }
+       });
+  
     $.noConflict();
     $('#fecha').datepicker({
             language: 'es',

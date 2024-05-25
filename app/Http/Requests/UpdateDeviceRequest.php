@@ -27,6 +27,13 @@ class UpdateDeviceRequest extends FormRequest
             'brand'=> 'required|string|max:250',
             'ram'=> 'required|string|max:250',
             'OS'=> 'required|string|max:250',
+            'typedevice_id' => 'required|exists:typedevices,id',
+            'branch_id' => 'required|exists:branches,id',
+            'branch_office_id' => 'required|exists:branch_offices,id',
+            'employee_id' => 'required|exists:employees,id',
+            'disktype_id' => 'required|exists:disktypes,id',
+            'ipaddress_id' => 'required|exists:ipaddresses,id'
+            
 
         ];
 

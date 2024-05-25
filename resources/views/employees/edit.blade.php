@@ -101,6 +101,15 @@
                                     <img src="{{asset( $employee->photo)}}" width="300px">
                             </div>
                         </div>
+                        <div class="mb-3 row">
+                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Usuario Eskema</label>
+                            <div class="col-md-6">
+                            <input type="text" class="form-control @error('usrcod') is-invalid @enderror" id="usuario" name="usrcod" value="{{ $employee->usrcod }}">
+                                @if ($errors->has('usrcod'))
+                                    <span class="text-danger">{{ $errors->first('usrcod') }}</span>
+                                @endif
+                            </div>
+                        </div>
                     <div class="mb-3 row">
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-info" value="Actualizar">
                     </div>

@@ -25,6 +25,7 @@ class Device extends Model
         'branch_office_id',
         'employee_id',
         'disktype_id',
+        'ipaddress_id',
     ];
 
     public function typedevice()
@@ -47,5 +48,10 @@ class Device extends Model
     public function disktype()
     {
         return $this->belongsTo(Disktype::class);
+    }
+
+    public function ipaddress()
+    {
+        return $this->belongsTo(Ipaddress::class);
     }
 }

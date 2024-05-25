@@ -56,11 +56,11 @@
                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>
                                 @endif
                             @else
-                                @can('edit-user')
+                                @can('editar-usuarios')
                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-sm "><i class="fas fa-pencil-alt"></i> Editar</a>
                                 @endcan
 
-                                @can('delete-user')
+                                @can('eliminar-usuarios')
                                     @if (Auth::user()->id!=$user->id)
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Estas seguro que quieres eliminar este usuario?');"><i class="fas fa-trash"></i> Eliminar</button>
                                     @endif

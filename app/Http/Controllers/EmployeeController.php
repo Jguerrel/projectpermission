@@ -49,7 +49,7 @@ class EmployeeController extends Controller
 	        return Datatables()->of(Employee::with('branch', 'department','jobtitle')->select('*'))
 	        ->addColumn('action', function (Employee $employee) use ($user) {
 
-                $btn = '<form action='.route("employees.destroy",$employee->id).' method="post"><input type="hidden" name="_token" value="CFBNenxDwWPoyJ1YgORiS6JyrnK663TuxbIJUeDu" autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
+                $btn = '<form action='.route("employees.destroy",$employee->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
                 $onclick='return confirm("Do you want to delete this user?");';
                 if ($user->can('ver-colaboradores'))
                 {
@@ -69,12 +69,6 @@ class EmployeeController extends Controller
                   return $btn;
 
             })
-            // ->addColumn('Edit', function (Employee $employee,$user) {
-            //     return '<a href="'.route("employees.edit",$employee->id).'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>';
-            // })
-            // ->addColumn('Delete', function (Employee $employee,$user) {
-            //     return '<a href="'.route("employees.delete",$employee->id).'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>';
-            // })
             ->rawColumns(['action'])
             ->addIndexColumn()
 	        ->make(true);
@@ -83,6 +77,14 @@ class EmployeeController extends Controller
 
     }
 
+    public function create(): View
+    {
+        $branches = Branch::all();
+        $jobtitles = Jobtitle::all();
+        $departments = Department::all();
+        return view('employees.create',compact('branches','jobtitles','departments') );
+
+    }
     public function show(Employee $employee): View
 
     {
@@ -93,16 +95,14 @@ class EmployeeController extends Controller
 
     public function store(StoreEmployeeRequest $request): RedirectResponse
     {
-
           $input = $request->all();
-        ///$compania=Compania::findorFail($companiaid);
+
         if ($image = $request->file('photo')) {
             $destinationPath = 'photos/';
             $postImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $postImage);
             $input['photo'] =$destinationPath . $postImage;
         }
-        // dd($input['photo']);
         Employee::create($input);
 
         return redirect()->route('employees.index')
@@ -115,10 +115,6 @@ class EmployeeController extends Controller
         $branches = Branch::all();
         $jobtitles = Jobtitle::get();
         $departments = Department::get();
-
-        // return view('employees.edit', [
-        //     'employee' => $employee
-        // ]);
         return view('employees.edit',compact('employee','branches','jobtitles','departments'));
 
     }
@@ -143,14 +139,6 @@ class EmployeeController extends Controller
                 ->withSuccess('Colaborador ha sido actualizado correctamente.');
     }
 
-    public function create(): View
-    {
-        $branches = Branch::all();
-        $jobtitles = Jobtitle::all();
-        $departments = Department::all();
-        return view('employees.create',compact('branches','jobtitles','departments') );
-
-    }
     public function destroy(Employee $employee): RedirectResponse
     {
         $employee->delete();

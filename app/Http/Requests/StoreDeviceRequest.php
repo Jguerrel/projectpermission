@@ -31,7 +31,8 @@ class StoreDeviceRequest extends FormRequest
             'branch_id' => 'required|exists:branches,id',
             'branch_office_id' => 'required|exists:branch_offices,id',
             'employee_id' => 'required|exists:employees,id',
-            'disktype_id' => 'required|exists:disktypes,id'
+            'disktype_id' => 'required|exists:disktypes,id',
+            'ipaddress_id' => 'required|exists:ipaddresses,id'
         ];
     }
 

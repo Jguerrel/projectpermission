@@ -23,4 +23,8 @@ class BranchOffice extends Model
     {
         return $this->hasMany(Device::class);
     }
+    public function Ipaddress()
+    {
+        return $this->hasMany(Ipaddress::class);
+    }
 }

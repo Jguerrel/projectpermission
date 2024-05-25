@@ -333,10 +333,10 @@ return [
         [
             'text' => 'Tipos de Dispositivos',
             'url'  => 'admin/typedevices',
-            'icon'    => 'fas fa-fw fa-mobile',
+            'icon'    => 'fas fa-fw fa-keyboard',
             'can'         => 'ver-tipodispositivos',
         ],
-        [
+        [  
             'text' => 'Cuentas',
             'url'  => 'admin/accounts',
             'icon'    => 'fas fa-fw fa-tag',
@@ -345,7 +345,7 @@ return [
         [
             'text' => 'Sucursales',
             'url'  => 'admin/branchoffices',
-            'icon'    => 'fas fa-fw fa-tag',
+            'icon'    => 'fas fa-fw fa-code-branch',
             'can'         => 'ver-sucursales',
         ],
         [
@@ -359,6 +359,12 @@ return [
             'url'  => 'admin/disktypes',
             'icon'    => 'fas fa-fw fa-disease',
             'can'         => 'ver-tipodiscos',
+        ],
+        [
+            'text' => 'Lista de IP',
+            'url'  => 'admin/ipaddresses',
+            'icon'    => 'fas fa-fw fa-globe',
+            'can'         => 'ver-direccionesip',
         ],
     /*   [<i class="fas fa-disc-drive
             'text'        => 'pages',
@@ -501,18 +507,74 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
+                    'location' => 'https://adminlte.io/themes/v3/plugins/datatables/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
+                    'location' => 'https://adminlte.io/themes/v3/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'https://adminlte.io/themes/v3/plugins/datatables-responsive/js/dataTables.responsive.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'https://adminlte.io/themes/v3/plugins/datatables-responsive/js/responsive.bootstrap4.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'https://adminlte.io/themes/v3/plugins/datatables-buttons/js/dataTables.buttons.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/buttons.bootstrap4.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'https://adminlte.io/themes/v3/plugins/jszip/jszip.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/pdfmake.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/vfs_fonts.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/buttons.html5.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/buttons.print.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/buttons.colVis.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => true,
-                    'location' => 'https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
+                    'location' => 'https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css',
                 ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/DataTables/buttons.bootstrap4.min.css',
+                ],
+                
             ],
         ],
         'Select2' => [

@@ -12,6 +12,8 @@ use App\Models\Branch;
 use App\Models\BranchOffice;
 use App\Models\Employee;
 use App\Models\Disktype;
+use App\Models\Ipaddress;
+
 class DeviceController extends Controller
 {
     public function __construct()
@@ -36,7 +38,7 @@ class DeviceController extends Controller
         $user = Auth()->user();
         if(request()->ajax()) {
 
-	        return Datatables()->of(Device::with('typedevice', 'branch','branch_office','employee','disktype')->select('*'))
+	        return Datatables()->of(Device::with('typedevice', 'branch','branch_office','employee','disktype','ipaddress')->select('*'))
 	        ->addColumn('action', function (Device $device) use ($user) {
 
                 $btn = '<form action='.route("devices.destroy",$device->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
@@ -61,6 +63,7 @@ class DeviceController extends Controller
             })
 
             ->rawColumns(['action'])
+           
             ->addIndexColumn()
 	        ->make(true);
 	    }
@@ -75,7 +78,8 @@ class DeviceController extends Controller
         $branchoffices = BranchOffice::all();
         $typedevices = Typedevice::all();
         $disktypes = Disktype::all();
-        return view('devices.create',compact('branches','employees','branchoffices','typedevices','disktypes') );
+        $ipadresses = Ipaddress::all();
+        return view('devices.create',compact('branches','employees','branchoffices','typedevices','disktypes','ipadresses') );
     }
 
     /**
@@ -113,16 +117,17 @@ class DeviceController extends Controller
      */
     public function edit(string $id)
     {
-        $device = Device::with('branch', 'branch_office','typedevice','disktype','employee')->findOrFail($id);;
+        $device = Device::with('branch', 'branch_office','typedevice','disktype','employee','ipaddress')->findOrFail($id);;
         $branches = Branch::all();
         $typedevices = Typedevice::get();
         $branch_offices = BranchOffice::get();
         $employees = Employee::get();
         $disktypes = Disktype::get();
+        $ipaddresses = Ipaddress::get();
         // return view('employees.edit', [
         //     'employee' => $employee
         // ]);
-        return view('devices.edit',compact('device','branches', 'branch_offices','typedevices','disktypes','employees'));
+        return view('devices.edit',compact('device','branches', 'branch_offices','typedevices','disktypes','employees','ipaddresses'));
     }
 
     /**

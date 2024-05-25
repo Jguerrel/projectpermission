@@ -1,0 +1,6 @@
+Header set Access-Control-Allow-Origin "*"
+Access-Control-Allow-Headers: x-requested-with 
+
+<FilesMatch "\.json$">
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>

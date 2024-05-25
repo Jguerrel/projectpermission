@@ -19,28 +19,29 @@
 </section>
 
 <div class="card card-info card-outline">
-    <div class="card-body">
+    <div class="card-body ">
          @can('crear-dispositivos')
             <a href="{{ route('devices.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
-        <table class="table table-striped table-bordered dataTable dtr-inline" id ="dispositivos">
-            <thead>
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">Serie</th>
-                <th scope="col">Marca</th>
-                <th scope="col">Modelo</th>
-                <th scope="col">Sistema operativo</th>
-                <th scope="col">Fecha de compra</th>
-                <th scope="col">Office</th>
-                <th scope="col" style="width: 20%;">Accion</th>
-                </tr>
-            </thead>
+                    <table class="table table-striped table-hover table-bordered table-sm dataTable dtr-inline " id ="dispositivos">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Serie</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Modelo</th>
+                            <th scope="col">Sistema operativo</th>
+                            <th scope="col">Fecha de compra</th>
+                            <th scope="col">IP</th>
+                            <th scope="col">Office</th>
+                            <th scope="col" style="width: 20%;">Accion</th>
+                            </tr>
+                        </thead>
+                    </table>
 
-       </table>
     </div>
 </div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
 
 <script type="text/javascript">
 let rutaTabla = "{{route('devices.index')}}";
@@ -51,10 +52,20 @@ $(document).ready(function() {
     }
   });
 
-  $('#dispositivos').DataTable({
+  var table =$('#dispositivos').DataTable({
+
+            dom : 'lBfrtip',
+                buttons: [
+                    'excel', 'pdf', 'print','colvis'
+                ],
+                lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+                bLengthChange: true,
+                pageLength: 10,
            processing: true,
+           responsive: true,
            serverSide: true,
-           ajax: {
+
+            ajax: {
                 url: "{{ route('devices.pagination') }}",
                 type: "GET",
                  error : function(xhr, textStatus, errorThrown){
@@ -68,12 +79,20 @@ $(document).ready(function() {
                     { data: 'brand', name: 'brand' },
                     { data: 'model', name: 'model' },
                     { data: 'OS', name: 'OS' },
-                    { data: 'office', name: 'office' },
-                    { data: 'datedevicepurchase', name: 'datedevicepurchase' , orderable: false},
+                    { data: 'datedevicepurchase', name: 'datedevicepurchase'},
+                    { data: 'ipaddress.ip', name: 'ipaddress.ip' },
+                    { data: 'office', name: 'office' ,visible: false},
                      {data: 'action', name: 'action', orderable: false},
                  ],
-                 order: [[0, 'desc']]
-       });
+                 order: [[0, 'desc']],
+                 language: {
+                    url:'/es-ES.json',
+                    },
+       }).buttons().container().appendTo('#dispositivos_wrapper .col-md-6:eq(1)');
+;
+
+
+
 
 });
 </script>

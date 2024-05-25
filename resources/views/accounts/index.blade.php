@@ -36,7 +36,7 @@
                 <th scope="col" style="width: 20%;">Accion</th>
                 </tr>
             </thead>
-         
+
        </table>
    </div>
 </div>
@@ -69,7 +69,20 @@ $(document).ready(function() {
                     { data: 'description', name: 'description' },
                      {data: 'action', name: 'action', orderable: false},
                  ],
-                 order: [[0, 'desc']]
+                 order: [[0, 'desc']],
+        columnDefs: [
+            {
+                "targets": 2, // Índice de la columna de contraseña
+                "render": function ( data, type, row ) {
+                    // Si el tipo es display, renderiza el input password
+                    if(type === 'display') {
+                        return '<span  style="-webkit-text-security:disc;">' + data + '" </span>';
+                    }
+                    // De lo contrario, devuelve el dato tal cual
+                    return data;
+                }
+            }
+        ]
        });
 
 });

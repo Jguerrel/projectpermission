@@ -15,6 +15,8 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BranchOfficeController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DisktypeController;
+use App\Http\Controllers\IpaddressController;
+use App\Http\Controllers\PermissionEskemaController;
 
 /*
 /*
@@ -60,6 +62,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::resource('branchoffices', BranchOfficeController::class);
     Route::resource('devices', DeviceController::class);
     Route::resource('disktypes', DisktypeController::class);
+    Route::resource('ipaddresses',IpaddressController::class);
 });
 
 //Rutas de paginacion////
@@ -67,4 +70,9 @@ Route::get('employees', [EmployeeController::class, 'pagination'])->name('employ
 Route::get('devices', [DeviceController::class, 'pagination'])->name('devices.pagination');
 Route::get('permissions', [PermissionController::class, 'pagination'])->name('permissions.pagination');
 Route::get('accounts', [AccountController::class, 'pagination'])->name('accounts.pagination');
+Route::get('ipadresses', [IpaddressController::class, 'pagination'])->name('ipaddresses.pagination');
+Route::post('/direccionesip', [IpaddressController::class, 'direccionesip'])->name('ipaddresses.direccionesip');;
+//Route::get('permissioneskema', [PermissionEskemaController::class, 'permissioneskema']);
+//Route::resource('permissioneskema ', PermissionEskemaController::class);
+Route::get('acccessobjeto', [App\Http\Controllers\PermissionEskemaController::class, 'acccessobjeto'])->name('acccessobjeto');
 //Route::get('employees/getemployee', 'EmployeeController@getemployee')->name('employees.getemployee');
