@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBranchOfficeRequest extends FormRequest
+class StoreIpaddressRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,29 +23,27 @@ class StoreBranchOfficeRequest extends FormRequest
     {
         return [
 
-            'name'=>'required|unique:branch_offices,name|string',
-            'branch_id' => 'required|exists:branches,id'
+            'ip'=>'required|ipv4|unique:ipaddresses,ip|string',
+            'branch_office_id' => 'required|exists:branch_offices,id',
         ];
     }
-
     public function messages()
     {
         return [
-
-            'name.required' => 'El :attribute es obligatorio.',
-            'name.unique' => 'El :attribute ya existe.',
-            'branch_id.required' => 'La :attribute es obligatorio.',
+            'ip.required' => 'El :attribute es obligatorio.',
+            'branch_office_id.required' => 'El :attribute es obligatorio.',
+            'ip.unique' => 'El :attribute ya existe.',
+            'ip.ipv4' => 'El :attribute debe ser un ip valido.',
         ];
-
 
     }
 
-    public function attributes()
+      public function attributes()
         {
             return [
+                'ip' => 'IP',
+                'branch_office_id' => 'Sucursal',
 
-                'name' => 'nombre ',
-                'branch_id' => 'compañia ',
             ];
         }
 

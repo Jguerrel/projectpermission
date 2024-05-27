@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Ipaddress;
 use Illuminate\Http\Request;
 use App\Models\BranchOffice;
+use App\Http\Requests\StoreIpaddressRequest;
+use App\Http\Requests\UpdateIpaddressRequest;
 
 class IpaddressController extends Controller
 {
@@ -27,12 +29,11 @@ class IpaddressController extends Controller
     }
 
     public function direccionesip(Request $request)
-    {   
+    {
         $id = $request->input('id');
        $direccionesip = Ipaddress::where('branch_office_id', $id)->get();
          return response()->json($direccionesip);
-        //return view('ipaddresses.direccionesip', compact('ipaddresses'));
-      
+
     }
 
     public function pagination()
@@ -75,46 +76,60 @@ class IpaddressController extends Controller
      */
     public function create()
     {
-        //
+        $branch_offices = BranchOffice::all();
+        return view('ipaddresses.create',compact('branch_offices') );
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreIpaddressRequest $request)
     {
-        //
+        Ipaddress::create($request->all());
+        return redirect()->route('ipaddresses.index')
+                ->withSuccess('Direccion IP ha sido agregado correctamente.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Ipaddress $ipaddress)
     {
-        //
+        return view('ipaddresses.show', [
+            'ipaddress' => $ipaddress
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $ipaddress = Ipaddress::with('branch_office')->findOrFail($id);;
+        $branch_offices = BranchOffice::all();
+        return view('ipaddresses.edit',compact('ipaddress','branch_offices'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateIpaddressRequest $request, Ipaddress $ipaddress)
     {
-        //
+        $input = $request->all();
+
+        $ipaddress->update($input);
+
+        return redirect()->route('branchoffices.index')
+                ->withSuccess('Sucursal ha sido actualizada correctamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Ipaddress $ipaddress)
     {
-        //
+        $ipaddress->delete();
+        return redirect()->route('ipaddresses.index')
+                ->withSuccess('Direccion ha sido eliminado correctamente');
     }
 }

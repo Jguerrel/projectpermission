@@ -22,7 +22,7 @@ class StoreDepartamentoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|string',
+            'name'=>'required|unique:departments,name|string',
 
         ];
 
@@ -32,6 +32,7 @@ class StoreDepartamentoRequest extends FormRequest
     {
         return [
             'name.required' => 'El :attribute es obligatorio.',
+            'name.unique' => 'El :attribute ya existe.',
         ];
 
     }

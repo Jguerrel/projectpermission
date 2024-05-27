@@ -23,7 +23,7 @@ class StoreTypeDeviceRequest extends FormRequest
     {
         return [
 
-            'name'=>'required|string',
+            'name'=>'required|unique:typedevices,name|string',
         ];
     }
 
@@ -32,6 +32,7 @@ class StoreTypeDeviceRequest extends FormRequest
         return [
 
             'name.required' => 'El :attribute es obligatorio.',
+            'name.unique' => 'Este :attribute ya existe.',
         ];
 
 
@@ -42,6 +43,7 @@ class StoreTypeDeviceRequest extends FormRequest
             return [
 
                 'name' => 'nombre ',
+
             ];
         }
 }

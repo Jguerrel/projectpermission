@@ -22,7 +22,7 @@ class StoreDeviceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'serialnumber' => 'required|string|max:250',
+            'serialnumber' => 'required|unique:devices,serialnumber|string|max:250',
             'model' => 'required|string|max:250',
             'brand'=> 'required|string|max:250',
             'ram'=> 'required|string|max:250',
@@ -35,6 +35,34 @@ class StoreDeviceRequest extends FormRequest
             'ipaddress_id' => 'required|exists:ipaddresses,id'
         ];
     }
+    public function messages()
+    {
+        return [
 
-    
+            'serialnumber.required' => 'El :attribute es obligatorio.',
+            'model.required' => 'El :attribute es obligatorio.',
+            'OS.required' => 'El :attribute es obligatorio.',
+            'serialnumber.unique' => 'El :attribute ya existe.',
+            'branch_id.required' => 'La :attribute es obligatorio.',
+            'branch_office_id.required' => 'La :attribute es obligatorio.',
+            'employee_id.required' => 'La :attribute es obligatorio.',
+
+        ];
+
+
+    }
+
+
+    public function attributes()
+        {
+            return [
+
+                'serialnumber' => 'numero de serie ',
+                 'OS' => 'sistema operativo',
+                'model' => 'modelo',
+                'branch_office_id' => 'sucursal',
+                'branch_id' => 'compañia ',
+            ];
+        }
+
 }

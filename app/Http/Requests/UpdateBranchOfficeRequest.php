@@ -23,7 +23,8 @@ class UpdateBranchOfficeRequest extends FormRequest
     {
         return [
 
-            'name'=>'required|string',
+            'name'=>'required|unique:Branch_Offices,name|string',
+
         ];
     }
 
@@ -32,6 +33,7 @@ class UpdateBranchOfficeRequest extends FormRequest
         return [
 
             'name.required' => 'El :attribute es obligatorio.',
+            'name.unique' => 'El :attribute ya existe.'
         ];
 
 

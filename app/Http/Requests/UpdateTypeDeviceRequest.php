@@ -22,13 +22,14 @@ class UpdateTypeDeviceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:250'
+            'name' => 'required|unique:typedevices,name|string|max:250'
         ];
     }
     public function messages()
     {
         return [
             'name.required' => 'El :attribute es obligatorio.',
+            'name.unique' => 'Este :attribute ya existe.'
         ];
 
 

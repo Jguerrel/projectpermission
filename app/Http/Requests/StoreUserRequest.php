@@ -22,10 +22,33 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:250',
+            'name' => 'required|unique:users,name|string|max:250',
             'email' => 'required|string|email:rfc,dns|max:250|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
             'roles' => 'required'
+        ];
+    }
+    public function messages()
+    {
+        return [
+
+            'name.required' => 'El :attribute es obligatorio.',
+            'email.required' => 'El :attribute es obligatorio.',
+            'password.required' => 'El :attribute es obligatorio.',
+            'name.unique' => 'El :attribute ya existe.',
+            'email.unique' => 'El :attribute ya existe.',
+
+
+        ];
+
+
+    }
+    public function attributes()
+    {
+        return [
+            'name' => 'usuario ',
+            'email'=>'correo',
+            'password'=>'contraseña'
         ];
     }
 }

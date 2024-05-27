@@ -22,7 +22,8 @@ class UpdateCargoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:250'
+            'name' => 'required|unique:jobtitles,name|string|max:250'
+
         ];
     }
 
@@ -31,6 +32,7 @@ class UpdateCargoRequest extends FormRequest
         return [
 
             'name.required' => 'El :attribute es obligatorio.',
+            'name.unique' => 'El :attribute ya existe.',
         ];
 
     }
@@ -38,7 +40,7 @@ class UpdateCargoRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'nombre ',
+            'name' => 'cargo ',
         ];
     }
 }

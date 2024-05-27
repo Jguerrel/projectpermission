@@ -23,7 +23,7 @@ class StoreCargoRequest extends FormRequest
     {
         return [
 
-            'name'=>'required|string',
+            'name'=>'required|unique:jobtitles,name|string',
         ];
     }
 
@@ -32,6 +32,7 @@ class StoreCargoRequest extends FormRequest
         return [
 
             'name.required' => 'El :attribute es obligatorio.',
+            'name.unique' => 'El :attribute ya existe.',
         ];
 
 
@@ -41,7 +42,7 @@ class StoreCargoRequest extends FormRequest
         {
             return [
 
-                'name' => 'nombre ',
+                'name' => 'cargo ',
             ];
         }
 }

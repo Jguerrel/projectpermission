@@ -38,15 +38,6 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::resources([
-//     'roles' => RoleController::class,
-//     'users' => UserController::class,
-//     'products' => ProductController::class,
-//     'permissions' => PermissionController::class,
-// ]);
-
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
 	Route::resource('roles', RoleController::class);
