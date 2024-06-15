@@ -336,7 +336,7 @@ return [
             'icon'    => 'fas fa-fw fa-keyboard',
             'can'         => 'ver-tipodispositivos',
         ],
-        [  
+        [
             'text' => 'Cuentas',
             'url'  => 'admin/accounts',
             'icon'    => 'fas fa-fw fa-tag',
@@ -365,6 +365,18 @@ return [
             'url'  => 'admin/ipaddresses',
             'icon'    => 'fas fa-fw fa-globe',
             'can'         => 'ver-direccionesip',
+        ],
+        [
+            'text' => 'Productos',
+            'url'  => 'admin/products',
+            'icon'    => 'fas fa-fw fa-globe',
+            'can'         => 'ver-productos',
+        ],
+        [
+            'text' => 'Ubicaciones',
+            'url'  => 'admin/locations',
+            'icon'    => 'fas fa-fw fa-globe',
+            'can'         => 'ver-ubicaciones',
         ],
     /*   [<i class="fas fa-disc-drive
             'text'        => 'pages',
@@ -574,7 +586,7 @@ return [
                     'asset' => true,
                     'location' => 'vendor/DataTables/buttons.bootstrap4.min.css',
                 ],
-                
+
             ],
         ],
         'Select2' => [

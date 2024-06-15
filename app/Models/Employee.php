@@ -21,7 +21,7 @@ class Employee extends Model
     ];
 
 
-    public function Jobtitle()
+    public function jobtitle()
     {
         return $this->belongsTo(Jobtitle::class);
     }
@@ -34,7 +34,7 @@ class Employee extends Model
     {
         return $this->belongsTo(Department::class);
     }
-    public function Devices()
+    public function devices()
     {
         return $this->hasMany(Device::class);
     }

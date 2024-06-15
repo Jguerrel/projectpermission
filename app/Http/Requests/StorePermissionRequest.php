@@ -22,25 +22,24 @@ class StorePermissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|string',
+            'name'=>'required|unique:permission,name|string',
             'guard_name'=>'required|string',
         ];
     }
     public function messages()
     {
-        return [
+      return [
             'name.required' => 'El :attribute es obligatorio.',
             'guard_name.required' => 'El :attribute es obligatorio.',
+            'name.unique'=> 'El :attribute ya existe.'
         ];
-
-
     }
 
-      public function attributes()
-        {
-            return [
-                'name' => 'permiso',
-                'guard_name' => 'guard name ',
-            ];
-        }
+    public function attributes()
+    {
+        return [
+            'name' => 'permiso',
+            'guard_name' => 'guard name ',
+        ];
+    }
 }

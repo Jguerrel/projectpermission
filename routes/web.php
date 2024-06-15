@@ -16,6 +16,7 @@ use App\Http\Controllers\BranchOfficeController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DisktypeController;
 use App\Http\Controllers\IpaddressController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PermissionEskemaController;
 
 /*
@@ -49,6 +50,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::resource('jobtitles', JobTitleController::class);
     Route::resource('typedevices', TypedeviceController::class);
     Route::resource('employees', EmployeeController::class);
+    Route::resource('products', ProductController::class);
+    Route::resource('locations', LocationController::class);
     Route::resource('accounts', AccountController::class);
     Route::resource('branchoffices', BranchOfficeController::class);
     Route::resource('devices', DeviceController::class);
