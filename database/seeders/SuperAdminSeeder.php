@@ -28,6 +28,7 @@ class SuperAdminSeeder extends Seeder
             'email' => 'jean.guerrel@bahiamotors.com',
             'password' => Hash::make('Zelda2021%')
         ]);
+        
         $admin->assignRole('Admin');
 
         // Creating Product Manager User

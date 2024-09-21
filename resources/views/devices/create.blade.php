@@ -77,7 +77,7 @@
                             @endif
                         </div>
                     </div>
-                    
+
                     <div class="mb-3 row">
                         <label for="text" class="col-md-4 col-form-label text-md-end text-start">Tamaño de disco</label>
                         <div class="col-md-6">
@@ -98,19 +98,19 @@
                     </div>
                     <div class="mb-3 row">
                         <label for="date" class="col-md-4 col-form-label text-md-end text-start">Fecha de Compra</label>
-                  
+
                             <div class="col-md-6 input-group-addon datepicker" style ='display: inline-flex;'>
-                          
+
                             <input type="date" class="form-control  @error('datedevicepurchase') is-invalid @enderror" id="datepurcharse" name="datedevicepurchase" >
                                 @if ($errors->has('datedevicepurchase'))
                                 <span class="text-danger">{{ $errors->first('datedevicepurchase') }}</span>
-                                @endif                        
+                                @endif
                          </div>
                     </div>
                     <div class="mb-3 row input-group">
                         <label for="textarea" class="col-md-4 col-form-label text-md-end text-start">Comentarios</label>
                         <div class="col-md-6">
-                          <textarea  type="text" rows="3" class="form-control @error('devicecomment') is-invalid @enderror" id="comments" name="devicecomment" value="{{ old('devicecomment') }}"></textarea> 
+                          <textarea  type="text" rows="3" class="form-control @error('devicecomment') is-invalid @enderror" id="comments" name="devicecomment" value="{{ old('devicecomment') }}"></textarea>
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -138,22 +138,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Compañia</label>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                                    <select class="form-control js-example-basic-single select2 @error('branches') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="branches" id="compania" name="branch_id">
-                                               <option value="" disabled selected>Seleccione Item</option>
-                                        @foreach ($branches as $branch)
-                                             <option value="{{ $branch->id }}" {{ in_array($branch->id, old('branches') ?? []) ? 'selected' : '' }}>
-                                               {{ $branch->name }}
-                                            </option>
 
-                                        @endforeach
-                                   </select>
-                             </div>
-                        </div>
-                    </div>
                     <div class="mb-3 row">
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Sucursal</label>
                         <div class="col-md-6">
@@ -175,8 +160,8 @@
                         <div class="col-md-6">
                           <div class="form-group">
                                 <select id="direccionip" name="ipaddress_id" class="form-control js-example-basic-single select2">
-                                  <option value="" disabled selected>Seleccione un ip</option>    
-                              
+                                  <option value="" disabled selected>Seleccione un ip</option>
+
                                 </select>
                              </div>
                         </div>
@@ -212,7 +197,7 @@
                             </div>
                         </div>
                     </div>
-              
+
                     <div class="mb-3 row">
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-info" value="Guardar">
                     </div>
@@ -231,22 +216,22 @@
     });
 
     $('#sucursal').on('select2:select', function (e) {
-          
+
           var sucursal = e.params.data;
          console.log(sucursal.id);
        //   Limpiar las opciones del segundo select
           var direccionip = document.getElementById('direccionip');
           direccionip.innerHTML = '<option value="">Selecciona un IP</option>';
-       
+
           // Obtener los ip de la categoría seleccionada
           if (sucursal.id) {
             var id=sucursal.id;
-            
+
             let token = '@csrf';
             token = token.substr(42, 40);
-            $.ajax({ 
+            $.ajax({
             url: "{{ route('ipaddresses.direccionesip') }}",
-            type: 'POST', 
+            type: 'POST',
             dataType: "json",
             headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: {id: id},
@@ -265,20 +250,20 @@
                         console.log('error'+JSON.stringify(xhr))
                         }
            });
-    
+
           }
        });
-  
+
 
 /**dejar  esto de ultimo para que no moleste los demas script*/
     // $.noConflict();
     // $('#datepurcharse').datepicker({
-    //         language: 'es', 
-    //             autoclose: true, 
+    //         language: 'es',
+    //             autoclose: true,
     //             todayHighlight: true,
     //             uiLibrary: 'bootstrap4'
     // });
-   
+
 
 
     });

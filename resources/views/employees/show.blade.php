@@ -35,19 +35,6 @@
                             {{ $employee->name }}
                         </div>
                     </div>
-
-                    <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Apellido:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
-                            {{ $employee->lastname }}
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Compañia:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
-                            {{ $employee->branch->name }}
-                        </div>
-                    </div>
                     <div class="mb-3 row">
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Departamento:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
@@ -61,7 +48,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Cargo:</strong></label>
+                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Foto:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
                             <img src="{{ asset($employee->photo) }}" alt="employee image" title="employee image">
                         </div>

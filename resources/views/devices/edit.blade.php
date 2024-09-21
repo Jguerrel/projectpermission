@@ -104,20 +104,7 @@
                                   </textarea>
                                </div>
                          </div>
-                        <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Compañia</label>
-                            <div class="col-md-6">
-                                <select class="form-control js-example-basic-single select2 @error('branches') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="branches" id="compania" name="branch_id">
-                                        <option value="" disabled selected>Seleccione Item</option>
-                                        @foreach ($branches as $branch)
-                                         <option value="{{ $branch->id }}"  {{ $device->branch->id == $branch->id ? 'selected' : '' }}>
-                                               {{ $branch->name }}
-                                        </option>
 
-                                        @endforeach
-                                 </select>
-                            </div>
-                      </div>
                         <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Sucursal</label>
                                 <div class="col-md-6">
@@ -136,7 +123,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <select id="direccionip" name="ipaddress_id" class="form-control js-example-basic-single select2">
-                                          <option value="" disabled selected>Seleccione un ip</option>    
+                                          <option value="" disabled selected>Seleccione un ip</option>
                                          @foreach ($ipaddresses as $ipaddress)
                                             <option value="{{ $ipaddress->id }}"  {{ $device->ipaddress->id == $ipaddress->id ? 'selected' : '' }}>
                                                {{ $ipaddress->ip }}
@@ -215,24 +202,24 @@
         $('.select2').select2({
         placeholder: 'Select an option'
     });
-    
+
     $('#sucursal').on('select2:select', function (e) {
-          
+
           var sucursal = e.params.data;
          console.log(sucursal.id);
        //   Limpiar las opciones del segundo select
           var direccionip = document.getElementById('direccionip');
           direccionip.innerHTML = '<option value="">Selecciona un IP</option>';
-       
+
           // Obtener los ip de la categoría seleccionada
           if (sucursal.id) {
             var id=sucursal.id;
-            
+
             let token = '@csrf';
             token = token.substr(42, 40);
-            $.ajax({ 
+            $.ajax({
             url: "{{ route('ipaddresses.direccionesip') }}",
-            type: 'POST', 
+            type: 'POST',
             dataType: "json",
             headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: {id: id},
@@ -251,10 +238,10 @@
                         console.log('error'+JSON.stringify(xhr))
                         }
            });
-    
+
           }
        });
-  
+
     $.noConflict();
     $('#fecha').datepicker({
             language: 'es',

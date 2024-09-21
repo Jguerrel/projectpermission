@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('devices', function (Blueprint $table) {
-            $table->unsignedBigInteger('ipaddress_id');
-            $table->foreign('ipaddress_id')->references('id')->on('ipaddresses')->onDelete('cascade');
-
+            $table->dropForeign(['branch_id']);
+            $table->dropColumn('branch_id');
         });
     }
 
@@ -24,8 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('devices', function (Blueprint $table) {
-            $table->dropForeign(['ipaddress_id']);
-            $table->dropColumn('ipaddress_id');
+            //
         });
     }
 };

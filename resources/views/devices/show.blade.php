@@ -82,12 +82,7 @@
                             {{ $device->office }}
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Compañia:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
-                            {{ $device->branch->name }}
-                        </div>
-                    </div>
+
                     <div class="mb-3 row">
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Sucursal:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">

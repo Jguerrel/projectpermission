@@ -28,8 +28,6 @@
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">Compañia</th>
                 <th scope="col">Departamento</th>
                 <th scope="col">Cargo</th>
                 <th scope="col">Usuario</th>
@@ -72,8 +70,6 @@ $(document).ready(function() {
            columns: [
                     { data: 'id', name: 'id' },
                     { data: 'name', name: 'name' },
-                    { data: 'lastname', name: 'lastname' },
-                    { data: 'branch.name', name: 'branch.name' },
                     { data: 'department.name', name: 'department.name' },
                     { data: 'jobtitle.name', name: 'jobtitle.name' },
                     { data: 'usrcod', name: 'usrcod' },

@@ -16,12 +16,12 @@ class Branch extends Model
         'name'
     ];
 
-    public function employees()
-    {
-        return $this->hasMany(Employee::class);
-    }
-    public function Devices()
-    {
-        return $this->hasMany(Device::class);
-    }
+    // public function employees()
+    // {
+    //     return $this->hasMany(Employee::class);
+    // }
+    // public function Devices()
+    // {
+    //     return $this->hasMany(Device::class);
+    // }
 }

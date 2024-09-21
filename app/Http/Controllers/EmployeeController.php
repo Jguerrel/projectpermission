@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
+
 use App\Models\User;
 use App\Models\Employee;
 use App\Models\Jobtitle;
@@ -11,6 +11,7 @@ use App\Models\Branch;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use Yajra\DataTables\Contracts\DataTable;
+use Illuminate\Http\RedirectResponse;
 
 
 
@@ -26,16 +27,7 @@ class EmployeeController extends Controller
         $this->middleware('permission:eliminar-colaboradores', ['only' => ['destroy']]);
     }
 
-    // public function index(Request $request): View
-    // {
 
-    //     $employees = Employee::with('branch', 'department','jobtitle')
-    //     ->orderBy('id','DESC')
-    //     ->paginate(10);
-
-    //     return view('employees.index', compact('employees'));
-
-    // }
     public function index()
     {
         return view('employees.index');
@@ -46,7 +38,7 @@ class EmployeeController extends Controller
         $user = Auth()->user();
         if(request()->ajax()) {
 
-	        return Datatables()->of(Employee::with('branch', 'department','jobtitle')->select('*'))
+	        return Datatables()->of(Employee::with('department','jobtitle')->select('*'))
 	        ->addColumn('action', function (Employee $employee) use ($user) {
 
                 $btn = '<form action='.route("employees.destroy",$employee->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
@@ -73,7 +65,6 @@ class EmployeeController extends Controller
             ->addIndexColumn()
 	        ->make(true);
 	    }
-        return view('employees.pagination', compact('employees'));
 
     }
 
@@ -111,11 +102,10 @@ class EmployeeController extends Controller
 
     public function edit($id)
     {
-        $employee = Employee::with('branch', 'department','jobtitle')->findOrFail($id);;
-        $branches = Branch::all();
+        $employee = Employee::with('department','jobtitle')->findOrFail($id);;
         $jobtitles = Jobtitle::get();
         $departments = Department::get();
-        return view('employees.edit',compact('employee','branches','jobtitles','departments'));
+        return view('employees.edit',compact('employee','jobtitles','departments'));
 
     }
     public function update(UpdateEmployeeRequest $request, Employee $employee): RedirectResponse

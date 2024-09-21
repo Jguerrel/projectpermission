@@ -89,10 +89,6 @@ $(document).ready(function() {
                     url:'/es-ES.json',
                     },
        }).buttons().container().appendTo('#dispositivos_wrapper .col-md-6:eq(1)');
-;
-
-
-
 
 });
 </script>

@@ -31,7 +31,7 @@ class IpaddressController extends Controller
     public function direccionesip(Request $request)
     {
         $id = $request->input('id');
-       $direccionesip = Ipaddress::where('branch_office_id', $id)->get();
+         $direccionesip = Ipaddress::where('branch_office_id', $id)->get();
          return response()->json($direccionesip);
 
     }
@@ -68,7 +68,7 @@ class IpaddressController extends Controller
             ->addIndexColumn()
 	        ->make(true);
 	    }
-        return view('ipaddresses.pagination', compact('ipaddresses'));
+
 
     }
     /**

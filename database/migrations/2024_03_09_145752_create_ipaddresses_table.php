@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('ipaddresses', function (Blueprint $table) {
             $table->id();
             $table->string('ip',20)->unique()->nullable(false);
+            $table->unsignedBigInteger('branch_office_id');
+            $table->foreign('branch_office_id')->references('id')->on('branch_offices')->unique()->nullable(false);
             $table->timestamps();
         });
     }

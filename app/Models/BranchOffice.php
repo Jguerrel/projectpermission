@@ -10,15 +10,14 @@ class BranchOffice extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'branch_id'
+        'name'
 
     ];
 
-    public function Branch()
-    {
-        return $this->belongsTo(Branch::class);
-    }
+    // public function Branch()
+    // {
+    //     return $this->belongsTo(Branch::class);
+    // }
     public function Devices()
     {
         return $this->hasMany(Device::class);

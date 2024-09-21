@@ -40,23 +40,9 @@
                                 @endif
                             </div>
                         </div>
-      
-                        <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Compañia</label>
-                            <div class="col-md-6">
-                            <select class="form-control js-example-basic-single select2 @error('branches') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="branches" id="branch_id" name="branch_id">
-                                        <option value="" disabled selected>Seleccione Item</option>
-                                        @foreach ($branches as $branch)
-                                         <option value="{{ $branch->id }}"  {{ $branchoffice->branch->id == $branch->id ? 'selected' : '' }}>
-                                               {{ $branch->name }}
-                                        </option>
 
-                                        @endforeach
-                                   </select>
-                        </div>
-                      </div>
-      
-    
+
+
                     <div class="mb-3 row">
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-info" value="Actualizar">
                     </div>

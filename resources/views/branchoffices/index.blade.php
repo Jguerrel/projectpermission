@@ -30,7 +30,6 @@
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Sucursal</th>
-                <th scope="col">Compañia</th>
                 <th scope="col" style="width: 20%;">Accion</th>
                 </tr>
             </thead>
@@ -39,7 +38,6 @@
                 <tr>
                    <th scope="row">{{ $loop->iteration }}</th>
                    <td>{{ $branchoffice->name }}</td>
-                   <td>{{ $branchoffice->branch->name}}</td>
                    <td>
                         <form action="{{ route('branchoffices.destroy', $branchoffice->id) }}" method="post">
                             @csrf

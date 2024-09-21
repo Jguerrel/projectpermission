@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Device extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'serialnumber',
         'model',
@@ -21,7 +21,6 @@ class Device extends Model
         'devicecomment',
         'office',
         'typedevice_id',
-        'branch_id',
         'branch_office_id',
         'employee_id',
         'disktype_id',
@@ -33,10 +32,6 @@ class Device extends Model
         return $this->belongsTo(TypeDevice::class);
     }
 
-    public function branch()
-    {
-        return $this->belongsTo(Branch::class);
-    }
     public function branch_office()
     {
         return $this->belongsTo(BranchOffice::class);

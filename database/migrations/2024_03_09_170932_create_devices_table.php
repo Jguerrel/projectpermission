@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('ram')->nullable();
             $table->string('photo',255)->nullable();
             $table->string('OS',50)->nullable();
-            $table->integer('disco')->nullable();
+            $table->string('disco',10)->nullable();
             $table->date('datedevicepurchase')->nullable(false);
             $table->text('devicecomment');
             $table->string('office',50)->nullable();
@@ -33,6 +33,8 @@ return new class extends Migration
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->unsignedBigInteger('disktype_id');
             $table->foreign('disktype_id')->references('id')->on('disktypes');
+            $table->unsignedBigInteger('ipaddress_id');
+            $table->foreign('ipaddress_id')->references('id')->on('ipaddresses')->onDelete('cascade');
             $table->timestamps();
         });
     }

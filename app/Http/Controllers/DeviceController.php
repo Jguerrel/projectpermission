@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDeviceRequest;
 use App\Http\Requests\UpdateDeviceRequest;
 use App\Models\Device;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Typedevice;
-use App\Models\Branch;
 use App\Models\BranchOffice;
 use App\Models\Employee;
 use App\Models\Disktype;
@@ -38,7 +36,7 @@ class DeviceController extends Controller
         $user = Auth()->user();
         if(request()->ajax()) {
 
-	        return Datatables()->of(Device::with('typedevice', 'branch','branch_office','employee','disktype','ipaddress')->select('*'))
+	        return Datatables()->of(Device::with('typedevice','branch_office','employee','disktype','ipaddress')->select('*'))
 	        ->addColumn('action', function (Device $device) use ($user) {
 
                 $btn = '<form action='.route("devices.destroy",$device->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
@@ -63,23 +61,22 @@ class DeviceController extends Controller
             })
 
             ->rawColumns(['action'])
-           
+
             ->addIndexColumn()
 	        ->make(true);
 	    }
-        return view('devices.pagination', compact('devices'));
 
     }
 
     public function create()
     {
-        $branches = Branch::all();
+
         $employees = Employee::all();
         $branchoffices = BranchOffice::all();
         $typedevices = Typedevice::all();
         $disktypes = Disktype::all();
         $ipadresses = Ipaddress::all();
-        return view('devices.create',compact('branches','employees','branchoffices','typedevices','disktypes','ipadresses') );
+        return view('devices.create',compact('employees','branchoffices','typedevices','disktypes','ipadresses') );
     }
 
     /**
@@ -117,17 +114,14 @@ class DeviceController extends Controller
      */
     public function edit(string $id)
     {
-        $device = Device::with('branch', 'branch_office','typedevice','disktype','employee','ipaddress')->findOrFail($id);;
-        $branches = Branch::all();
+        $device = Device::with('branch_office','typedevice','disktype','employee','ipaddress')->findOrFail($id);;
         $typedevices = Typedevice::get();
         $branch_offices = BranchOffice::get();
         $employees = Employee::get();
         $disktypes = Disktype::get();
         $ipaddresses = Ipaddress::get();
-        // return view('employees.edit', [
-        //     'employee' => $employee
-        // ]);
-        return view('devices.edit',compact('device','branches', 'branch_offices','typedevices','disktypes','employees','ipaddresses'));
+
+        return view('devices.edit',compact('device','branch_offices','typedevices','disktypes','employees','ipaddresses'));
     }
 
     /**
@@ -146,7 +140,7 @@ class DeviceController extends Controller
         else{
             unset($input['photo']);
         }
-      //  dd("llegue");
+;
         $device->update($input);
 
         return redirect()->route('devices.index')

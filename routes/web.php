@@ -65,7 +65,7 @@ Route::get('devices', [DeviceController::class, 'pagination'])->name('devices.pa
 Route::get('permissions', [PermissionController::class, 'pagination'])->name('permissions.pagination');
 Route::get('accounts', [AccountController::class, 'pagination'])->name('accounts.pagination');
 Route::get('ipadresses', [IpaddressController::class, 'pagination'])->name('ipaddresses.pagination');
-Route::post('/direccionesip', [IpaddressController::class, 'direccionesip'])->name('ipaddresses.direccionesip');;
+Route::post('/direccionesip', [IpaddressController::class, 'direccionesip'])->name('ipaddresses.direccionesip');
 //Route::get('permissioneskema', [PermissionEskemaController::class, 'permissioneskema']);
 //Route::resource('permissioneskema ', PermissionEskemaController::class);
 Route::get('acccessobjeto', [App\Http\Controllers\PermissionEskemaController::class, 'acccessobjeto'])->name('acccessobjeto');

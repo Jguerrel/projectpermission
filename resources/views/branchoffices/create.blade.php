@@ -22,7 +22,7 @@
         <div class="card car-info">
             <div class="card-header">
                 <div class="float-start">
-                    Nuevo Colaborador
+                    Nueva Sucursal
                 </div>
                 <div class="float-end">
                     <a href="{{ route('branchoffices.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
@@ -44,23 +44,6 @@
 
 
 
-                    <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Compañia</label>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                                    <select class="form-control js-example-basic-single select2 @error('branch_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="branch_id" id="branch_id" name="branch_id">
-                                               <option value="" disabled selected>Seleccione Item</option>
-                                        @foreach ($branches as $branch)
-                                             <option value="{{ $branch->id }}" {{ in_array($branch->id, old('branches') ?? []) ? 'selected' : '' }}>
-                                               {{ $branch->name }}
-                                            </option>
-
-                                        @endforeach
-                                   </select>
-                             </div>
-                        </div>
-                    </div>
-                   
                     <div class="mb-3 row">
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-info" value="Guardar">
                     </div>

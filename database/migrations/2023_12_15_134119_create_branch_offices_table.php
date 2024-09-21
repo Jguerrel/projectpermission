@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('branch_offices', function (Blueprint $table) {
             $table->id();
             $table->string('name',60)->unique()->nullable(false);
-            $table->unsignedBigInteger('branch_id');
-            $table->foreign('branch_id')->references('id')->on('branches');
             $table->timestamps();
         });
     }

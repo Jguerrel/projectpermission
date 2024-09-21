@@ -23,11 +23,8 @@ class BranchOfficeController extends Controller
     }
 
     public function index(): View
-    {   // return view('branch_offices.index', [
-        //     'branchoffices' => BranchOffice::orderBy('id','ASC')->paginate(20)
-        // ]);
-        $branchoffices = BranchOffice::with('branch')
-        ->orderBy('id','DESC')
+    {
+        $branchoffices = BranchOffice::orderBy('id','DESC')
         ->paginate(20);
 
         return view('branchoffices.index', compact('branchoffices'));
@@ -48,9 +45,9 @@ class BranchOfficeController extends Controller
     }
     public function edit($id)
     {
-        $branchoffice = BranchOffice::with('branch')->findOrFail($id);;
+        $branchoffice = BranchOffice::findOrFail($id);;
         $branches = Branch::all();
-        return view('branchoffices.edit',compact('branchoffice','branches'));
+        return view('branchoffices.edit',compact('branchoffice'));
 
     }
 
