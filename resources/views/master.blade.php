@@ -19,7 +19,7 @@
         @yield('title_postfix', config('adminlte.title_postfix', ''))
     </title>
     <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="{{ asset('public/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
     {{-- Custom stylesheets (pre AdminLTE) --}}
     @yield('adminlte_css_pre')
 
