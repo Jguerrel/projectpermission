@@ -24,7 +24,7 @@ class BranchOfficeController extends Controller
 
     public function index(): View
     {
-        $branchoffices = BranchOffice::orderBy('id','DESC')
+        $branchoffices = BranchOffice::orderBy('id','ASC')
         ->paginate(20);
 
         return view('branchoffices.index', compact('branchoffices'));

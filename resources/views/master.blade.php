@@ -18,7 +18,7 @@
         @yield('title', config('adminlte.title', 'AdminLTE 3'))
         @yield('title_postfix', config('adminlte.title_postfix', ''))
     </title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     {{-- Custom stylesheets (pre AdminLTE) --}}
     @yield('adminlte_css_pre')
@@ -94,7 +94,7 @@
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
         <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+        <script src="{{ asset('public/css/dataTables.bootstrap5.min.js') }}"></script>
         <script type="text/javascript" src= "https://code.jquery.com/jquery-1.12.4.js"></script>
     @else
 
@@ -116,7 +116,7 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+
 </body>
 
 </html>
