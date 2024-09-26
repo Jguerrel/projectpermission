@@ -17,15 +17,15 @@
                     {{ __('You are logged in!') }}
 
                     <p>This is your application dashboard.</p>
-                    @canany(['create-role', 'edit-role', 'delete-role'])
+                    @canany(['crear-roles', 'editar-roles', 'eliminar-roles'])
                         <a class="btn btn-primary" href="{{ route('roles.index') }}">
                             <i class="bi bi-person-fill-gear"></i> Manage Roles</a>
                     @endcanany
-                    @canany(['create-users', 'edit-users', 'delete-users'])
+                    @canany(['crear-usuarios', 'editar-usuarios', 'eliminar-usuarios'])
                         <a class="btn btn-success" href="{{ route('users.index') }}">
                             <i class="bi bi-people"></i> Manage Users</a>
                     @endcanany
-                    @canany(['create-product', 'edit-product', 'delete-product'])
+                    @canany(['crear-productos', 'editar-productos', 'eliminar-productos'])
                         <a class="btn btn-warning" href="{{ route('products.index') }}">
                             <i class="bi bi-bag"></i> Manage Products</a>
                     @endcanany

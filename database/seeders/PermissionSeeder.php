@@ -15,15 +15,21 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-            'create-role',
-            'edit-role',
-            'delete-role',
-            'create-user',
-            'edit-user',
-            'delete-user',
-            'create-product',
-            'edit-product',
-            'delete-product'
+            'crear-usuarios',
+            'editar-usuarios',
+            'eliminar-usuarios',
+            'crear-roles',
+            'editar-roles',
+            'eliminar-roles',
+            'crear-permisos',
+            'editar-permisos',
+            'eliminar-permisos',
+            'ver-permisos',
+            'ver-roles',
+            'ver-usuarios',
+            'crear-productos',
+            'editar-productos',
+            'eliminar-productos'
          ];
 
          foreach ($permissions as $permission) {
