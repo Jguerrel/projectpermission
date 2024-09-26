@@ -18,14 +18,17 @@
         @yield('title', config('adminlte.title', 'AdminLTE 3'))
         @yield('title_postfix', config('adminlte.title_postfix', ''))
     </title>
-    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
+
     {{-- Custom stylesheets (pre AdminLTE) --}}
     @yield('adminlte_css_pre')
 
     {{-- Base Stylesheets --}}
 
     @if(!config('adminlte.enabled_laravel_mix'))
+        <link href="{{ asset('resources/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('resources/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('resources/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('resources/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.csss') }}">
         <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
@@ -89,7 +92,7 @@
 
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+        <script src="{{ asset('public/js/moment.min.js') }}"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
