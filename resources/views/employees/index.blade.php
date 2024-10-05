@@ -32,6 +32,7 @@
                 <th scope="col">Cargo</th>
                 <th scope="col">Usuario</th>
                 <th scope="col">Foto</th>
+                <th scope="col">Estado</th>
                 <th scope="col" style="width: 20%;">Accion</th>
                 </tr>
             </thead>
@@ -74,7 +75,9 @@ $(document).ready(function() {
                     { data: 'jobtitle.name', name: 'jobtitle.name' },
                     { data: 'usrcod', name: 'usrcod' },
                     { data: 'photo', name: 'photo' , orderable: false},
+                    {data: 'status', name: 'status'},
                      {data: 'action', name: 'action', orderable: false},
+                     
                  ],
                  order: [[0, 'desc']]
        });

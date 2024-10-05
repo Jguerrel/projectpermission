@@ -48,7 +48,7 @@ return [
     */
 
     'google_fonts' => [
-        'allowed' => true,
+        'allowed' => false,
     ],
 
     /*
@@ -307,12 +307,6 @@ return [
             'text' => 'buscar',
         ],
         [
-            'text' => 'Compañias',
-            'url'  => 'admin/branches',
-            'icon'    => 'fas fa-fw fa-landmark',
-            'can'         => 'ver-companias',
-        ],
-        [
             'text' => 'Departamentos',
             'url'  => 'admin/departments',
             'icon'    => 'fas fa-fw fa-building ',
@@ -361,22 +355,22 @@ return [
             'can'         => 'ver-tipodiscos',
         ],
         [
-            'text' => 'Lista de IP',
-            'url'  => 'admin/ipaddresses',
-            'icon'    => 'fas fa-fw fa-globe',
-            'can'         => 'ver-direccionesip',
+            'text' => 'Marcas',
+            'url'  => 'admin/brands',
+            'icon'    => 'fas fa-regular fa-copyright',
+            'can'         => 'ver-marcas',
         ],
         [
-            'text' => 'Productos',
-            'url'  => 'admin/products',
-            'icon'    => 'fas fa-fw fa-globe',
-            'can'         => 'ver-productos',
+            'text' => 'Modelos',
+            'url'  => 'admin/models',
+            'icon'    => 'fas fa-solid fa-briefcase',
+            'can'         => 'ver-marcas',
         ],
         [
-            'text' => 'Ubicaciones',
-            'url'  => 'admin/locations',
-            'icon'    => 'fas fa-fw fa-globe',
-            'can'         => 'ver-ubicaciones',
+            'text' => 'Sistema Operativo',
+            'url'  => 'admin/operatingsystems',
+            'icon'    => 'fas fa-brands fa-windows',
+            'can'         => 'ver-marcas',
         ],
     /*   [<i class="fas fa-disc-drive
             'text'        => 'pages',
@@ -584,8 +578,14 @@ return [
                 [
                     'type' => 'css',
                     'asset' => true,
-                    'location' => 'vendor/DataTables/buttons.bootstrap4.min.css',
+                    'location' => 'vendor/datatables/buttons.bootstrap4.min.css',
                 ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/moment.min.js',
+                ],
+
 
             ],
         ],
@@ -615,6 +615,7 @@ return [
                 ],
             ],
         ],
+
         'Sweetalert2' => [
             'active' => true,
             'files' => [

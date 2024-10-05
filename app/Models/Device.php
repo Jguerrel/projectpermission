@@ -25,6 +25,7 @@ class Device extends Model
         'employee_id',
         'disktype_id',
         'ipaddress_id',
+        'status'
     ];
 
     public function typedevice()

@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 class UpdateDepartamentoRequest extends FormRequest
 {
     /**
@@ -14,21 +14,21 @@ class UpdateDepartamentoRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+   
     public function rules(): array
-    {
+    {  
+      
         return [
-            'name' => 'required|string|max:250'
+            'name' => ['required',Rule::unique('departments','name')->ignore($this->department)],
+
+
         ];
     }
     public function messages()
     {
         return [
             'name.required' => 'El :attribute es obligatorio.',
+            'name.unique' => 'El :attribute ya existe.',
         ];
 
 
@@ -37,7 +37,7 @@ class UpdateDepartamentoRequest extends FormRequest
     public function attributes()
         {
             return [
-                'name' => 'nombre ',
+                'name' => 'departamento ',
             ];
         }
 }

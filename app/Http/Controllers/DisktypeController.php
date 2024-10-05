@@ -29,9 +29,42 @@ class DisktypeController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function pagination()
+    {
+        $user = Auth()->user();
+        if(request()->ajax()) {
+
+	        return Datatables()->of(Disktype::select('*'))
+            ->editColumn('status', function(Disktype $disktype) {
+                return  '<span class="text-'. ($disktype->status ? 'success' : 'danger') .'">'. ($disktype->status ? 'Activo' : 'Inactivo').'</span>';
+            })
+            ->addColumn('action', function (Disktype $disktype) use ($user) {
+
+                $btn = '<form action='.route("disktypes.destroy",$disktype->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
+                $onclick='return confirm("Quieres eliminar el tipo de disco?");';
+                if ($user->can('ver-tiposdiscos'))
+                {
+                   $btn  = $btn . '<a href="'.route("disktypes.show",$disktype->id).'" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>';
+                }
+
+                if ($user->can('editar-tiposdiscos'))
+                {
+                    $btn =$btn.'<a href="'.route("disktypes.edit",$disktype->id).'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>';
+                }
+                if ($user->can('eliminar-tiposdiscos'))
+                {
+                    $btn =$btn.'<button type="submit" class="btn btn-danger btn-sm" onclick="'. $onclick.'"><i class="fas fa-trash"></i> Eliminar</button>';
+                }
+
+                  $btn =$btn .'</form>';
+                  return $btn;
+
+            })
+            ->rawColumns(['status','action'])
+            ->addIndexColumn()
+	        ->make(true);
+	    }
+    }
     public function create()
     {
         return view('disktypes.create');

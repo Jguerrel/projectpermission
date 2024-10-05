@@ -47,15 +47,16 @@ class TypedeviceController extends Controller
 
     public function edit(Typedevice $typedevice)
     {
-        return view('typedevices.edit', [
-            'typedevice' => $typedevice
-        ]);
+       
+
+        return view('typedevices.edit',compact('typedevice'));
     }
 
 
-    public function update(UpdateTypeDeviceRequest $request, TypeDevice $typedevice): RedirectResponse
+    public function update(UpdateTypeDeviceRequest $request, Typedevice $typedevice): RedirectResponse
     {
         $typedevice->update($request->all());
+
         return redirect()->route('typedevices.index')
                 ->withSuccess('Tipo de Dispositivo ha sido actualizado correctamente.');
     }

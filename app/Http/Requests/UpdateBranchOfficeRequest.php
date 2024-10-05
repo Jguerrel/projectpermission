@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateBranchOfficeRequest extends FormRequest
 {
@@ -14,17 +15,12 @@ class UpdateBranchOfficeRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+ 
     public function rules(): array
     {
         return [
 
-            'name'=>'required|unique:Branch_Offices,name|string',
-
+            'name'=>['required',Rule::unique('branch_offices','name')->ignore($this->branchoffice)] 
         ];
     }
 
@@ -33,7 +29,8 @@ class UpdateBranchOfficeRequest extends FormRequest
         return [
 
             'name.required' => 'El :attribute es obligatorio.',
-            'name.unique' => 'El :attribute ya existe.'
+            'name.unique' => 'La :attribute ya existe.'
+
         ];
 
 
@@ -43,7 +40,8 @@ class UpdateBranchOfficeRequest extends FormRequest
         {
             return [
 
-                'name' => 'nombre ',
+                'name' => 'sucursal '
+
             ];
         }
 

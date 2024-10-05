@@ -11,12 +11,13 @@ class Typedevice extends Model
     use HasFactory,HasRoles ;
 
     protected $fillable = [
-        'name'
+        'name',
+        'status',
     ];
-  
+
     public function Devices()
     {
         return $this->hasMany(Device::class);
     }
-    
+
 }

@@ -37,6 +37,9 @@ class DeviceController extends Controller
         if(request()->ajax()) {
 
 	        return Datatables()->of(Device::with('typedevice','branch_office','employee','disktype','ipaddress')->select('*'))
+            ->editColumn('status', function(Device $device) {
+                return  ' <span class="text-'. ($device->status ? 'success' : 'danger') .'">Activo</span>';
+            })
 	        ->addColumn('action', function (Device $device) use ($user) {
 
                 $btn = '<form action='.route("devices.destroy",$device->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';

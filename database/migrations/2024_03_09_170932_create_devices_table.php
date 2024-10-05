@@ -35,6 +35,7 @@ return new class extends Migration
             $table->foreign('disktype_id')->references('id')->on('disktypes');
             $table->unsignedBigInteger('ipaddress_id');
             $table->foreign('ipaddress_id')->references('id')->on('ipaddresses')->onDelete('cascade');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

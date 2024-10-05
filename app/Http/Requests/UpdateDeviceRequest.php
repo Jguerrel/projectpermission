@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateDeviceRequest extends FormRequest
 {
@@ -14,15 +15,11 @@ class UpdateDeviceRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+
     public function rules(): array
     {
         return [
-            'serialnumber' => 'required|string|max:250',
+            'serialnumber' => ['required',Rule::unique('devices','name')->ignore($this->device)],
             'model' => 'required|string|max:250',
             'brand'=> 'required|string|max:250',
             'ram'=> 'required|string|max:250',

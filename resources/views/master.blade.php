@@ -2,7 +2,6 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-
     {{-- Base Meta Tags --}}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,10 +24,7 @@
     {{-- Base Stylesheets --}}
 
     @if(!config('adminlte.enabled_laravel_mix'))
-        <link href="{{ asset('resources/css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('resources/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('resources/css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('resources/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
+
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.csss') }}">
         <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
@@ -56,7 +52,11 @@
     <!-- <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet"> -->
     {{-- Custom Stylesheets (post AdminLTE) --}}
     @yield('adminlte_css')
-    <link type="text/javascript" href="{{ asset('public/css/style.css') }}">
+    <link href="{{ asset('resources/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('resources/css/dataables.bootstrap5.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('resources/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('resources/css/datatables.bootstrap5.min.css') }}" rel="stylesheet">
+    <link type="stylesheet" href="{{ asset('public/css/style.css') }}">
     {{-- Favicon --}}
     @if(config('adminlte.use_ico_only'))
         <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
@@ -97,7 +97,7 @@
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
         <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-        <script src="{{ asset('public/css/dataTables.bootstrap5.min.js') }}"></script>
+        <script src="{{asset('public/css/dataTables.bootstrap5.min.js') }}"></script>
         <script type="text/javascript" src= "https://code.jquery.com/jquery-1.12.4.js"></script>
     @else
 

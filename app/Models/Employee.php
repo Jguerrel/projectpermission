@@ -15,7 +15,8 @@ class Employee extends Model
         'department_id',
         'jobtitle_id',
         'photo',
-        'usrcod'
+        'usrcod',
+        'status'
     ];
 
 

@@ -31,17 +31,39 @@ class JobTitleController extends Controller
 
     public function pagination()
     {
-
+        $user = Auth()->user();
         if(request()->ajax()) {
 
-	        return Datatables()->of(jobtitle::select('*'))
-	        ->addColumn('action', 'blog-action')
-	        ->rawColumns(['action'])
-	        ->addIndexColumn()
+	        return Datatables()->of(Jobtitle::select('*'))
+            ->editColumn('status', function(Jobtitle $jobtitle) {
+                return  '<span class="text-'. ($jobtitle->status ? 'success' : 'danger') .'">'. ($jobtitle->status ? 'Activo' : 'Inactivo').'</span>';
+            })
+            ->addColumn('action', function (Jobtitle $jobtitle) use ($user) {
+
+                $btn = '<form action='.route("jobtitles.destroy",$jobtitle->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
+                $onclick='return confirm("Do you want to delete this user?");';
+                if ($user->can('ver-cargos'))
+                {
+                   $btn  = $btn . '<a href="'.route("jobtitles.show",$jobtitle->id).'" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>';
+                }
+
+                if ($user->can('editar-cargos'))
+                {
+                    $btn =$btn.'<a href="'.route("jobtitles.edit",$jobtitle->id).'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>';
+                }
+                if ($user->can('eliminar-cargos'))
+                {
+                    $btn =$btn.'<button type="submit" class="btn btn-danger btn-sm" onclick="'. $onclick.'"><i class="fas fa-trash"></i> Eliminar</button>';
+                }
+
+                  $btn =$btn .'</form>';
+                  return $btn;
+
+            })
+            ->rawColumns(['status','action'])
+            ->addIndexColumn()
 	        ->make(true);
 	    }
-        return view('jobtitles.pagination', compact('jobtitles'));
-
     }
 
     public function create(): View

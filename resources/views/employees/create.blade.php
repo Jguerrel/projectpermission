@@ -41,34 +41,6 @@
                             @endif
                         </d iv>
                     </div>
-
-                    <div class="mb-3 row">
-                        <label for="email" class="col-md-4 col-form-label text-md-end text-start">Apellido</label>
-                        <div class="col-md-6">
-                          <input type="name" class="form-control @error('lastname') is-invalid @enderror" id="lastname" name="lastname" value="{{ old('lastname') }}">
-                            @if ($errors->has('lastname'))
-                                <span class="text-danger">{{ $errors->first('lastname') }}</span>
-                            @endif
-                        </div>
-                    </div>
-
-
-                    <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Compañia</label>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                                    <select class="form-control js-example-basic-single select2 @error('branches') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="branches" id="branches" name="branch_id">
-                                               <option value="" disabled selected>Seleccione Item</option>
-                                        @foreach ($branches as $branch)
-                                             <option value="{{ $branch->id }}" {{ in_array($branch->id, old('branches') ?? []) ? 'selected' : '' }}>
-                                               {{ $branch->name }}
-                                            </option>
-
-                                        @endforeach
-                                   </select>
-                             </div>
-                        </div>
-                    </div>
                     <div class="mb-3 row">
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Departamentos</label>
                         <div class="col-md-6">
@@ -109,6 +81,15 @@
                                 <span class="text-danger">{{ $errors->first('photo') }}</span>
                             @endif
                         </div>
+                    </div>
+                    <div class="mb-3 row">
+                            <label for="status" class="col-md-4 col-form-label text-md-end text-start">Estado</label>
+                             <div class="col-md-6">
+                             <input type="checkbox" class="@error('status') is-invalid @enderror" name="status" id='status' value="1" {{ old('featured') ? 'checked="checked"' : '' }}/>
+                                @if ($errors->has('status'))
+                                        <span class="text-danger">{{ $errors->first('status') }}</span>
+                                    @endif
+                            </div>
                     </div>
                     <div class="mb-3 row">
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-info" value="Guardar">

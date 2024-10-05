@@ -6,7 +6,6 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\BranchController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\JobTitleController;
 use App\Http\Controllers\EmployeeController;
@@ -16,9 +15,8 @@ use App\Http\Controllers\BranchOfficeController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DisktypeController;
 use App\Http\Controllers\IpaddressController;
-use App\Http\Controllers\LocationController;
-use App\Http\Controllers\PermissionEskemaController;
-
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ModelController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -45,25 +43,33 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
 	Route::resource('users', UserController::class);
 	Route::resource('permissions', PermissionController::class);
     Route::resource('products', ProductController::class);
-    Route::resource('branches', BranchController::class);
     Route::resource('departments', DepartmentController::class);
     Route::resource('jobtitles', JobTitleController::class);
     Route::resource('typedevices', TypedeviceController::class);
     Route::resource('employees', EmployeeController::class);
     Route::resource('products', ProductController::class);
-    Route::resource('locations', LocationController::class);
     Route::resource('accounts', AccountController::class);
     Route::resource('branchoffices', BranchOfficeController::class);
     Route::resource('devices', DeviceController::class);
     Route::resource('disktypes', DisktypeController::class);
     Route::resource('ipaddresses',IpaddressController::class);
+    Route::resource('brands',BrandController::class);
+    Route::resource('models',ModelController::class);
+
+    /*Paginacion*/
+    Route::get('employees.pagination', [EmployeeController::class, 'pagination'])->name('employees.pagination');
+    Route::get('branchoffices.pagination', [BranchOfficeController::class, 'pagination'])->name('branchoffices.pagination');
+    Route::get('departments.pagination', [DepartmentController::class, 'pagination'])->name('departments.pagination');
+    Route::get('devices.pagination', [DeviceController::class, 'pagination'])->name('devices.pagination');
+    Route::get('accounts.pagination', [AccountController::class, 'pagination'])->name('accounts.pagination');
+    Route::get('disktypes.pagination', [DisktypeController::class, 'pagination'])->name('disktypes.pagination');
+    Route::get('jobtitles.pagination', [JobTitleController::class, 'pagination'])->name('jobtitles.pagination');
 });
 
 //Rutas de paginacion////
-Route::get('employees', [EmployeeController::class, 'pagination'])->name('employees.pagination');
-Route::get('devices', [DeviceController::class, 'pagination'])->name('devices.pagination');
+
 Route::get('permissions', [PermissionController::class, 'pagination'])->name('permissions.pagination');
-Route::get('accounts', [AccountController::class, 'pagination'])->name('accounts.pagination');
+//Route::get('accounts', [AccountController::class, 'pagination'])->name('accounts.pagination');
 Route::get('ipadresses', [IpaddressController::class, 'pagination'])->name('ipaddresses.pagination');
 Route::post('/direccionesip', [IpaddressController::class, 'direccionesip'])->name('ipaddresses.direccionesip');
 //Route::get('permissioneskema', [PermissionEskemaController::class, 'permissioneskema']);

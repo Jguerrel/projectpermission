@@ -10,7 +10,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Departamento</li>
+                    <li class="breadcrumb-item active">Departamento2</li>
                     </ol>
                 </div>
                 </div>
@@ -34,10 +34,21 @@
                         <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Nombre</label>
                             <div class="col-md-6">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $department->name }}">
-                                @if ($errors->has('name'))
-                                    <span class="text-danger">{{ $errors->first('name') }}</span>
-                                @endif
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $department->name }}">
+                                    @if ($errors->has('name'))
+                                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                                    @endif
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="status" class="col-md-4 col-form-label text-md-end text-start">Estado</label>
+                             <div class="col-md-6">
+                             <input type="hidden" name="status" value="0">
+                             <input type="checkbox" class="@error('status') is-invalid @enderror" name="status" id='status' value="1" {{ $department->status ? 'checked' : '' }} />
+                                @if ($errors->has('status'))
+                                        <span class="text-danger">{{ $errors->first('status') }}</span>
+                                    @endif
                             </div>
                         </div>
                     <div class="mb-3 row">

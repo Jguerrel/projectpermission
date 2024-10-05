@@ -4,20 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 class BranchOffice extends Model
 {
-    use HasFactory;
+    use HasFactory,HasRoles ;
 
     protected $fillable = [
-        'name'
+        'name',
+        'status',
 
     ];
 
-    // public function Branch()
-    // {
-    //     return $this->belongsTo(Branch::class);
-    // }
     public function Devices()
     {
         return $this->hasMany(Device::class);

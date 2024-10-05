@@ -33,6 +33,7 @@
                 <th scope="col">Contraseña</th>
                 <th scope="col">Link</th>
                 <th scope="col">Descripcion</th>
+                <th scope="col">Estado</th>
                 <th scope="col" style="width: 20%;">Accion</th>
                 </tr>
             </thead>
@@ -67,6 +68,7 @@ $(document).ready(function() {
                     { data: 'password', name: 'password' },
                     { data: 'link', name: 'link' },
                     { data: 'description', name: 'description' },
+                    { data: 'status', name: 'status' },
                      {data: 'action', name: 'action', orderable: false},
                  ],
                  order: [[0, 'desc']],

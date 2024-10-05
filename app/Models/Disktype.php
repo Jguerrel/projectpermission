@@ -11,7 +11,8 @@ class Disktype extends Model
 
 
     protected $fillable = [
-        'name'
+        'name',
+        'status'
     ];
 
     public function Devices()

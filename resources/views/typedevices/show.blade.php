@@ -36,7 +36,16 @@
                             {{ $typedevice->name }}
                         </div>
                     </div>
-
+                    <div class="mb-3 row">
+                                <label for="status" class="col-md-4 col-form-label text-md-end text-start"><strong>Estado:</strong></label>
+                                <div class="col-md-6" style="line-height: 35px;">
+                                    @if ($typedevice->status)
+                                        <span class="text-success">Activo</span> <!-- O puedes usar un ícono -->
+                                    @else
+                                        <span class="text-danger">Inactivo</span> <!-- O puedes usar un ícono -->
+                                    @endif
+                                </div>
+                    </div>
             </div>
         </div>
     </div>

@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('name',60)->nullable(false);
+            $table->string('name',100)->nullable(false);
             $table->string('photo',255)->nullable();
+            $table->boolean('status')->default(0);
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
             $table->unsignedBigInteger('jobtitle_id');

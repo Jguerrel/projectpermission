@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('name',50)->nullable();
+            $table->string('name',60)->nullable();
             $table->string('password',50)->nullable();
             $table->string('link',300)->nullable();
             $table->string('description',300)->nullable();
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
 

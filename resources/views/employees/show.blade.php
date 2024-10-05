@@ -36,23 +36,40 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Departamento:</strong></label>
+                        <label for="department_id" class="col-md-4 col-form-label text-md-end text-start"><strong>Departamento:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
                             {{ $employee->department->name }}
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Cargo:</strong></label>
+                        <label for="jobtitle_id" class="col-md-4 col-form-label text-md-end text-start"><strong>Cargo:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
                             {{ $employee->jobtitle->name }}
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Foto:</strong></label>
+                        <label for="usrcod" class="col-md-4 col-form-label text-md-end text-start"><strong>Usuario:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                            <img src="{{ asset($employee->photo) }}" alt="employee image" title="employee image">
+                             {{ $employee->usrcod }}
                         </div>
                     </div>
+                    <div class="mb-3 row">
+                        <label for="photo" class="col-md-4 col-form-label text-md-end text-start"><strong>Foto:</strong></label>
+                        <div class="col-md-6" style="line-height: 35px;">
+                            <img src="{{ asset($employee->photo) }}" alt="sin imagen" title="sin imagen">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="status" class="col-md-4 col-form-label text-md-end text-start"><strong>Estado:</strong></label>
+                        <div class="col-md-6" style="line-height: 35px;">
+                            @if ($employee->status)
+                                <span class="text-success">Activo</span> <!-- O puedes usar un ícono -->
+                            @else
+                                <span class="text-danger">Inactivo</span> <!-- O puedes usar un ícono -->
+                            @endif
+
+                       </div>
+                   </div>
                 </div>
         </div>
     </div>

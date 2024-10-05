@@ -13,7 +13,8 @@ class Account extends Model
         'name',
         'password',
         'link',
-        'description'
+        'description',
+        'status'
 
     ];
 

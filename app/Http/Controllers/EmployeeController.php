@@ -39,7 +39,10 @@ class EmployeeController extends Controller
         if(request()->ajax()) {
 
 	        return Datatables()->of(Employee::with('department','jobtitle')->select('*'))
-	        ->addColumn('action', function (Employee $employee) use ($user) {
+            ->editColumn('status', function(Employee $employee) {
+                return  '<span class="text-'. ($employee->status ? 'success' : 'danger') .'">'. ($employee->status ? 'Activo' : 'Inactivo').'</span>';
+            })
+            ->addColumn('action', function (Employee $employee) use ($user) {
 
                 $btn = '<form action='.route("employees.destroy",$employee->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
                 $onclick='return confirm("Do you want to delete this user?");';
@@ -61,7 +64,7 @@ class EmployeeController extends Controller
                   return $btn;
 
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['status','action'])
             ->addIndexColumn()
 	        ->make(true);
 	    }
@@ -70,10 +73,9 @@ class EmployeeController extends Controller
 
     public function create(): View
     {
-        $branches = Branch::all();
         $jobtitles = Jobtitle::all();
         $departments = Department::all();
-        return view('employees.create',compact('branches','jobtitles','departments') );
+        return view('employees.create',compact('jobtitles','departments') );
 
     }
     public function show(Employee $employee): View

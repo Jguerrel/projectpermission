@@ -11,6 +11,7 @@ class Ipaddress extends Model
     protected $fillable = [
         'ip',
         'branch_office_id',
+        'status'
 
     ];
     public function branch_office()

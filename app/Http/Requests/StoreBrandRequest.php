@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCompaniaRequest extends FormRequest
+class StoreBrandRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,25 +22,7 @@ class StoreCompaniaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|string',
+            //
         ];
     }
-
-    public function messages()
-    {
-        return [
-
-            'name.required' => 'El :attribute es obligatorio.',
-        ];
-
-
-    }
-
-    public function attributes()
-        {
-            return [
-
-                'name' => 'nombre ',
-            ];
-        }
 }

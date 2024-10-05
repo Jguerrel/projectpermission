@@ -30,55 +30,46 @@
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Permiso</th>
+                <th scope="col">Estado</th>
                 <th scope="col" style="width: 20%;">Accion</th>
                 </tr>
             </thead>
-            <tbody>
-                @forelse ($departments as $department)
-                <tr>
-                   <th scope="row">{{ $loop->iteration }}</th>
-                   <td>{{ $department->name }}</td>
-                   <td>
-                        <form action="{{ route('departments.destroy', $department->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
 
-                            <a href="{{ route('departments.show', $department->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>
-
-                                @can('editar-departamentos')
-                                    <a href="{{ route('departments.edit', $department->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>
-                                @endcan
-
-                                @can('eliminar-departamentos')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Estas seguro de eliminar este departamento?');"><i class="fas fa-trash"></i> Eliminar</button>
-                                @endcan
-                        </form>
-                    </td>
-                </tr>
-                @empty
-                    <td colspan="5">
-                        <span class="text-danger">
-                            <strong>No User Found!</strong>
-                        </span>
-                    </td>
-                @endforelse
-            </tbody>
        </table>
    </div>
 </div>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
 <script type="text/javascript">
 
 $(document).ready(function() {
 
-    var table = $('#departamento').DataTable({
-        language: {
-        url: 'https://cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json',
-         }
+    $('#departamento').DataTable({
+          language: {
+                    url:'/es-ES.json',
+                    },
+           processing: true,
+           serverSide: true,
+           ajax: {
+                url: "{{ route('departments.pagination') }}",
+                type: "GET",
+                // success:function(data){
+                //  alert(JSON.stringify(data))
+                // },
+                 error : function(xhr, textStatus, errorThrown){
 
+                    console.log('error'+JSON.stringify(xhr))
+                }
+            },
+           columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'name', name: 'name' },
+                     {data: 'status', name: 'status'},
+                     {data: 'action', name: 'action', orderable: false},
 
-    });
+                 ],
+                 order: [[0, 'desc']]
+       });
 });
 </script>
 

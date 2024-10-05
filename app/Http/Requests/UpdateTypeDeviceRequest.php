@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateTypeDeviceRequest extends FormRequest
 {
@@ -14,22 +15,19 @@ class UpdateTypeDeviceRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+    
     public function rules(): array
     {
+       
         return [
-            'name' => 'required|unique:typedevices,name|string|max:250'
+            'name' => ['required',Rule::unique('typedevices','name')->ignore($this->typedevice)],
         ];
     }
     public function messages()
     {
         return [
             'name.required' => 'El :attribute es obligatorio.',
-            'name.unique' => 'Este :attribute ya existe.'
+            'name.unique' => 'Este :attribute ya existe'
         ];
 
 
@@ -38,7 +36,7 @@ class UpdateTypeDeviceRequest extends FormRequest
     public function attributes()
         {
             return [
-                'name' => 'nombre ',
+                'name' => 'tipo de dispositivo ',
             ];
         }
 }

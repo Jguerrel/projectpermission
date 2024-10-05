@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
-            // $table->string('ciacod',4)->nullable(false);
-            $table->string('name',40)->unique()->nullable(false);
+            $table->string('name',60)->unique()->nullable(false);
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

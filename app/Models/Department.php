@@ -11,7 +11,8 @@ class Department extends Model
     use HasFactory,HasRoles ;
 
     protected $fillable = [
-        'name'
+        'name',
+        'status',
     ];
 
     public function employees()

@@ -35,18 +35,21 @@ class AccountController extends Controller
         if(request()->ajax()) {
 
 	        return Datatables()->of(Account::select('*'))
-	        ->addColumn('action', function (Account $device) use ($user) {
+            ->editColumn('status', function(Account $account) {
+                return  '<span class="text-'. ($account->status ? 'success' : 'danger') .'">'. ($account->status ? 'Activo' : 'Inactivo').'</span>';
+            })
+	        ->addColumn('action', function (Account $account) use ($user) {
 
-                $btn = '<form action='.route("accounts.destroy",$device->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
+                $btn = '<form action='.route("accounts.destroy",$account->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
                 $onclick='return confirm("Seguro que quieres eliminar esta cuenta?");';
                 if ($user->can('ver-cuentas'))
                 {
-                   $btn  = $btn . '<a href="'.route("accounts.show",$device->id).'" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>';
+                   $btn  = $btn . '<a href="'.route("accounts.show",$account->id).'" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>';
                 }
 
                 if ($user->can('editar-cuentas'))
                 {
-                    $btn =$btn.'<a href="'.route("accounts.edit",$device->id).'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>';
+                    $btn =$btn.'<a href="'.route("accounts.edit",$account->id).'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>';
                 }
                 if ($user->can('eliminar-cuentas'))
                 {
@@ -58,7 +61,7 @@ class AccountController extends Controller
 
             })
 
-            ->rawColumns(['action'])
+            ->rawColumns(['status','action'])
             ->addIndexColumn()
 	        ->make(true);
 	    }

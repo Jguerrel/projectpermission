@@ -27,6 +27,7 @@
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
+                <th scope="col">Estado</th>
                 <th scope="col" style="width: 20%;">Accion</th>
                 </tr>
             </thead>
@@ -35,6 +36,12 @@
                   <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{ $typedevice->name }}</td>
+                    <td>    @if ($typedevice->status)
+                                    <span class="text-success">Activo</span>
+                                @else
+                                    <span class="text-danger">Inactivo</span>
+                                @endif
+                    </td>
                     <td>
                             <form action="{{ route('typedevices.destroy', $typedevice->id) }}" method="post">
                                 @csrf

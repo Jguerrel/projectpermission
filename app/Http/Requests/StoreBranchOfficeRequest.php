@@ -24,7 +24,7 @@ class StoreBranchOfficeRequest extends FormRequest
         return [
 
             'name'=>'required|unique:branch_offices,name|string',
-            'branch_id' => 'required|exists:branches,id'
+            
         ];
     }
 
@@ -33,8 +33,8 @@ class StoreBranchOfficeRequest extends FormRequest
         return [
 
             'name.required' => 'El :attribute es obligatorio.',
-            'name.unique' => 'El :attribute ya existe.',
-            'branch_id.required' => 'La :attribute es obligatorio.',
+            'name.unique' => 'La :attribute ya existe.',
+            
         ];
 
 
@@ -44,8 +44,8 @@ class StoreBranchOfficeRequest extends FormRequest
         {
             return [
 
-                'name' => 'nombre ',
-                'branch_id' => 'compañia ',
+                'name' => 'sucursal ',
+                'status' => 'estado ',
             ];
         }
 

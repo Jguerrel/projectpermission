@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('disktypes', function (Blueprint $table) {
             $table->id();
-            $table->string('name',15)->unique()->nullable(false);
+            $table->string('name',30)->unique()->nullable(false);
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

@@ -40,7 +40,15 @@
                             @endif
                         </div>
                     </div>
-
+                    <div class="mb-3 row">
+                            <label for="status" class="col-md-4 col-form-label text-md-end text-start">Estado</label>
+                             <div class="col-md-6">
+                             <input type="checkbox" class="@error('status') is-invalid @enderror" name="status" id='status' value="1" {{ old('featured') ? 'checked="checked"' : '' }}/>
+                                @if ($errors->has('status'))
+                                        <span class="text-danger">{{ $errors->first('status') }}</span>
+                                    @endif
+                            </div>
+                    </div>
                     <div class="mb-3 row">
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-info" value="Confirmar">
                     </div>
@@ -50,7 +58,7 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
 
 <script>
  $(function () {

@@ -30,6 +30,7 @@
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Tipo</th>
+                <th scope="col">Estado</th>
                 <th scope="col" style="width: 20%;">Accion</th>
                 </tr>
             </thead>
@@ -67,18 +68,37 @@
    </div>
 </div>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
 <script type="text/javascript">
 
 $(document).ready(function() {
 
-    var table = $('#tiposdiscos').DataTable({
-        language: {
-        url: 'https://cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json',
-         }
+    $('#tiposdiscos').DataTable({
+          language: {
+                    url:'/es-ES.json',
+                    },
+           processing: true,
+           serverSide: true,
+           ajax: {
+                url: "{{ route('disktypes.pagination') }}",
+                type: "GET",
+                // success:function(data){
+                //  alert(JSON.stringify(data))
+                // },
+                 error : function(xhr, textStatus, errorThrown){
 
-
-    });
+                    console.log('error'+JSON.stringify(xhr))
+                }
+            },
+           columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'name', name: 'name' },
+                     {data: 'status', name: 'status'},
+                     {data: 'action', name: 'action', orderable: false},
+                     
+                 ],
+                 order: [[0, 'desc']]
+       });
 });
 </script>
 
