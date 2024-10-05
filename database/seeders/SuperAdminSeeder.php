@@ -22,13 +22,22 @@ class SuperAdminSeeder extends Seeder
         ]);
         $superAdmin->assignRole('Super Admin');
 
+        /*Senior */
+        $superAdmin = User::create([
+            'name' => 'Alejandro Sanchez',
+            'email' => 'alejandro.sanchez@bahiamotors.com',
+            'password' => Hash::make('Admin123%')
+        ]);
+
+        $superAdmin->assignRole('Super Admin');
+
         // Creating Admin User
         $admin = User::create([
             'name' => 'Jean Rodriguez',
             'email' => 'jean.guerrel@bahiamotors.com',
             'password' => Hash::make('Zelda2021%')
         ]);
-        
+
         $admin->assignRole('Admin');
 
         // Creating Product Manager User
