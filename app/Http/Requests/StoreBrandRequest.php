@@ -11,7 +11,7 @@ class StoreBrandRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,26 @@ class StoreBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'=>'required|unique:brands,name|string',
+
         ];
+
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'La :attribute es obligatorio.',
+            'name.unique' => 'La :attribute ya existe.',
+        ];
+
+    }
+
+      public function attributes()
+        {
+            return [
+                'name' => 'marca',
+
+            ];
+        }
 }

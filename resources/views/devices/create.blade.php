@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('vendor.adminlte.page')
 
 @section('content')
 
@@ -42,21 +42,35 @@
                         </d iv>
                     </div>
                     <div class="mb-3 row">
-                        <label for="email" class="col-md-4 col-form-label text-md-end text-start">Marca</label>
+                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Marca</label>
                         <div class="col-md-6">
-                          <input type="text" class="form-control @error('brand') is-invalid @enderror" id="brand" name="brand" value="{{ old('brand') }}">
-                            @if ($errors->has('brand'))
-                                <span class="text-danger">{{ $errors->first('brand') }}</span>
-                            @endif
+                          <div class="form-group">
+                                <select class="form-control js-example-basic-single select2 @error('brands') is-invalid @enderror "  data-placeholder="Seleccione Item"   id="brand" name="brand_id">
+                                <option value="" disabled selected>Seleccione Item</option>
+                                  @foreach ($brands as $brand)
+                                        <option value="{{ $brand->id }}" {{ in_array($brand->id, old('brands') ?? []) ? 'selected' : '' }}>
+                                            {{ $brand->name }}
+                                        </option>
+
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="email" class="col-md-4 col-form-label text-md-end text-start">Modelo</label>
+                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Modelo</label>
                         <div class="col-md-6">
-                          <input type="text" class="form-control @error('model') is-invalid @enderror" id="model" name="model" value="{{ old('model') }}">
-                            @if ($errors->has('model'))
-                                <span class="text-danger">{{ $errors->first('model') }}</span>
-                            @endif
+                          <div class="form-group">
+                                <select class="form-control js-example-basic-single select2 @error('carmodels') is-invalid @enderror "  data-placeholder="Seleccione Item"   id="carmodel" name="carmodel_id">
+                                <option value="" disabled selected>Seleccione Item</option>
+                                  @foreach ($carmodels as $carmodel)
+                                        <option value="{{ $carmodel->id }}" {{ in_array($carmodel->id, old('carmodels') ?? []) ? 'selected' : '' }}>
+                                            {{ $carmodel->name }}
+                                        </option>
+
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -69,22 +83,35 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="email" class="col-md-4 col-form-label text-md-end text-start">Sistema Operativo</label>
+                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Sistema Operativo</label>
                         <div class="col-md-6">
-                          <input type="text" class="form-control @error('OS') is-invalid @enderror" id="OS" name="OS" value="{{ old('OS') }}">
-                            @if ($errors->has('OS'))
-                                <span class="text-danger">{{ $errors->first('OS') }}</span>
-                            @endif
+                          <div class="form-group">
+                                <select class="form-control js-example-basic-single select2 @error('operatingsystems') is-invalid @enderror "  data-placeholder="Seleccione Item"   id="operatingsystems" name="operatingsystem_id">
+                                <option value="" disabled selected>Seleccione Item</option>
+                                  @foreach ($operatingsystems as $operatingsystem)
+                                        <option value="{{ $operatingsystem->id }}" {{ in_array($operatingsystem->id, old('operatingsystems') ?? []) ? 'selected' : '' }}>
+                                            {{ $operatingsystem->name }}
+                                        </option>
+
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
-
                     <div class="mb-3 row">
-                        <label for="text" class="col-md-4 col-form-label text-md-end text-start">Tamaño de disco</label>
+                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Tamaño de Disco</label>
                         <div class="col-md-6">
-                          <input type="text" class="form-control @error('disco') is-invalid @enderror" id="disco" name="disco" value="{{ old('disco') }}">
-                            @if ($errors->has('disco'))
-                                <span class="text-danger">{{ $errors->first('disco') }}</span>
-                            @endif
+                          <div class="form-group">
+                                <select class="form-control js-example-basic-single select2 @error('diskstorages') is-invalid @enderror "  data-placeholder="Seleccione Item"   id="diskstorages" name="diskstorage_id">
+                                <option value="" disabled selected>Seleccione Item</option>
+                                  @foreach ($diskstorages as $diskstorage)
+                                        <option value="{{ $diskstorage->id }}" {{ in_array($diskstorage->id, old('diskstorage') ?? []) ? 'selected' : '' }}>
+                                            {{ $diskstorage->name }}
+                                        </option>
+
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3 row">

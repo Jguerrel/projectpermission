@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('vendor.adminlte.page')
 
 @section('content')
 
@@ -34,6 +34,7 @@
                             <th scope="col">Fecha de compra</th>
                             <th scope="col">IP</th>
                             <th scope="col">Office</th>
+                            <th scope="col">Estado</th>
                             <th scope="col" style="width: 20%;">Accion</th>
                             </tr>
                         </thead>
@@ -76,12 +77,13 @@ $(document).ready(function() {
            columns: [
                     { data: 'id', name: 'id' },
                     { data: 'serialnumber', name: 'serialnumber' },
-                    { data: 'brand', name: 'brand' },
-                    { data: 'model', name: 'model' },
-                    { data: 'OS', name: 'OS' },
+                    { data: 'brand.name', name: 'brand.name' },
+                    { data: 'carmodel.name', name: 'carmodel.name' },
+                    { data: 'operatingsystem.name', name: 'operatingsystem.name' },
                     { data: 'datedevicepurchase', name: 'datedevicepurchase'},
                     { data: 'ipaddress.ip', name: 'ipaddress.ip' },
-                    { data: 'office', name: 'office' ,visible: false},
+                    { data: 'microsotoffice.name', name: 'microsotoffice.name' ,visible: false},
+                    { data: 'status', name: 'status' ,visible: true},
                      {data: 'action', name: 'action', orderable: false},
                  ],
                  order: [[0, 'desc']],

@@ -8,9 +8,14 @@ use App\Models\Device;
 use Illuminate\View\View;
 use App\Models\Typedevice;
 use App\Models\BranchOffice;
+use App\Models\Brand;
+use App\Models\CarModel;
+use App\Models\Diskstorage;
 use App\Models\Employee;
 use App\Models\Disktype;
 use App\Models\Ipaddress;
+use App\Models\Microsoftoffice;
+use App\Models\OperatingSystem;
 
 class DeviceController extends Controller
 {
@@ -36,7 +41,7 @@ class DeviceController extends Controller
         $user = Auth()->user();
         if(request()->ajax()) {
 
-	        return Datatables()->of(Device::with('typedevice','branch_office','employee','disktype','ipaddress')->select('*'))
+	        return Datatables()->of(Device::with('typedevice','branch_office','employee','disktype','ipaddress','carmodel','brand','diskstorage','operatingsystem','microsoftoffice')->select('*'))
             ->editColumn('status', function(Device $device) {
                 return  ' <span class="text-'. ($device->status ? 'success' : 'danger') .'">Activo</span>';
             })
@@ -63,7 +68,7 @@ class DeviceController extends Controller
 
             })
 
-            ->rawColumns(['action'])
+            ->rawColumns(['status','action'])
 
             ->addIndexColumn()
 	        ->make(true);
@@ -79,7 +84,12 @@ class DeviceController extends Controller
         $typedevices = Typedevice::all();
         $disktypes = Disktype::all();
         $ipadresses = Ipaddress::all();
-        return view('devices.create',compact('employees','branchoffices','typedevices','disktypes','ipadresses') );
+        $carmodels = CarModel::all();
+        $diskstorages = Diskstorage::all();
+        $brands = Brand::all();
+        $microsoftoffices = Microsoftoffice::all();
+        $operatingsystems = OperatingSystem::all();
+        return view('devices.create',compact('employees','branchoffices','typedevices','disktypes','ipadresses','carmodels','diskstorages','brands','microsoftoffices','operatingsystems') );
     }
 
     /**
@@ -117,14 +127,19 @@ class DeviceController extends Controller
      */
     public function edit(string $id)
     {
-        $device = Device::with('branch_office','typedevice','disktype','employee','ipaddress')->findOrFail($id);;
+        $device = Device::with('branch_office','typedevice','disktype','employee','ipaddress','carmodel','diskstorage','brand','microsoftoffice','operatingsystem')->findOrFail($id);
         $typedevices = Typedevice::get();
         $branch_offices = BranchOffice::get();
         $employees = Employee::get();
         $disktypes = Disktype::get();
         $ipaddresses = Ipaddress::get();
+        $carmodels = CarModel::all();
+        $diskstorages = Diskstorage::all();
+        $brands = Brand::all();
+        $microsoftoffices = Microsoftoffice::all();
+        $operatingsystems = OperatingSystem::all();
 
-        return view('devices.edit',compact('device','branch_offices','typedevices','disktypes','employees','ipaddresses'));
+        return view('devices.edit',compact('device','branch_offices','typedevices','disktypes','employees','ipaddresses','carmodels','diskstorages','brands','microsoftoffices','operatingsystems'));
     }
 
     /**
@@ -132,7 +147,7 @@ class DeviceController extends Controller
      */
     public function update(UpdateDeviceRequest $request, Device $device)
     {
-        dd("llegue");
+
          $input = $request->all();
         if ($image = $request->file('photo')) {
             $destinationPath = 'photos/';

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateBrandRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateBrandRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -20,9 +21,29 @@ class UpdateBrandRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
+    {  
+      
         return [
-            //
+            'name' => ['required',Rule::unique('brands','name')->ignore($this->brand)],
+
+
         ];
     }
+    public function messages()
+    {
+        return [
+            'name.required' => 'La :attribute es obligatorio.',
+            'name.unique' => 'La :attribute ya existe.',
+        ];
+
+
+    }
+
+    public function attributes()
+        {
+            return [
+                'name' => 'marca ',
+            ];
+        }
+
 }

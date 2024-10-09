@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('vendor.adminlte.page')
 
 @section('content')
 <section class="content-header" >
@@ -84,7 +84,7 @@
 
     </div>
 </div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
 <script type="text/javascript">
 
 $(document).ready(function() {

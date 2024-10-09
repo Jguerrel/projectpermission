@@ -1,5 +1,4 @@
-
-@extends('adminlte::page')
+@extends('vendor.adminlte.page')
 
 @section('content')
 <section class="content-header" >
@@ -25,7 +24,7 @@
        @can('crear-departamentos')
             <a href="{{ route('departments.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
-        <table class="table table-striped table-bordered "  id ="departamento">
+        <table class="table table-striped dataTable table-bordered "  id ="departamento">
         <thead>
                 <tr>
                 <th scope="col">#</th>
@@ -53,9 +52,6 @@ $(document).ready(function() {
            ajax: {
                 url: "{{ route('departments.pagination') }}",
                 type: "GET",
-                // success:function(data){
-                //  alert(JSON.stringify(data))
-                // },
                  error : function(xhr, textStatus, errorThrown){
 
                     console.log('error'+JSON.stringify(xhr))

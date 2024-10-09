@@ -15,8 +15,8 @@ return new class extends Migration
               // Agregar nuevos campos
               $table->unsignedBigInteger('brand_id');
               $table->foreign('brand_id')->references('id')->on('brands');
-              $table->unsignedBigInteger('model_id');
-              $table->foreign('model_id')->references('id')->on('models');
+              $table->unsignedBigInteger('carmodel_id');
+              $table->foreign('carmodel_id')->references('id')->on('carmodels');
               $table->unsignedBigInteger('operatingsystem_id');
               $table->foreign('operatingsystem_id')->references('id')->on('operatingsystems');
               $table->unsignedBigInteger('diskstorage_id');
@@ -47,7 +47,7 @@ return new class extends Migration
 
                 // Eliminar los campos que fueron agregados en el método up()
                 $table->dropForeign('brand_id');
-                $table->dropForeign('model_id');
+                $table->dropForeign('carmodel_id');
                 $table->dropForeign('operatingsystem_id');
                 $table->dropForeign('diskstorage_id');
                 $table->dropForeign('microsoftoffice_id');

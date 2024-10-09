@@ -26,6 +26,45 @@ class TypedeviceController extends Controller
         ]);
     }
 
+    public function pagination()
+    {
+        $user = Auth()->user();
+        if(request()->ajax()) {
+
+	        return Datatables()->of(Typedevice::select('*'))
+            ->editColumn('status', function(Typedevice $typedevice) {
+                return  '<span class="text-'. ($typedevice->status ? 'success' : 'danger') .'">'. ($typedevice->status ? 'Activo' : 'Inactivo').'</span>';
+            })
+	        ->addColumn('action', function (Typedevice $typedevice) use ($user) {
+
+                $btn = '<form action='.route("typedevices.destroy",$typedevice->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
+                $onclick='return confirm("Seguro que quieres eliminar esta cuenta?");';
+                if ($user->can('ver-cuentas'))
+                {
+                   $btn  = $btn . '<a href="'.route("typedevices.show",$typedevice->id).'" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>';
+                }
+
+                if ($user->can('editar-cuentas'))
+                {
+                    $btn =$btn.'<a href="'.route("typedevices.edit",$typedevice->id).'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>';
+                }
+                if ($user->can('eliminar-cuentas'))
+                {
+                    $btn =$btn.'<button type="submit" class="btn btn-danger btn-sm" onclick="'. $onclick.'"><i class="fas fa-trash"></i> Eliminar</button>';
+                }
+
+                  $btn =$btn .'</form>';
+                  return $btn;
+
+            })
+
+            ->rawColumns(['status','action'])
+            ->addIndexColumn()
+	        ->make(true);
+	    }
+      
+
+    }
     public function create(): View
     {
         return view('typedevices.create');

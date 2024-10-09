@@ -40,7 +40,7 @@
        </table>
     </div>
 </div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
 
 <script type="text/javascript">
 let rutaTabla = "{{route('employees.index')}}";
@@ -77,7 +77,7 @@ $(document).ready(function() {
                     { data: 'photo', name: 'photo' , orderable: false},
                     {data: 'status', name: 'status'},
                      {data: 'action', name: 'action', orderable: false},
-                     
+
                  ],
                  order: [[0, 'desc']]
        });

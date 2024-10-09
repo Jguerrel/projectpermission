@@ -1,6 +1,7 @@
-@extends('adminlte::master')
+@extends('vendor.adminlte.master')
 
 @inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
+@inject('adminlte', 'JeroenNoten\LaravelAdminLte\AdminLte')
 
 @section('adminlte_css')
     @stack('css')
@@ -12,28 +13,28 @@
 @section('body_data', $layoutHelper->makeBodyData())
 
 @section('body')
-    <div class="wrapper">
+    <div class="wrapper" >
 
         {{-- Preloader Animation --}}
         @if($layoutHelper->isPreloaderEnabled())
-            @include('partials.common.preloader')
+            @include('adminlte::partials.common.preloader')
         @endif
 
         {{-- Top Navbar --}}
         @if($layoutHelper->isLayoutTopnavEnabled())
-            @include('partials.navbar.navbar-layout-topnav')
+            @include('adminlte::partials.navbar.navbar-layout-topnav')
         @else
-            @include('partials.navbar.navbar')
+            @include('adminlte::partials.navbar.navbar')
         @endif
 
         {{-- Left Main Sidebar --}}
         @if(!$layoutHelper->isLayoutTopnavEnabled())
-            @include('partials.sidebar.left-sidebar')
+            @include('adminlte::partials.sidebar.left-sidebar')
         @endif
 
         {{-- Content Wrapper --}}
         @empty($iFrameEnabled)
-            @include('partials.cwrapper.cwrapper-default')
+            @include('adminlte::partials.cwrapper.cwrapper-default')
         @else
             @include('adminlte::partials.cwrapper.cwrapper-iframe')
         @endempty

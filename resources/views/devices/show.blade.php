@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('vendor.adminlte.page')
 
 @section('content')
 
@@ -39,13 +39,13 @@
                     <div class="mb-3 row">
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Marca:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                            {{ $device->brand }}
+                            {{ $device->brand->name }}
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Modelo:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                            {{ $device->model }}
+                            {{ $device->carmodel->name }}
                         </div>
                     </div>
                     <div class="mb-3 row">

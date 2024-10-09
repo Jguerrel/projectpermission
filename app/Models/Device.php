@@ -11,20 +11,20 @@ class Device extends Model
 
     protected $fillable = [
         'serialnumber',
-        'model',
-        'brand',
         'ram',
         'photo',
-        'OS',
-        'disco',
         'datedevicepurchase',
         'devicecomment',
-        'office',
         'typedevice_id',
         'branch_office_id',
         'employee_id',
         'disktype_id',
         'ipaddress_id',
+        'carmodel_id',
+        'brand_id',
+        'diskstorage_id',
+        'microsoftoffice_id',
+        'operatingsystem_id',
         'status'
     ];
 
@@ -49,5 +49,25 @@ class Device extends Model
     public function ipaddress()
     {
         return $this->belongsTo(Ipaddress::class);
+    }
+    public function carmodel()
+    {
+        return $this->belongsTo(CarModel::class);
+    }
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+    public function microsoftoffice()
+    {
+        return $this->belongsTo(Microsoftoffice::class);
+    }
+    public function operatingsystem()
+    {
+        return $this->belongsTo(OperatingSystem::class);
+    }
+    public function diskstorage()
+    {
+        return $this->belongsTo(Diskstorage::class);
     }
 }

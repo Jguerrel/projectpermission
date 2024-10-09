@@ -25,9 +25,10 @@
 
     @if(!config('adminlte.enabled_laravel_mix'))
 
-        <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.csss') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+
 
 
         @if(config('adminlte.google_fonts.allowed', true))
@@ -52,11 +53,9 @@
     <!-- <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet"> -->
     {{-- Custom Stylesheets (post AdminLTE) --}}
     @yield('adminlte_css')
-    <link href="{{ asset('resources/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('resources/css/dataables.bootstrap5.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('resources/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('resources/css/datatables.bootstrap5.min.css') }}" rel="stylesheet">
-    <link type="stylesheet" href="{{ asset('public/css/style.css') }}">
+
+    <link type="stylesheet" href="{{ asset('vendor/adminlte/dist/css/style.css') }}">
+
     {{-- Favicon --}}
     @if(config('adminlte.use_ico_only'))
         <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
@@ -83,22 +82,17 @@
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
-
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     {{-- Body Content --}}
     @yield('body')
 
     {{-- Base Scripts --}}
     @if(!config('adminlte.enabled_laravel_mix'))
 
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-        <script src="{{ asset('public/js/moment.min.js') }}"></script>
-        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+       <script  src= "{{ asset('vendor/jquery/jquery-1.12.4.js') }}"></script>
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
-        <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-        <script src="{{asset('public/css/dataTables.bootstrap5.min.js') }}"></script>
-        <script type="text/javascript" src= "https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     @else
 
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>

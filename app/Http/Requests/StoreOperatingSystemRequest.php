@@ -11,18 +11,34 @@ class StoreOperatingSystemRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+
     public function rules(): array
     {
         return [
-            //
+            'name'=>'required|unique:operatingsystems,name|string',
+
         ];
+
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'El :attribute es obligatorio.',
+            'name.unique' => 'El :attribute ya existe.',
+        ];
+
+    }
+
+      public function attributes()
+        {
+            return [
+                'name' => 'sistema operativo',
+
+            ];
+        }
+
 }

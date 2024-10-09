@@ -65,7 +65,7 @@ class AccountController extends Controller
             ->addIndexColumn()
 	        ->make(true);
 	    }
-        return view('accounts.pagination', compact('accounts'));
+      
 
     }
 

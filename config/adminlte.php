@@ -343,6 +343,12 @@ return [
             'can'         => 'ver-sucursales',
         ],
         [
+            'text' => 'Direcciones IP',
+            'url'  => 'admin/ipaddresses',
+            'icon'    => 'fas fa-fw fa-code-branch',
+            'can'         => 'ver-direccionesip',
+        ],
+        [
             'text' => 'Dispositivos',
             'url'  => 'admin/devices',
             'icon'    => 'fas fa-fw fa-desktop',
@@ -362,7 +368,7 @@ return [
         ],
         [
             'text' => 'Modelos',
-            'url'  => 'admin/models',
+            'url'  => 'admin/carmodels',
             'icon'    => 'fas fa-solid fa-briefcase',
             'can'         => 'ver-marcas',
         ],

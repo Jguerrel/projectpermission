@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('vendor.adminlte.page')s
 
 @section('content')
 <section class="content-header" >
@@ -32,7 +32,7 @@
                     @csrf
                     @method("PUT")
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Nombre</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">IP</label>
                             <div class="col-md-6">
                             <input type="text" class="form-control @error('ip') is-invalid @enderror" id="ip" name="ip" value="{{ $ipaddress->ip }}">
                                 @if ($errors->has('ip'))
@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Compañia</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Sucursal</label>
                             <div class="col-md-6">
                             <select class="form-control js-example-basic-single select2 @error('branchoffices') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="branches" id="branch_id" name="branch_id">
                                         <option value="" disabled selected>Seleccione Item</option>

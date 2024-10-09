@@ -8,12 +8,25 @@ use App\Http\Requests\UpdateMicrosoftofficeRequest;
 
 class MicrosoftofficeController extends Controller
 {
+
+    public function __construct()
+    {
+
+        $this->middleware('auth');
+         $this->middleware('permission:ver-licenciaoffice', ['only' => ['index']]);
+         $this->middleware('permission:crear-licenciaoffice', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-licenciaoffice', ['only' => ['edit','update']]);
+        $this->middleware('permission:eliminar-licenciaoffice', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('microsoftoffice.index', [
+            'microsoftoffices' => microsoftoffice::orderBy('id','ASC')->paginate(10)
+        ]);
     }
 
     /**
