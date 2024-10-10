@@ -1,7 +1,6 @@
-@extends('vendor.adminlte.master')
+@extends('adminlte::master')
 
 @inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
-@inject('adminlte', 'JeroenNoten\LaravelAdminLte\AdminLte')
 
 @section('adminlte_css')
     @stack('css')
@@ -13,7 +12,7 @@
 @section('body_data', $layoutHelper->makeBodyData())
 
 @section('body')
-    <div class="wrapper" >
+    <div class="wrappereerer" >
 
         {{-- Preloader Animation --}}
         @if($layoutHelper->isPreloaderEnabled())

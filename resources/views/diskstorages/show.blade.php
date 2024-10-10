@@ -1,1 +1,1 @@
-@extends('vendor.adminlte.page')
+@extends('adminlte::page')

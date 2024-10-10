@@ -1,4 +1,4 @@
-@extends('vendor.adminlte.page')
+@extends('adminlte::page')
 
 @section('content')
 <section class="content-header" >
@@ -94,7 +94,7 @@ $(document).ready(function() {
                     { data: 'name', name: 'name' },
                      {data: 'status', name: 'status'},
                      {data: 'action', name: 'action', orderable: false},
-                     
+
                  ],
                  order: [[0, 'desc']]
        });

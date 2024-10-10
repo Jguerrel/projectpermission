@@ -1,4 +1,4 @@
-@extends('vendor.adminlte.page')
+@extends('adminlte::page')
 
 @section('content')
 
@@ -44,7 +44,7 @@
                             @else
                                 <span class="text-danger">Inactivo</span> <!-- O puedes usar un ícono -->
                             @endif
-                          
+
                        </div>
                    </div>
             </div>

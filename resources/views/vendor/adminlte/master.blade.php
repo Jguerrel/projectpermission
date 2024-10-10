@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+
     {{-- Base Meta Tags --}}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,15 +23,13 @@
     @yield('adminlte_css_pre')
 
     {{-- Base Stylesheets --}}
-
     @if(!config('adminlte.enabled_laravel_mix'))
 
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
-
-
-
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
         @if(config('adminlte.google_fonts.allowed', true))
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         @endif
@@ -39,7 +38,6 @@
     @endif
 
     {{-- Extra Configured Plugins Stylesheets --}}
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/all.min.css') }}">
     @include('adminlte::plugins', ['type' => 'css'])
 
     {{-- Livewire Styles --}}
@@ -50,11 +48,9 @@
             <livewire:styles />
         @endif
     @endif
-    <!-- <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet"> -->
+
     {{-- Custom Stylesheets (post AdminLTE) --}}
     @yield('adminlte_css')
-
-    <link type="stylesheet" href="{{ asset('vendor/adminlte/dist/css/style.css') }}">
 
     {{-- Favicon --}}
     @if(config('adminlte.use_ico_only'))
@@ -82,22 +78,24 @@
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
     {{-- Body Content --}}
     @yield('body')
 
     {{-- Base Scripts --}}
     @if(!config('adminlte.enabled_laravel_mix'))
+     @yield('js')
 
-       <script  src= "{{ asset('vendor/jquery/jquery-1.12.4.js') }}"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+     <script src="{{ asset('vendor/jquery/jquery-1.12.4.js') }}"></script>
+        <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
-        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    @else
 
+            @else
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
-
-        @endif
+    @endif
 
     {{-- Extra Configured Plugins Scripts --}}
     @include('adminlte::plugins', ['type' => 'js'])
