@@ -1,4 +1,4 @@
-@extends('vendor.adminlte.page')
+@extends('adminlte::page')
 
 @section('content')
 <div class="row justify-content-center">

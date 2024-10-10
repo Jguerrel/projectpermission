@@ -1,5 +1,4 @@
-
-@extends('vendor.adminlte.page')
+@extends('adminlte::page')
 
 @section('content')
 <section class="content-header" >
@@ -34,7 +33,7 @@
                 <th scope="col"  style="width: 20%;">Accion</th>
                 </tr>
             </thead>
-           
+
 
        </table>
    </div>

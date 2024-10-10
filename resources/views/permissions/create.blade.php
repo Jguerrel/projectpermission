@@ -1,5 +1,5 @@
+@extends('adminlte::page')
 
-@extends('vendor.adminlte.page')
 
 @section('content')
 

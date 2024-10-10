@@ -75,6 +75,7 @@
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
 
+    <script src="{{ asset('vendor/adminlte/dist/js/jquery-3.7.1.slim.min.js') }}"></script>
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
@@ -85,14 +86,12 @@
     {{-- Base Scripts --}}
     @if(!config('adminlte.enabled_laravel_mix'))
      @yield('js')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-     <script src="{{ asset('vendor/jquery/jquery-1.12.4.js') }}"></script>
         <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
-
             @else
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
     @endif

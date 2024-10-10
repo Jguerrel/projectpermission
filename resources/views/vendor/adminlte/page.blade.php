@@ -2,6 +2,7 @@
 
 @inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
 
+
 @section('adminlte_css')
     @stack('css')
     @yield('css')
@@ -18,6 +19,7 @@
         @if($layoutHelper->isPreloaderEnabled())
             @include('adminlte::partials.common.preloader')
         @endif
+
 
         {{-- Top Navbar --}}
         @if($layoutHelper->isLayoutTopnavEnabled())

@@ -1,4 +1,4 @@
-@extends('vendor.adminlte.page')
+@extends('adminlte::page')
 
 @section('content')
 <section class="content-header" >
