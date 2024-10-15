@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCarmodelRequest extends FormRequest
+class StoreCarModelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class StoreCarmodelRequest extends FormRequest
         ];
     }
 
-    
+
     public function messages()
     {
         return [

@@ -40,5 +40,4 @@ class StoreOperatingSystemRequest extends FormRequest
 
             ];
         }
-
 }

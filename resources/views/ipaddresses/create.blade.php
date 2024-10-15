@@ -35,7 +35,7 @@
                     <div class="mb-3 row">
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start">Direccion IP</label>
                         <d class="col-md-6">
-                          <input type="text" class="form-control @error('ip') is-invalid @enderror" id="ip" name="ip" value="{{ old('ip') }}">
+                          <input type="text" class="form-control @error('ip') is-invalid @enderror" required  pattern="^((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])$" id="ip" name="ip" value="{{ old('ip') }}">
                             @if ($errors->has('ip'))
                                 <span class="text-danger">{{ $errors->first('ip') }}</span>
                             @endif

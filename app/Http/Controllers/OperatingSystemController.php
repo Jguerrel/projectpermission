@@ -8,6 +8,17 @@ use App\Http\Requests\UpdateOperatingSystemRequest;
 use Illuminate\Http\RedirectResponse;
 class OperatingSystemController extends Controller
 {
+
+
+    public function __construct()
+    {
+
+        $this->middleware('auth');
+         $this->middleware('permission:ver-sistemaoperativos', ['only' => ['index']]);
+         $this->middleware('permission:crear-sistemaoperativos', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-sistemaoperativos', ['only' => ['edit','update']]);
+        $this->middleware('permission:eliminar-sistemaoperativos', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

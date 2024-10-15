@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\CarModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Laravel\Ui\Presets\Vue;
@@ -24,6 +25,13 @@ class CarModelController extends Controller
         ]);
     }
 
+    public function modelos(Request $request)
+    {
+         $id = $request->input('id');
+         $modelos = CarModel::where('brand_id', $id)->get();
+         return response()->json($modelos);
+
+    }
 
     public function pagination()
     {
@@ -73,8 +81,8 @@ class CarModelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCarmodelRequest $request): RedirectResponse
-    {  
+    public function store(StoreCarModelRequest $request): RedirectResponse
+    {
          CarModel::create($request->all());
         return redirect()->route('carmodels.index')
                 ->withSuccess('Modelo ha sido agregado correctamente.');

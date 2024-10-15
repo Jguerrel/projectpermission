@@ -31,7 +31,7 @@ return [
     */
 
     'use_ico_only' => false,
-    'use_full_favicon' => false,
+    'use_full_favicon' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -63,9 +63,9 @@ return [
     |
     */
 
-    'logo' => '<b>Bahia</b> Motors ',
-    'logo_img' => 'vendor/adminlte/dist/img/LogoBahiaMotors.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo' => '<b>Bahia</b> Motors Group',
+    'logo_img' => 'images/icono-de-bahia.png',
+    'logo_img_class' => 'brand-image elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Admin Logo',
@@ -84,7 +84,7 @@ return [
     */
 
     'auth_logo' => [
-        'enabled' => false,
+        'enabled' => true,
         'img' => [
             'path' => 'vendor/adminlte/dist/img/LogoBahiaMotors.png',
             'alt' => 'Auth Logo',
@@ -194,7 +194,7 @@ return [
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-info navbar-dark',
+    'classes_topnav' => 'navbar-custom navbar-dark',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -307,6 +307,12 @@ return [
             'text' => 'buscar',
         ],
         [
+            'text' => 'Newsletters',
+            'url'  => 'admin/newsletters',
+            'icon'    => 'fas fa-file-lines ',
+            'can'         => 'ver-departamentos',
+        ],
+        [
             'text' => 'Departamentos',
             'url'  => 'admin/departments',
             'icon'    => 'fas fa-fw fa-building ',
@@ -324,12 +330,7 @@ return [
             'icon'    => 'fas fa-fw fa-file ',
             'can'         => 'ver-cargos',
         ],
-        [
-            'text' => 'Tipos de Dispositivos',
-            'url'  => 'admin/typedevices',
-            'icon'    => 'fas fa-fw fa-keyboard',
-            'can'         => 'ver-tipodispositivos',
-        ],
+
         [
             'text' => 'Cuentas',
             'url'  => 'admin/accounts',
@@ -345,57 +346,91 @@ return [
         [
             'text' => 'Direcciones IP',
             'url'  => 'admin/ipaddresses',
-            'icon'    => 'fas fa-fw fa-code-branch',
+            'icon'    => 'fas fa-fw fa-map-pin',
             'can'         => 'ver-direccionesip',
         ],
-        [
-            'text' => 'Dispositivos',
-            'url'  => 'admin/devices',
-            'icon'    => 'fas fa-fw fa-desktop',
-            'can'         => 'ver-dispositivos',
-        ],
+        // [
+        //     'text' => 'Dispositivos',
+        //     'url'  => 'admin/devices',
+        //     'icon'    => 'fas fa-fw fa-desktop',
+        //     'can'         => 'ver-dispositivos',
+        // ],
         [
             'text' => 'Tipos de Discos',
             'url'  => 'admin/disktypes',
             'icon'    => 'fas fa-fw fa-disease',
             'can'         => 'ver-tipodiscos',
         ],
-        [
-            'text' => 'Marcas',
-            'url'  => 'admin/brands',
-            'icon'    => 'fas fa-regular fa-copyright',
-            'can'         => 'ver-marcas',
-        ],
-        [
-            'text' => 'Modelos',
-            'url'  => 'admin/carmodels',
-            'icon'    => 'fas fa-solid fa-briefcase',
-            'can'         => 'ver-marcas',
-        ],
+        // [
+        //     'text' => 'Marcas',
+        //     'url'  => 'admin/brands',
+        //     'icon'    => 'fas fa-regular fa-copyright',
+        //     'can'         => 'ver-marcas',
+        // ],
+        // [
+        //     'text' => 'Modelos',
+        //     'url'  => 'admin/carmodels',
+        //     'icon'    => 'fas fa-solid fa-briefcase',
+        //     'can'         => 'ver-modelos',
+        // ],
         [
             'text' => 'Sistema Operativo',
             'url'  => 'admin/operatingsystems',
             'icon'    => 'fas fa-brands fa-windows',
-            'can'         => 'ver-marcas',
+            'can'         => 'ver-sistemas',
         ],
-    /*   [<i class="fas fa-disc-drive
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-         ['header' => 'account_settings'],
+        // [
+        //     'text' => 'Tamaño de disco',
+        //     'url'  => 'admin/diskstorages',
+        //     'icon'    => 'fas fa-box-archive',
+        //     'can'         => 'ver-tamanodiscos',
+        // ],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Office',
+            'url'  => 'admin/microsoftoffices',
+            'icon'    => 'fas fa-brands fa-microsoft',
+            'can'         => 'ver-offices',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
+            'text'    => 'Config. Dispositivos',
+            'icon'    => 'fas fa-fw  fa-wrench',
+               'submenu' =>
+               [
+                   [
+                       'text' => 'Marcas',
+                       'url'  => 'admin/brands',
+                       'icon'    => 'fas fa-regular fa-copyright',
+                       'can'         => 'ver-marcas',
+                   ],
+                   [
+                       'text' => 'Modelos',
+                       'url'  => 'admin/carmodels',
+                       'icon'    => 'fas fa-solid fa-briefcase',
+                       'can'         => 'ver-modelos',
+                   ],
+                   [
+                       'text' => 'Tamaño de disco',
+                       'url'  => 'admin/diskstorages',
+                       'icon'    => 'fas fa-box-archive',
+                       'can'         => 'ver-tamanodiscos',
+                   ],
+                   [
+                        'text' => 'Dispositivos',
+                        'url'  => 'admin/devices',
+                        'icon'    => 'fas fa-fw fa-desktop',
+                        'can'         => 'ver-dispositivos',
+
+                   ],
+                   [
+                    'text' => 'Tipos de Dispositivos',
+                    'url'  => 'admin/typedevices',
+                    'icon'    => 'fas fa-fw fa-keyboard',
+                    'can'         => 'ver-tipodispositivos',
+                ],
+
+               ]
+                ],
+ /*
         [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
@@ -600,7 +635,7 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => true,
+                    'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
                 ],
 
@@ -627,7 +662,7 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => true,
+                    'asset' => false,
                     'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
                 ],
             ],
@@ -647,7 +682,30 @@ return [
                 ],
             ],
         ],
+        'fontawesome' =>
+        [
+            'active'=>true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css',
+                ],
+            ],
 
+        ],
+        'animate' =>
+        [
+            'active'=>true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css',
+                ],
+            ],
+
+        ]
 
 
     ],

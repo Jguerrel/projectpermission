@@ -3,3 +3,13 @@
    -webkit-text-stroke: 0.7px;
 
 }
+
+.navbar-custom {
+    background-color: #0d4f48 !important;
+      color: #fff;
+}
+
+ .nav-link.active {
+     background-color: #0d4f48 !important;
+     color: #e1e1e1 !important;
+ }

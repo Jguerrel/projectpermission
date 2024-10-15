@@ -18,6 +18,12 @@ use App\Http\Controllers\IpaddressController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CarModelController;
 use App\Http\Controllers\OperatingSystemController;
+use App\Http\Controllers\MicrosoftofficeController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LoginUsersController;
+use App\Http\Controllers\NewsletterController;
+
+
 /*
 /*
 |--------------------------------------------------------------------------
@@ -30,16 +36,20 @@ use App\Http\Controllers\OperatingSystemController;
 |
 */
 
+
+
 Auth::routes();
+// Register the new login route
+
 Route::get('/', function () {
-    return redirect('/login');
+    return view('auth.login');
 });
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 
 Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
+
+    Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 	Route::resource('roles', RoleController::class);
 	Route::resource('users', UserController::class);
 	Route::resource('permissions', PermissionController::class);
@@ -57,8 +67,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::resource('brands',BrandController::class);
     Route::resource('carmodels',CarModelController::class);
     Route::resource('operatingsystems',OperatingSystemController::class);
-
-
+    Route::resource('microsoftoffices',MicrosoftofficeController::class);
+    Route::resource('newsletters',NewsletterController::class);
     /*Paginacion*/
     Route::get('employees.pagination', [EmployeeController::class, 'pagination'])->name('employees.pagination');
     Route::get('branchoffices.pagination', [BranchOfficeController::class, 'pagination'])->name('branchoffices.pagination');
@@ -72,14 +82,10 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::get('permissions.pagination', [PermissionController::class, 'pagination'])->name('permissions.pagination');
     Route::get('ipaddresses.pagination', [IpaddressController::class, 'pagination'])->name('ipaddresses.pagination');
     Route::get('operatingsystems.pagination', [OperatingSystemController::class, 'pagination'])->name('operatingsystems.pagination');
+    Route::get('microsoftoffices.pagination', [MicrosoftofficeController::class, 'pagination'])->name('microsoftoffices.pagination');
 });
 
 //Rutas de paginacion////
 
-
-//Route::get('ipadresses', [IpaddressController::class, 'pagination'])->name('ipaddresses.pagination');
 Route::post('/direccionesip', [IpaddressController::class, 'direccionesip'])->name('ipaddresses.direccionesip');
-//Route::get('permissioneskema', [PermissionEskemaController::class, 'permissioneskema']);
-//Route::resource('permissioneskema ', PermissionEskemaController::class);
-//Route::get('acccessobjeto', [App\Http\Controllers\PermissionEskemaController::class, 'acccessobjeto'])->name('acccessobjeto');
-//Route::get('employees/getemployee', 'EmployeeController@getemployee')->name('employees.getemployee');
+Route::post('/modelos', [CarModelController::class, 'modelos'])->name('carmodels.modelos');
