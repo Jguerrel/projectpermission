@@ -1,7 +1,7 @@
 @extends('adminlte::master')
 
 @inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
-
+@inject('preloaderHelper', 'JeroenNoten\LaravelAdminLte\Helpers\PreloaderHelper')
 
 @section('adminlte_css')
     @stack('css')
@@ -19,7 +19,6 @@
         @if($layoutHelper->isPreloaderEnabled())
             @include('adminlte::partials.common.preloader')
         @endif
-
 
         {{-- Top Navbar --}}
         @if($layoutHelper->isLayoutTopnavEnabled())
