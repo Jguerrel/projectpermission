@@ -203,44 +203,18 @@
         placeholder: 'Select an option'
     });
 
+
     $('#sucursal').on('select2:select', function (e) {
+            url="{{route('ipaddresses.direccionesip')}}";
+            ippaddres(e,url);
+        });
 
-          var sucursal = e.params.data;
-         console.log(sucursal.id);
-       //   Limpiar las opciones del segundo select
-          var direccionip = document.getElementById('direccionip');
-          direccionip.innerHTML = '<option value="">Selecciona un IP</option>';
 
-          // Obtener los ip de la categoría seleccionada
-          if (sucursal.id) {
-            var id=sucursal.id;
+        $('#brand').on('select2:select', function (e) {
+            url="{{route('carmodels.modelos')}}";
 
-            let token = '@csrf';
-            token = token.substr(42, 40);
-            $.ajax({
-            url: "{{ route('ipaddresses.direccionesip') }}",
-            type: 'POST',
-            dataType: "json",
-            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: {id: id},
-            success: function (response) {
-                for (var clave in response) {
-                if (response.hasOwnProperty(clave)) {
-                         var option = document.createElement('option');
-                          option.value = response[clave].id;
-                          option.textContent = response[clave].ip;
-                          direccionip.appendChild(option);
-                }}
-
-              },
-                 error : function(xhr, textStatus, errorThrown){
-
-                        console.log('error'+JSON.stringify(xhr))
-                        }
-           });
-
-          }
-       });
+            modelos(e,url);
+        });
 
     $.noConflict();
     $('#fecha').datepicker({

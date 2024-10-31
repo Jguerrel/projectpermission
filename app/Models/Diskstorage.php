@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Diskstorage extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'status'
+    ];
+
+    public function Devices()
+    {
+        return $this->hasMany(Device::class);
+    }
 }

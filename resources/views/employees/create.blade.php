@@ -42,7 +42,7 @@
                         </d iv>
                     </div>
                     <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Departamentos</label>
+                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Departamento</label>
                         <div class="col-md-6">
                           <div class="form-group">
                                 <select class="form-control js-example-basic-single select2 @error('departments') is-invalid @enderror "  data-placeholder="Seleccione Item"   id="department" name="department_id">
@@ -85,7 +85,7 @@
                     <div class="mb-3 row">
                             <label for="status" class="col-md-4 col-form-label text-md-end text-start">Estado</label>
                              <div class="col-md-6">
-                             <input type="checkbox" class="@error('status') is-invalid @enderror" name="status" id='status' value="1" {{ old('featured') ? 'checked="checked"' : '' }}/>
+                             <input type="checkbox" class="@error('status') is-invalid @enderror" name="status" id='status' value="1" checked/>
                                 @if ($errors->has('status'))
                                         <span class="text-danger">{{ $errors->first('status') }}</span>
                                     @endif

@@ -15,6 +15,17 @@ use Laravel\Ui\Presets\Vue;
 
 class CarModelController extends Controller
 {
+
+    public function __construct()
+    {
+
+         $this->middleware('auth');
+         $this->middleware('permission:ver-modelos', ['only' => ['index']]);
+         $this->middleware('permission:crear-modelos', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-modelos', ['only' => ['edit','update']]);
+         $this->middleware('permission:eliminar-modelos', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */

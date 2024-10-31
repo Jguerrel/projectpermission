@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('ip',20)->unique()->nullable(false);
             $table->unsignedBigInteger('branch_office_id');
             $table->foreign('branch_office_id')->references('id')->on('branch_offices')->unique()->nullable(false);
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

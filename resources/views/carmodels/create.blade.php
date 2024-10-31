@@ -5,12 +5,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Marca</h1>
+                    <h1>Modelos</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Marcas</li>
+                    <li class="breadcrumb-item active">Modelos</li>
                     </ol>
                 </div>
                 </div>
@@ -21,7 +21,7 @@
         <div class="card car-info">
             <div class="card-header">
                 <div class="float-start">
-                    Nueva Marca
+                    Nuevo Modelo
                 </div>
                 <div class="float-end">
                     <a href="{{ route('carmodels.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
@@ -32,7 +32,7 @@
                     @csrf
 
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Nombre</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Modelo</label>
                         <div class="col-md-6">
                           <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
                             @if ($errors->has('name'))
@@ -59,7 +59,7 @@
                     <div class="mb-3 row">
                             <label for="status" class="col-md-4 col-form-label text-md-end text-start">Estado</label>
                              <div class="col-md-6">
-                             <input type="checkbox" class="@error('status') is-invalid @enderror" name="status" id='status' value="1" {{ old('featured') ? 'checked="checked"' : '' }}/>
+                             <input type="checkbox" class="@error('status') is-invalid @enderror" name="status" id='status' value="1" checked/>
                                 @if ($errors->has('status'))
                                         <span class="text-danger">{{ $errors->first('status') }}</span>
                                     @endif

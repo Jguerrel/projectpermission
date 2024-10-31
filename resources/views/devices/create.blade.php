@@ -135,14 +135,22 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="text" class="col-md-4 col-form-label text-md-end text-start">Office</label>
+                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Office</label>
                         <div class="col-md-6">
-                          <input type="text" class="form-control @error('office') is-invalid @enderror" id="column_offi" name="office" value="{{ old('office') }}">
-                            @if ($errors->has('office'))
-                                <span class="text-danger">{{ $errors->first('office') }}</span>
-                            @endif
+                          <div class="form-group">
+                                <select class="form-control js-example-basic-single select2 @error('microsoftoffices') is-invalid @enderror "  data-placeholder="Seleccione tipo de dispositivo"   id="office" name="microsoftoffices_id">
+                                <option value="" disabled selected>Seleccione tipo de dispositivo</option>
+                                  @foreach ($microsoftoffices as $microsoftoffice)
+                                        <option value="{{ $microsoftoffice->id }}" {{ in_array($microsoftoffice->id, old('microsoftoffices') ?? []) ? 'selected' : '' }}>
+                                            {{ $microsoftoffice->name }}
+                                        </option>
+
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
+
                     <div class="mb-3 row">
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Tipos de dispositivo</label>
                         <div class="col-md-6">

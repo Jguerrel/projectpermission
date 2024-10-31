@@ -306,12 +306,12 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'buscar',
         ],
-        [
-            'text' => 'Newsletters',
-            'url'  => 'admin/newsletters',
-            'icon'    => 'fas fa-file-lines ',
-            'can'         => 'ver-departamentos',
-        ],
+        // [
+        //     'text' => 'Newsletters',
+        //     'url'  => 'admin/newsletters',
+        //     'icon'    => 'fas fa-file-lines ',
+        //     'can'         => 'ver-departamentos',
+        // ],
         [
             'text' => 'Departamentos',
             'url'  => 'admin/departments',

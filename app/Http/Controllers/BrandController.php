@@ -8,6 +8,17 @@ use App\Http\Requests\UpdateBrandRequest;
 
 class BrandController extends Controller
 {
+
+    public function __construct()
+    {
+
+         $this->middleware('auth');
+         $this->middleware('permission:ver-marcas', ['only' => ['index']]);
+         $this->middleware('permission:crear-marcas', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-marcas', ['only' => ['edit','update']]);
+         $this->middleware('permission:eliminar-marcas', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */

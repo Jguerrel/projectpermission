@@ -21,7 +21,9 @@ use App\Http\Controllers\OperatingSystemController;
 use App\Http\Controllers\MicrosoftofficeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LoginUsersController;
+use App\Http\Controllers\DiskstorageController;
 use App\Http\Controllers\NewsletterController;
+
 
 
 /*
@@ -69,6 +71,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::resource('operatingsystems',OperatingSystemController::class);
     Route::resource('microsoftoffices',MicrosoftofficeController::class);
     Route::resource('newsletters',NewsletterController::class);
+    Route::resource('diskstorages',DiskstorageController::class);
     /*Paginacion*/
     Route::get('employees.pagination', [EmployeeController::class, 'pagination'])->name('employees.pagination');
     Route::get('branchoffices.pagination', [BranchOfficeController::class, 'pagination'])->name('branchoffices.pagination');
@@ -83,6 +86,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::get('ipaddresses.pagination', [IpaddressController::class, 'pagination'])->name('ipaddresses.pagination');
     Route::get('operatingsystems.pagination', [OperatingSystemController::class, 'pagination'])->name('operatingsystems.pagination');
     Route::get('microsoftoffices.pagination', [MicrosoftofficeController::class, 'pagination'])->name('microsoftoffices.pagination');
+    Route::get('diskstorages.pagination', [DiskstorageController::class, 'pagination'])->name('diskstorages.pagination');
 });
 
 //Rutas de paginacion////

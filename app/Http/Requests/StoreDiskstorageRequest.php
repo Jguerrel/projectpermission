@@ -11,7 +11,7 @@ class StoreDiskstorageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,26 @@ class StoreDiskstorageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'=>'required|unique:diskstorages,name|string',
+
+        ];
+
+
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'El :attribute es obligatorio.',
+            'name.unique' => 'El :attribute ya existe.',
+        ];
+
+    }
+    public function attributes()
+    {
+        return [
+            'name' => 'Tamaño',
+
         ];
     }
 }

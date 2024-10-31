@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('password',50)->nullable();
             $table->string('link',300)->nullable();
             $table->string('description',300)->nullable();
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
 

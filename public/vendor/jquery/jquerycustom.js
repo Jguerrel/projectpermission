@@ -9,7 +9,7 @@ var sucursal = e.params.data;
   if (sucursal.id) {
     var id=sucursal.id;
     token = token.substr(42, 40);
-    alert(url2);
+
     $.ajax({
     url: url2,
     type: 'POST',

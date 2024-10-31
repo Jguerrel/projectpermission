@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('operatingsystems', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false);
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

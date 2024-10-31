@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name',100)->nullable(false);
             $table->string('photo',255)->nullable();
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(1);
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
             $table->unsignedBigInteger('jobtitle_id');

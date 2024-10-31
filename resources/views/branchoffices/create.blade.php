@@ -33,7 +33,7 @@
                     @csrf
 
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Nombre</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Sucursal</label>
                         <d class="col-md-6">
                           <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
                             @if ($errors->has('name'))
@@ -44,7 +44,7 @@
                      <div class="mb-3 row">
                             <label for="status" class="col-md-4 col-form-label text-md-end text-start">Estado</label>
                                 <div class="col-md-6">
-                                    <input type="checkbox" class="@error('status') is-invalid @enderror" name="status" id='status' value="1" {{ old('featured') ? 'checked="checked"' : '' }}/>
+                                    <input type="checkbox" class="@error('status') is-invalid @enderror" name="status" id='status' value="1" checked/>
                                         @if ($errors->has('status'))
                                                 <span class="text-danger">{{ $errors->first('status') }}</span>
                                             @endif
