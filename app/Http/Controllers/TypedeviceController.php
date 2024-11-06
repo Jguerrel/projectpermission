@@ -62,7 +62,7 @@ class TypedeviceController extends Controller
             ->addIndexColumn()
 	        ->make(true);
 	    }
-      
+
 
     }
     public function create(): View
@@ -86,7 +86,7 @@ class TypedeviceController extends Controller
 
     public function edit(Typedevice $typedevice)
     {
-       
+
 
         return view('typedevices.edit',compact('typedevice'));
     }
