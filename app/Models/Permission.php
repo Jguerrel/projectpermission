@@ -11,5 +11,5 @@ use Spatie\Permission\Traits\HasRoles;
 class Permission extends Model
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles ;
-
+    protected $table = 'permissions';
 }
