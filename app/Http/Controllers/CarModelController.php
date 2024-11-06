@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCarmodelRequest;
+use App\Http\Requests\StoreCarModelRequest;
 use App\Http\Requests\UpdateModelRequest;
 use App\Models\Brand;
 use App\Models\CarModel;
