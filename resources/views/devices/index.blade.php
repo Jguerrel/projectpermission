@@ -82,7 +82,7 @@ $(document).ready(function() {
                     { data: 'operatingsystem.name', name: 'operatingsystem.name' },
                     { data: 'datedevicepurchase', name: 'datedevicepurchase'},
                     { data: 'ipaddress.ip', name: 'ipaddress.ip' },
-                    { data: 'microsotoffice.name', name: 'microsotoffice.name' ,visible: false},
+                    { data: 'microsoftoffice.name', name: 'microsoftoffice.name' ,visible: false},
                     { data: 'status', name: 'status' ,visible: true},
                      {data: 'action', name: 'action', orderable: false},
                  ],

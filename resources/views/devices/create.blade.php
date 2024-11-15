@@ -45,7 +45,7 @@
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Marca</label>
                         <div class="col-md-6">
                           <div class="form-group">
-                                <select class="form-control js-example-basic-single select2 @error('brands') is-invalid @enderror "  data-placeholder="Seleccione una marca"   id="brand" name="brand_id">
+                                <select class="form-control js-example-basic-single select2 @error('brands') is-invalid @enderror"  data-placeholder="Seleccione una marca"   id="brand_id" name="brand_id">
                                 <option value="" disabled selected>Seleccione una opcion</option>
                                   @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}" {{ in_array($brand->id, old('brands') ?? []) ? 'selected' : '' }}>
@@ -54,6 +54,10 @@
 
                                     @endforeach
                                 </select>
+                             <!-- Muestra el mensaje de error -->
+                             @if ($errors->has('brands'))
+                                <span class="text-danger">{{ $errors->first('brands') }}</span>
+                            @endif
                             </div>
                         </div>
                     </div>
@@ -138,7 +142,7 @@
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Office</label>
                         <div class="col-md-6">
                           <div class="form-group">
-                                <select class="form-control js-example-basic-single select2 @error('microsoftoffices') is-invalid @enderror "  data-placeholder="Seleccione tipo de dispositivo"   id="office" name="microsoftoffices_id">
+                                <select class="form-control js-example-basic-single select2 @error('microsoftoffices') is-invalid @enderror"  data-placeholder="Seleccione tipo de dispositivo"   id="office" name="microsoftoffice_id">
                                 <option value="" disabled selected>Seleccione tipo de dispositivo</option>
                                   @foreach ($microsoftoffices as $microsoftoffice)
                                         <option value="{{ $microsoftoffice->id }}" {{ in_array($microsoftoffice->id, old('microsoftoffices') ?? []) ? 'selected' : '' }}>
@@ -155,7 +159,7 @@
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Tipos de dispositivo</label>
                         <div class="col-md-6">
                           <div class="form-group">
-                                <select class="form-control js-example-basic-single select2 @error('typedevices') is-invalid @enderror "  data-placeholder="Seleccione tipo de dispositivo"   id="typedevice" name="typedevice_id">
+                                <select class="form-control js-example-basic-single select2 @error('typedevices') is-invalid @enderror"  data-placeholder="Seleccione tipo de dispositivo"   id="typedevice" name="typedevice_id">
                                 <option value="" disabled selected>Seleccione tipo de dispositivo</option>
                                   @foreach ($typedevices as $typedevice)
                                         <option value="{{ $typedevice->id }}" {{ in_array($typedevice->id, old('typedevices') ?? []) ? 'selected' : '' }}>
@@ -172,7 +176,7 @@
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Sucursal</label>
                         <div class="col-md-6">
                           <div class="form-group">
-                                    <select class="form-control js-example-basic-single select2 @error('branchoffices') is-invalid @enderror " data-placeholder="Seleccione una sucursal"  aria-label="sucursal" id="sucursal" name="branch_office_id">
+                                    <select class="form-control js-example-basic-single select2 @error('branch_offices') is-invalid @enderror" data-placeholder="Seleccione una sucursal"  aria-label="sucursal" id="sucursal" name="branch_office_id">
                                         <option value="" disabled selected>Seleccione una sucursal</option>
                                         @foreach ($branchoffices as $branchoffice)
                                              <option value="{{ $branchoffice->id }}" {{ in_array($branchoffice->id, old('branchoffices') ?? []) ? 'selected' : '' }}>
@@ -188,7 +192,7 @@
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">IP</label>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <select id="direccionip" name="ipaddress_id" class="form-control js-example-basic-single select2"  data-placeholder="Seleccione un ip" >
+                                <select id="direccionip" name="ipaddress_id" class="form-control js-example-basic-single select2 @error('ipaddress') is-invalid @enderror"  data-placeholder="Seleccione un ip" >
                                   <option value="" disabled selected>Seleccione un ip</option>
                                 </select>
                              </div>
@@ -198,7 +202,7 @@
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Colaborador</label>
                         <div class="col-md-6">
                           <div class="form-group">
-                                    <select class="form-control js-example-basic-single select2 @error('employee') is-invalid @enderror " data-placeholder="Seleccione un colaborador"  aria-label="colaborador" id="colaborador" name="employee_id">
+                                    <select class="form-control js-example-basic-single select2 @error('employees') is-invalid @enderror " data-placeholder="Seleccione un colaborador"  aria-label="colaborador" id="colaborador" name="employee_id">
                                          <option value="" disabled selected>Seleccione Item</option>
                                         @foreach ($employees as $employee)
                                              <option value="{{ $employee->id }}" {{ in_array($employee->id, old('employees') ?? []) ? 'selected' : '' }}>
@@ -225,7 +229,15 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="mb-3 row">
+                            <label for="status" class="col-md-4 col-form-label text-md-end text-start">Estado</label>
+                             <div class="col-md-6">
+                             <input type="checkbox" class="@error('status') is-invalid @enderror" name="status" id='status' value="1" checked/>
+                                @if ($errors->has('status'))
+                                        <span class="text-danger">{{ $errors->first('status') }}</span>
+                                    @endif
+                            </div>
+                    </div>
                     <div class="mb-3 row">
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-info" value="Guardar">
                     </div>
@@ -250,7 +262,7 @@ placeholder: 'Seleccione una opcion'
         });
 
 
-        $('#brand').on('select2:select', function (e) {
+        $('#brand_id').on('select2:select', function (e) {
             url="{{route('carmodels.modelos')}}";
 
             modelos(e,url);
