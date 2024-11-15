@@ -389,7 +389,7 @@ return [
             'text' => 'Office',
             'url'  => 'admin/microsoftoffices',
             'icon'    => 'fas fa-brands fa-microsoft',
-            'can'         => 'ver-offices',
+            'can'         => 'ver-licenciaoffices',
         ],
         [
             'text'    => 'Config. Dispositivos',
@@ -412,7 +412,7 @@ return [
                        'text' => 'Tamaño de disco',
                        'url'  => 'admin/diskstorages',
                        'icon'    => 'fas fa-box-archive',
-                       'can'         => 'ver-tamanodiscos',
+                       'can'         => 'ver-tamanio_de_discos',
                    ],
                    [
                         'text' => 'Dispositivos',
