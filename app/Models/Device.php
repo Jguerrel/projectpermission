@@ -30,7 +30,7 @@ class Device extends Model
 
     public function typedevice()
     {
-        return $this->belongsTo(TypeDevice::class);
+        return $this->belongsTo(Typedevice::class);
     }
 
     public function branch_office()
