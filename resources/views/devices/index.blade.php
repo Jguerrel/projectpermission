@@ -23,7 +23,7 @@
          @can('crear-dispositivos')
             <a href="{{ route('devices.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
-                    <table class="table table-striped table-hover table-bordered table-sm dataTable dtr-inline " id ="dispositivos">
+                    <table class="table table-striped table-hover table-bordered table-sm dataTable dtr-inline fixed " style ='overflow-x: auto;' id ="dispositivos">
                         <thead>
                             <tr>
                             <th scope="col">#</th>
@@ -66,6 +66,10 @@ $(document).ready(function() {
                 bLengthChange: true,
                 pageLength: 10,
            processing: true,
+           scrollX: true,
+           scrollY: '50vh', // Altura fija de la tabla
+           scrollCollapse: true,
+           autoWidth: false,
            responsive: true,
            serverSide: true,
 
