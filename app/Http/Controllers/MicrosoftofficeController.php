@@ -13,10 +13,10 @@ class MicrosoftofficeController extends Controller
     {
 
         $this->middleware('auth');
-         $this->middleware('permission:ver-licenciaoffice', ['only' => ['index']]);
-         $this->middleware('permission:crear-licenciaoffice', ['only' => ['create','store']]);
-         $this->middleware('permission:editar-licenciaoffice', ['only' => ['edit','update']]);
-        $this->middleware('permission:eliminar-licenciaoffice', ['only' => ['destroy']]);
+         $this->middleware('permission:ver-licenciaoffices', ['only' => ['index']]);
+         $this->middleware('permission:crear-licenciaoffices', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-licenciaoffices', ['only' => ['edit','update']]);
+        $this->middleware('permission:eliminar-licenciaoffices', ['only' => ['destroy']]);
     }
 
     /**
