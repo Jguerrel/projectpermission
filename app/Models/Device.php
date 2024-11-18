@@ -25,7 +25,8 @@ class Device extends Model
         'diskstorage_id',
         'microsoftoffice_id',
         'operatingsystem_id',
-        'status'
+        'status',
+        'anydesknumber'
     ];
 
     public function typedevice()

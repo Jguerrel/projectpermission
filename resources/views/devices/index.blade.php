@@ -30,10 +30,13 @@
                             <th scope="col">Serie</th>
                             <th scope="col">Marca</th>
                             <th scope="col">Modelo</th>
-                            <th scope="col">Sistema operativo</th>
                             <th scope="col">Fecha de compra</th>
                             <th scope="col">IP</th>
                             <th scope="col">Office</th>
+                            <th scope="col">Colaborador</th>
+                            <th scope="col">Almacenamiento</th>
+                            <th scope="col">Número de Anydesk</th>
+                            <th scope="col">OS</th>
                             <th scope="col">Estado</th>
                             <th scope="col" style="width: 20%;">Accion</th>
                             </tr>
@@ -79,10 +82,13 @@ $(document).ready(function() {
                     { data: 'serialnumber', name: 'serialnumber' },
                     { data: 'brand.name', name: 'brand.name' },
                     { data: 'carmodel.name', name: 'carmodel.name' },
-                    { data: 'operatingsystem.name', name: 'operatingsystem.name' },
                     { data: 'datedevicepurchase', name: 'datedevicepurchase'},
                     { data: 'ipaddress.ip', name: 'ipaddress.ip' },
-                    { data: 'microsoftoffice.name', name: 'microsoftoffice.name' ,visible: true},
+                    { data: 'microsoftoffice.name', name: 'microsoftoffice.name'},
+                    { data: 'employee.name', name: 'employee.name' },
+                    { data: 'diskstorage.name', name: 'diskstorage.name',visible: false },
+                    { data: 'anydesknumber', name: 'anydesknumber',visible: false },
+                    { data: 'operatingsystem.name', name: 'operatingsystem.name',visible: false },
                     { data: 'status', name: 'status' ,visible: true},
                      {data: 'action', name: 'action', orderable: false},
                  ],

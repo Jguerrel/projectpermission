@@ -68,6 +68,15 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
+                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Número de AnyDesk</label>
+                            <div class="col-md-6">
+                            <input type="text" class="form-control @error('anydesknumber') is-invalid @enderror" id="anydesknumber" name="anydesknumber" value="{{ $device->anydesknumber }}" >
+                                @if ($errors->has('anydesknumber'))
+                                    <span class="text-danger">{{ $errors->first('anydesknumber') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Disco</label>
                             <div class="col-md-6">
                             <input type="text" class="form-control @error('disco') is-invalid @enderror" id="disco" name="disco" value="{{ $device->disco }}">

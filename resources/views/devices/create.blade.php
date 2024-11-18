@@ -72,11 +72,20 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="email" class="col-md-4 col-form-label text-md-end text-start">Ram</label>
+                        <label for="text" class="col-md-4 col-form-label text-md-end text-start">Ram</label>
                         <div class="col-md-6">
                           <input type="number" class="form-control @error('ram') is-invalid @enderror" id="ram" name="ram" value="{{ old('ram') }}" min="1" max="100" step="1" >
                             @if ($errors->has('ram'))
                                 <span class="text-danger">{{ $errors->first('ram') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="text" class="col-md-4 col-form-label text-md-end text-start">Número de Anydesk</label>
+                        <div class="col-md-6">
+                          <input type="text" class="form-control @error('anydesknumber') is-invalid @enderror" id="anydesknumber" name="anydesknumber" value="{{ old('anydesknumber') }}" >
+                            @if ($errors->has('anydesknumber'))
+                                <span class="text-danger">{{ $errors->first('anydesknumber') }}</span>
                             @endif
                         </div>
                     </div>
