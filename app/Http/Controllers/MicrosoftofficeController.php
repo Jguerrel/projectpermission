@@ -48,11 +48,11 @@ class MicrosoftofficeController extends Controller
                    $btn  = $btn . '<a href="'.route("microsoftoffices.show",$microsoftoffice->id).'" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>';
                 }
 
-                if ($user->can('editar-licenciaoffice'))
+                if ($user->can('editar-licenciaoffices'))
                 {
                     $btn =$btn.'<a href="'.route("microsoftoffices.edit",$microsoftoffice->id).'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>';
                 }
-                if ($user->can('eliminar-licenciaoffice'))
+                if ($user->can('eliminar-licenciaoffices'))
                 {
                     $btn =$btn.'<button type="submit" class="btn btn-danger btn-sm" onclick="'. $onclick.'"><i class="fas fa-trash"></i> Eliminar</button>';
                 }
