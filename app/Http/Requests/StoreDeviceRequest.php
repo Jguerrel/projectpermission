@@ -48,6 +48,8 @@ class StoreDeviceRequest extends FormRequest
             'brand_id.required' => 'La :attribute es obligatorio.',
             'branch_office_id.required' => 'La :attribute es obligatorio.',
             'employee_id.required' => 'La :attribute es obligatorio.',
+            'ram.numeric' => 'El atributo :attribute debe ser un valor numerico.',
+
 
         ];
 

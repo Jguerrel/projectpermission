@@ -42,22 +42,32 @@
                         </div>
                         <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Marca</label>
-                            <div class="col-md-6">
-                            <input type="text" class="form-control @error('brand') is-invalid @enderror" id="marca" name="brand" value="{{ $device->brand }}">
-                                @if ($errors->has('brand'))
-                                    <span class="text-danger">{{ $errors->first('brand') }}</span>
-                                @endif
+                            <div class="col-md-6 ">
+                                    <select class="form-control js-example-basic-single select2 @error('brand_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="tmarca" id="brand" name="brand_id">
+                                        <option value="" disabled selected>Seleccione Item</option>
+                                        @foreach ($brands as $brand)
+                                         <option value="{{ $brand->id }}"  {{ $device->brand->id == $brand->id ? 'selected' : '' }}>
+                                               {{ $brand->name }}
+                                        </option>
+
+                                        @endforeach
+                                   </select>
                             </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Modelo</label>
-                            <div class="col-md-6">
-                            <input type="text" class="form-control @error('model') is-invalid @enderror" id="modelo" name="model" value="{{ $device->model }}">
-                                @if ($errors->has('model'))
-                                    <span class="text-danger">{{ $errors->first('model') }}</span>
-                                @endif
+                      </div>
+                      <div class="mb-3 row">
+                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Marca</label>
+                            <div class="col-md-6 ">
+                                    <select class="form-control js-example-basic-single select2 @error('carmodel_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="tmodelo" id="carmodel" name="carmodel_id">
+                                        <option value="" disabled selected>Seleccione Item</option>
+                                        @foreach ($carmodels as $carmodel)
+                                         <option value="{{ $carmodel->id }}"  {{ $device->carmodel->id == $carmodel->id ? 'selected' : '' }}>
+                                               {{ $carmodel->name }}
+                                        </option>
+
+                                        @endforeach
+                                   </select>
                             </div>
-                        </div>
+                      </div>
                         <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Ram</label>
                             <div class="col-md-6">
@@ -77,23 +87,47 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Disco</label>
-                            <div class="col-md-6">
-                            <input type="text" class="form-control @error('disco') is-invalid @enderror" id="disco" name="disco" value="{{ $device->disco }}">
-                                @if ($errors->has('disco'))
-                                    <span class="text-danger">{{ $errors->first('disco') }}</span>
-                                @endif
+                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Sistema Operativo</label>
+                            <div class="col-md-6 ">
+                                    <select class="form-control js-example-basic-single select2 @error('operatingsystem_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="Tsistema" id="sistema" name="operatingsystem_id">
+                                        <option value="" disabled selected>Seleccione Item</option>
+                                        @foreach ($operatingsystems as $operatingsystem)
+                                         <option value="{{ $operatingsystem->id }}"  {{ $device->operatingsystem->id == $operatingsystem->id ? 'selected' : '' }}>
+                                               {{ $operatingsystem->name }}
+                                        </option>
+
+                                        @endforeach
+                                   </select>
                             </div>
-                        </div>
+                      </div>
+                        <div class="mb-3 row">
+                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Tamaño de Disco</label>
+                            <div class="col-md-6 ">
+                                    <select class="form-control js-example-basic-single select2 @error('diskstorage_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="Tdisco" id="diskstorage" name="diskstorage_id">
+                                        <option value="" disabled selected>Seleccione Item</option>
+                                        @foreach ($diskstorages as $diskstorage)
+                                         <option value="{{ $diskstorage->id }}"  {{ $device->diskstorage->id == $diskstorage->id ? 'selected' : '' }}>
+                                               {{ $diskstorage->name }}
+                                        </option>
+
+                                        @endforeach
+                                   </select>
+                            </div>
+                      </div>
                         <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Office</label>
-                            <div class="col-md-6">
-                            <input type="text" class="form-control @error('office') is-invalid @enderror" id="office" name="office" value="{{ $device->office }}">
-                                @if ($errors->has('office'))
-                                    <span class="text-danger">{{ $errors->first('office') }}</span>
-                                @endif
+                            <div class="col-md-6 ">
+                                    <select class="form-control js-example-basic-single select2 @error('microsoftoffice_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="Toffice" id="microsoftoffice" name="microsoftoffice_id">
+                                        <option value="" disabled selected>Seleccione Item</option>
+                                        @foreach ($microsoftoffices as $microsoftoffice)
+                                         <option value="{{ $microsoftoffice->id }}"  {{ $device->microsoftoffice->id == $microsoftoffice->id ? 'selected' : '' }}>
+                                               {{ $microsoftoffice->name }}
+                                        </option>
+
+                                        @endforeach
+                                   </select>
                             </div>
-                        </div>
+                      </div>
                         <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Fecha de Compra</label>
                             <div class="col-md-6 input-group-addon datepicker" style ='display: inline-flex;'>
