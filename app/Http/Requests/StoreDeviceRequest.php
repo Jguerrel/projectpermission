@@ -24,7 +24,7 @@ class StoreDeviceRequest extends FormRequest
         return [
             'serialnumber' => 'required|unique:devices,serialnumber|string|max:250',
             'carmodel_id' => 'required|exists:carmodels,id',
-            'ram'=> 'required|string|max:250',
+             'ram'=> 'required|numeric',
              'datedevicepurchase'=> 'required|date|after_or_equal:today',
              'operatingsystem_id'=> 'required|exists:operatingsystems,id',
              'typedevice_id' => 'required|exists:typedevices,id',

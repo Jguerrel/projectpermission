@@ -61,7 +61,7 @@
                         <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Ram</label>
                             <div class="col-md-6">
-                            <input type="text" class="form-control @error('ram') is-invalid @enderror" id="ram" name="ram" value="{{ $device->ram }}">
+                            <input type="numeric" class="form-control @error('ram') is-invalid @enderror" id="ram" name="ram" value="{{ $device->ram }}" min="1" max="100" step="1">
                                 @if ($errors->has('ram'))
                                     <span class="text-danger">{{ $errors->first('ram') }}</span>
                                 @endif
