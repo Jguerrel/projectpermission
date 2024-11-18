@@ -377,7 +377,7 @@ return [
             'text' => 'Sistema Operativo',
             'url'  => 'admin/operatingsystems',
             'icon'    => 'fas fa-brands fa-windows',
-            'can'         => 'ver-sistemas',
+            'can'         => 'ver-sistemaoperativos',
         ],
         // [
         //     'text' => 'Tamaño de disco',
