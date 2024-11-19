@@ -25,7 +25,7 @@ class StoreDeviceRequest extends FormRequest
             'serialnumber' => 'required|unique:devices,serialnumber|string|max:250',
             'carmodel_id' => 'required|exists:carmodels,id',
              'ram'=> 'required|numeric',
-             'datedevicepurchase'=> 'required|date|after_or_equal:today',
+             'datedevicepurchase'=> 'required|date',
              'operatingsystem_id'=> 'required|exists:operatingsystems,id',
              'typedevice_id' => 'required|exists:typedevices,id',
              'brand_id' => 'required|exists:brands,id',
@@ -49,6 +49,7 @@ class StoreDeviceRequest extends FormRequest
             'branch_office_id.required' => 'La :attribute es obligatorio.',
             'employee_id.required' => 'La :attribute es obligatorio.',
             'ram.numeric' => 'El atributo :attribute debe ser un valor numerico.',
+            'datedevicepurchase.required' => 'La :attribute es obligatorio.',
 
 
         ];
@@ -65,6 +66,7 @@ class StoreDeviceRequest extends FormRequest
                 'operatingsystem_id' => 'sistema operativo',
                 'carmodel_id' => 'modelo',
                 'branch_office_id' => 'sucursal',
+                'datedevicepurchase'=>'Fecha de Compra'
 
             ];
         }

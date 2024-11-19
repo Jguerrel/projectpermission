@@ -29,7 +29,8 @@ class UpdateDeviceRequest extends FormRequest
             'ipaddress_id' => 'required|exists:ipaddresses,id',
             'diskstorage_id' => 'required|exists:diskstorages,id',
             'carmodel_id' => 'required|exists:carmodels,id',
-            'brand_id' => 'required|exists:brands,id'
+            'brand_id' => 'required|exists:brands,id',
+            'datedevicepurchase'=> 'required|date',
 
 
         ];
@@ -51,6 +52,7 @@ class UpdateDeviceRequest extends FormRequest
             'branch_office_id.required' => 'La :attribute es obligatorio.',
             'employee_id.required' => 'La :attribute es obligatorio.',
             'typedevice_id.required' => 'La :attribute es obligatorio.',
+            'datedevicepurchase.required' => 'La :attribute es obligatorio.',
 
         ];
 
@@ -63,6 +65,7 @@ class UpdateDeviceRequest extends FormRequest
             'operatingsystem_id' => 'sistema operativo',
             'carmodel_id' => 'modelo',
             'branch_office_id' => 'sucursal',
+             'datedevicepurchase'=>'Fecha de Compra'
 
         ];
     }
