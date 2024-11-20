@@ -70,7 +70,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::resource('carmodels',CarModelController::class);
     Route::resource('operatingsystems',OperatingSystemController::class);
     Route::resource('microsoftoffices',MicrosoftofficeController::class);
-    Route::resource('newsletters',NewsletterController::class);
+    //Route::resource('newsletters',NewsletterController::class);
     Route::resource('diskstorages',DiskstorageController::class);
     /*Paginacion*/
     Route::get('employees.pagination', [EmployeeController::class, 'pagination'])->name('employees.pagination');
@@ -87,9 +87,13 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::get('operatingsystems.pagination', [OperatingSystemController::class, 'pagination'])->name('operatingsystems.pagination');
     Route::get('microsoftoffices.pagination', [MicrosoftofficeController::class, 'pagination'])->name('microsoftoffices.pagination');
     Route::get('diskstorages.pagination', [DiskstorageController::class, 'pagination'])->name('diskstorages.pagination');
+    Route::post('/uploadinvoice', [DeviceController::class, 'uploadinvoice'])->name('uploadinvoice.file');
+    Route::get('/cargarfacturamultiple', [DeviceController::class, 'cargarfacturamultiple'])->name('devices.cargarfacturamultiple');
+    Route::post('/cargarfacturamultiplepost', [DeviceController::class, 'cargarfacturamultiplepost'])->name('devices.cargarfacturamultiplepost');
 });
 
 //Rutas de paginacion////
 
 Route::post('/direccionesip', [IpaddressController::class, 'direccionesip'])->name('ipaddresses.direccionesip');
 Route::post('/modelos', [CarModelController::class, 'modelos'])->name('carmodels.modelos');
+

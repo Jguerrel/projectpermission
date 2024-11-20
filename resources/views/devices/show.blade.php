@@ -51,13 +51,13 @@
                     <div class="mb-3 row">
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Sistema Operativo:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                            {{ $device->OS }}
+                            {{ $device->operatingsystem->name }}
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Tamaño de disco:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                            {{ $device->disco }}
+                            {{ $device->diskstorage->name }}
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>photo:</strong></label>
+                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Foto:</strong></label>
                         <img src="{{asset($device->photo) }}" class="img-thumbnail" style ='width:10%;' alt="Foto">
                     </div>
                     <div class="mb-3 row">
@@ -79,7 +79,7 @@
                     <div class="mb-3 row">
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Office:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                            {{ $device->office }}
+                            {{ $device->microsoftoffice->name }}
                         </div>
                     </div>
 
@@ -87,6 +87,12 @@
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Sucursal:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
                             {{ $device->branch_office->name }}
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>IP:</strong></label>
+                        <div class="col-md-6" style="line-height: 35px;">
+                            {{ $device->ipaddress->ip }}
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -102,14 +108,16 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Tipos de Disco:</strong></label>
+                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Factura</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                            {{ $device->disktype->name }}
-                            <!-- @php
-                                dump($device);
-                            @endphp -->
+                            {{ $device->invoicepath }}
                         </div>
                     </div>
+                    <div class="mb-3 row">
+                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Comentario</strong></label>
+                        <div class="col-md-6" style="line-height: 35px;">{{$device->devicecomment}}</div>
+                    </div>
+
                 </div>
         </div>
     </div>

@@ -622,9 +622,20 @@ return [
                     'location' => 'vendor/datatables/buttons.bootstrap4.min.css',
                 ],
                 [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'https://unpkg.com/dropzone@5/dist/min/dropzone.min.css',
+                ],
+                [
                     'type' => 'js',
                     'asset' => true,
                     'location' => 'vendor/datatables/moment.min.js',
+                ],
+
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js',
                 ],
 
 
@@ -663,7 +674,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'location' => 'https://cdn.jsdelivr.net/npm/sweetalert2@11',
                 ],
             ],
         ],

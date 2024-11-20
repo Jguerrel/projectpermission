@@ -77,6 +77,7 @@
     @endif
 
     <script src="{{ asset('vendor/adminlte/dist/js/jquery-3.7.1.slim.min.js') }}"></script>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>

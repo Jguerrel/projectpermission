@@ -26,7 +26,8 @@ class Device extends Model
         'microsoftoffice_id',
         'operatingsystem_id',
         'status',
-        'anydesknumber'
+        'anydesknumber',
+        'invoicepath'
     ];
 
     public function typedevice()

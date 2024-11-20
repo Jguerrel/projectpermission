@@ -22,8 +22,8 @@ class StoreDeviceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'serialnumber' => 'required|unique:devices,serialnumber|string|max:250',
-            'carmodel_id' => 'required|exists:carmodels,id',
+             'serialnumber' => 'required|unique:devices,serialnumber|string|max:250',
+             'carmodel_id' => 'required|exists:carmodels,id',
              'ram'=> 'required|numeric',
              'datedevicepurchase'=> 'required|date',
              'operatingsystem_id'=> 'required|exists:operatingsystems,id',
@@ -34,7 +34,7 @@ class StoreDeviceRequest extends FormRequest
              'disktype_id' => 'required|exists:disktypes,id',
              'microsoftoffice_id' => 'required|exists:microsoftoffices,id',
              'diskstorage_id' => 'required|exists:diskstorages,id',
-            'ipaddress_id' => 'required|exists:ipaddresses,id'
+             'ipaddress_id' => 'required|exists:ipaddresses,id'
         ];
     }
     public function messages()
@@ -49,9 +49,14 @@ class StoreDeviceRequest extends FormRequest
             'branch_office_id.required' => 'La :attribute es obligatorio.',
             'employee_id.required' => 'La :attribute es obligatorio.',
             'ram.numeric' => 'El atributo :attribute debe ser un valor numerico.',
+            'ram.required' => 'La :attribute es obligatorio.',
             'datedevicepurchase.required' => 'La :attribute es obligatorio.',
-
-
+            'invoicepath' => "La :attribute debe ser en formato pdf, img, png.",
+            'ipaddress_id' =>'La :attribute es obligatorio.',
+            'typedevice_id' =>'La :attribute es obligatorio.',
+            'disktype_id' =>'La :attribute es obligatorio.',
+            'microsoftoffice_id' =>'La :attribute es obligatorio.',
+            'diskstorage_id' =>'La :attribute es obligatorio.',
         ];
 
 
@@ -66,8 +71,18 @@ class StoreDeviceRequest extends FormRequest
                 'operatingsystem_id' => 'sistema operativo',
                 'carmodel_id' => 'modelo',
                 'branch_office_id' => 'sucursal',
-                'datedevicepurchase'=>'Fecha de Compra'
-
+                'datedevicepurchase'=>'fecha de compra',
+                'invoicepath'=>'factura',
+                 'diskstorage_id'=>'tamaño de disco',
+                 'ipaddress_id'=>'direccion ip',
+                 'microsoftoffice_id'=>'office',
+                 'disktype_id'=>'tipo de disco',
+                 'brand_id'=>'marca',
+                 'branch_office_id'=>'sucursal',
+                 'operatingsystem_id'=>'sistema operativo',
+                 'typedevice_id'=>'tipo de dispositivo',
+                 'employee_id'=>'colaborador',
+                 'disktype_id'=>'tipo de disco',
             ];
         }
 

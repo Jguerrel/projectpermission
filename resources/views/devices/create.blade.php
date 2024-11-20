@@ -51,12 +51,11 @@
                                         <option value="{{ $brand->id }}" {{ in_array($brand->id, old('brands') ?? []) ? 'selected' : '' }}>
                                             {{ $brand->name }}
                                         </option>
-
                                     @endforeach
                                 </select>
                              <!-- Muestra el mensaje de error -->
-                             @if ($errors->has('brands'))
-                                <span class="text-danger">{{ $errors->first('brands') }}</span>
+                             @if ($errors->has('brand_id'))
+                                <span class="text-danger">{{ $errors->first('brand_id') }}</span>
                             @endif
                             </div>
                         </div>
@@ -68,6 +67,9 @@
                                 <select id="carmodel" name="carmodel_id" class="form-control js-example-basic-single select2  @error('carmodels') is-invalid @enderror " data-placeholder="Seleccione un modelo">
                                   <option value="" disabled selected>Seleccione un modelo</option>
                                 </select>
+                                @if ($errors->has('carmodel_id'))
+                                <span class="text-danger">{{ $errors->first('carmodel_id') }}</span>
+                            @endif
                              </div>
                         </div>
                     </div>
@@ -99,9 +101,11 @@
                                         <option value="{{ $operatingsystem->id }}" {{ in_array($operatingsystem->id, old('operatingsystems') ?? []) ? 'selected' : '' }}>
                                             {{ $operatingsystem->name }}
                                         </option>
-
                                     @endforeach
                                 </select>
+                                @if ($errors->has('operatingsystem_id'))
+                                    <span class="text-danger">{{ $errors->first('operatingsystem_id') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -118,6 +122,9 @@
 
                                     @endforeach
                                 </select>
+                                @if ($errors->has('diskstorage_id'))
+                                     <span class="text-danger">{{ $errors->first('diskstorage_id') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -157,9 +164,11 @@
                                         <option value="{{ $microsoftoffice->id }}" {{ in_array($microsoftoffice->id, old('microsoftoffices') ?? []) ? 'selected' : '' }}>
                                             {{ $microsoftoffice->name }}
                                         </option>
-
                                     @endforeach
                                 </select>
+                                @if ($errors->has('microsoftoffice_id'))
+                                    <span class="text-danger">{{ $errors->first('microsoftoffice_id') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -174,9 +183,11 @@
                                         <option value="{{ $typedevice->id }}" {{ in_array($typedevice->id, old('typedevices') ?? []) ? 'selected' : '' }}>
                                             {{ $typedevice->name }}
                                         </option>
-
                                     @endforeach
                                 </select>
+                                @if ($errors->has('typedevice_id'))
+                                    <span class="text-danger">{{ $errors->first('typedevice_id') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -191,9 +202,11 @@
                                              <option value="{{ $branchoffice->id }}" {{ in_array($branchoffice->id, old('branchoffices') ?? []) ? 'selected' : '' }}>
                                                {{ $branchoffice->name }}
                                             </option>
-
                                         @endforeach
                                    </select>
+                                   @if ($errors->has('branch_office_id'))
+                                    <span class="text-danger">{{ $errors->first('branch_office_id') }}</span>
+                                @endif
                              </div>
                         </div>
                     </div>
@@ -204,6 +217,9 @@
                                 <select id="direccionip" name="ipaddress_id" class="form-control js-example-basic-single select2 @error('ipaddress') is-invalid @enderror"  data-placeholder="Seleccione un ip" >
                                   <option value="" disabled selected>Seleccione un ip</option>
                                 </select>
+                                @if ($errors->has('ipaddress_id'))
+                                    <span class="text-danger">{{ $errors->first('ipaddress_id') }}</span>
+                                @endif
                              </div>
                         </div>
                     </div>
@@ -219,6 +235,9 @@
                                             </option>
                                         @endforeach
                                    </select>
+                                   @if ($errors->has('employee_id'))
+                                    <span class="text-danger">{{ $errors->first('employee_id') }}</span>
+                                 @endif
                              </div>
                         </div>
                     </div>
@@ -232,10 +251,22 @@
                                         <option value="{{ $disktype->id }}" >
                                             {{ $disktype->name }}
                                         </option>
-
                                     @endforeach
                                 </select>
+                                @if ($errors->has('disktype_id'))
+                                    <span class="text-danger">{{ $errors->first('disktype_id') }}</span>
+                                 @endif
                             </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="text" class="col-md-4 col-form-label text-md-end text-start">Factura</label>
+                        <div class="col-md-6 input-group mb-3">
+                         <button class="btn btn btn-info" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">Cargar documento</button>
+                          <input type="text" class="form-control @error('invoicepath') is-invalid @enderror" id="invoicepath" name="invoicepath" value="{{ old('invoicepath') }}" readonly>
+                            @if ($errors->has('invoicepath'))
+                                <span class="text-danger">{{ $errors->first('invoicepath') }}</span>
+                            @endif
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -256,6 +287,41 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+      <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h4 class="mb-0">Subir Factura</h4>
+                            </div>
+                                    <div class="card-body">
+                                        <form action="{{ route('uploadinvoice.file') }}" method="POST" enctype="multipart/form-data"
+                                            class="dropzone" id="file-Upload">
+                                            @csrf
+                                        </form>
+                                        <h5 id="message"></h5>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript de Bootstrap -->
+
 <script src="{{ asset('vendor/jquery/jquerycustom.js') }}"></script>
  <script>
 
@@ -280,6 +346,37 @@ placeholder: 'Seleccione una opcion'
 
 
 });
+//Dropzone.autoDiscover = false;
+
+    Dropzone.options.fileUpload = {
+            dictDefaultMessage: "Arrastra tus archivos aquí para cargarlos",
+            dictInvalidFileType: "No puedes subir archivos de este tipo.",
+            dictFallbackMessage: "Tu navegador no soporta la carga de archivos mediante arrastrar y soltar.",
+            maxFilesize : 2,
+            maxFiles: 1,
+            dictFileTooBig: "El archivo es demasiado grande MiB. Máximo permitido: 2 MiB.",
+
+            acceptedFiles: ".jpeg,.jpg,.png,.pdf", // Tipos de archivo permitidos
+            success: function (file, response) {
+
+                $("#invoicepath").val(response.file_path);
+                Swal.fire({
+                title: "OK!",
+                text: "¡Archivo subido correctamente!",
+                icon: "success"
+                });
+
+            },
+            error: function (file, response) {
+
+                Swal.fire({
+                title: "NoOK!",
+                text: response,
+                icon: "error"
+                });
+
+            }
+        };
 
 </script>
 

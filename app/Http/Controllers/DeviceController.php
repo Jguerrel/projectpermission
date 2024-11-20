@@ -16,6 +16,7 @@ use App\Models\Disktype;
 use App\Models\Ipaddress;
 use App\Models\Microsoftoffice;
 use App\Models\OperatingSystem;
+use Illuminate\Http\Request;
 
 class DeviceController extends Controller
 {
@@ -92,6 +93,25 @@ class DeviceController extends Controller
         return view('devices.create',compact('employees','branchoffices','typedevices','disktypes','ipadresses','carmodels','diskstorages','brands','microsoftoffices','operatingsystems') );
     }
 
+/*subida de factura en pdf, img, png */
+   public function uploadinvoice(Request $request)
+   {
+    $request->validate([
+        'file' => 'required|mimes:jpeg,jpg,png,pdf|max:2048', // Solo imagenes o PDF
+    ]);
+
+    // Verificar si el archivo fue cargado
+    if ($request->hasFile('file')) {
+        // Guardar el archivo en el disco 'public/uploads'
+        $filePath = $request->file('file')->store('invoices', 'public');
+
+        return response()->json(['success' => true, 'file_path' => $filePath]);
+    }
+
+    return response()->json(['success' => false, 'message' => 'No se pudo cargar el archivo.'], 400);
+
+   }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -105,7 +125,12 @@ class DeviceController extends Controller
             $image->move($destinationPath, $postImage);
             $input['photo'] =$destinationPath . $postImage;
         }
+        //Subir foto de factura o pdf
+        if ($request->hasFile('invoicepath')) {
 
+            $filePath = $request->file('invoicepath')->store('invoice', 'public');
+            $input['invoicepath'] =$filePath;
+         }
         Device::create($input);
 
         return redirect()->route('devices.index')
@@ -121,6 +146,7 @@ class DeviceController extends Controller
             'device' => $device
         ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -173,5 +199,32 @@ class DeviceController extends Controller
         $device->delete();
         return redirect()->route('devices.index')
                 ->withSuccess('Dispositivo ha sido eliminado correctamente');
+    }
+
+    public function cargarfacturamultiple()
+    {
+        $cargarfacturamultiples = Device::select('id', 'serialnumber')->orderBy('id','ASC')->get();
+        return view('devices.cargarfacturamultiple',
+           compact('cargarfacturamultiples')
+        );
+    }
+    public function cargarfacturamultiplepost(Request $request)
+    {
+        // Validar los datos de entrada
+        $request->validate([
+            'ids' => 'required|array',          // Debe ser un array de IDs
+            'ids.*' => 'exists:devices,id',      // Cada ID debe existir en la tabla 'device'
+            'invoicepath' => 'required|string',        // El nuevo valor de path debe ser un string válido
+        ]);
+
+        // Extraer los datos del request
+        $ids = $request->input('ids');         // IDs de los registros a actualizar
+        $path = $request->input('invoicepath');       // Nuevo valor para el campo path
+
+        // Actualizar los registros
+        Device::whereIn('id', $ids)->update(['invoicepath' => $path]);
+
+        return redirect()->route('devices.index')
+                ->withSuccess('Dispositivo ha sido actualizado correctamente.');
     }
 }

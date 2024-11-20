@@ -143,8 +143,8 @@
                         <div class="mb-3 row input-group">
                           <label for="textarea" class="col-md-4 col-form-label text-md-end text-start">Comentarios</label>
                                 <div class="col-md-6">
-                                   <textarea  type="text" rows="3" cols="1" class="form-control @error('devicecomment') is-invalid @enderror" id="comentario" name="devicecomment" value="{{ $device->devicecomment}}">{{ $device->devicecomment}}
-                                  </textarea>
+                                   <textarea  type="text" rows="3" cols="1" class="form-control @error('devicecomment') is-invalid @enderror" id="comentario" name="devicecomment" value="{{ $device->devicecomment}}">{{ $device->devicecomment}}</textarea>
+
                                </div>
                          </div>
 
@@ -218,7 +218,7 @@
                                    </select>
                         </div>
                       </div>
-                      <div class="mb-3 row">
+                        <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Foto</label>
                             <div class="col-md-6">
                             <input type="file" class="form-control @error('photo') is-invalid @enderror" id="foto" name="photo" value="{{ $device->photo }}"  placeholder="foto">
@@ -227,6 +227,14 @@
                             @endif
 
                             </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="text" class="col-md-4 col-form-label text-md-end text-start">Factura</label>
+                                <div class="col-md-6 input-group mb-3">
+                                    <button class="btn btn btn-info" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">Cambiar factura</button>
+                                    <input type="text" class="form-control @error('invoicepath') is-invalid @enderror" id="invoicepath" name="invoicepath" value="{{ $device->invoicepath }}" readonly>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Ver Factura</button>
+                                </div>
                         </div>
                     <div class="mb-3 row">
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-info" value="Actualizar">
@@ -237,6 +245,54 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+      <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h4 class="mb-0">Subir Factura</h4>
+                            </div>
+                                    <div class="card-body">
+                                        <form action="{{ route('uploadinvoice.file') }}" method="POST" enctype="multipart/form-data"
+                                            class="dropzone" id="file-Upload">
+                                            @csrf
+                                        </form>
+
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--modal que muestra pdf-->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        <iframe src="{{ asset('storage/' . $device->invoicepath) }}" width="100%" height="1000" frameborder="0"  style="overflow:hidden;width:100%;border: none;" >
+            Este navegador no soporta la visualización de PDFs.
+        </iframe>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <script>
     $(document).ready(function() {
 
@@ -268,6 +324,31 @@
     });
 
     });
+
+    Dropzone.options.fileUpload = {
+            dictDefaultMessage: "Arrastra tus archivos aquí para cargarlos",
+            dictFallbackMessage: "Tu navegador no soporta la carga de archivos mediante arrastrar y soltar.",
+            dictInvalidFileType: "No puedes subir archivos de este tipo.",
+            dictFileTooBig: "El archivo es demasiado grande. Máximo permitido: 2 MiB.",
+            maxFilesize: 1, // Tamaño máximo en MB
+            acceptedFiles: ".jpeg,.jpg,.png,.pdf", // Tipos de archivo permitidos
+            success: function (file, response) {
+                $("#invoicepath").val(response.file_path);
+                Swal.fire({
+                title: "OK!",
+                text: "¡Archivo subido correctamente!",
+                icon: "success"
+                });
+            },
+            error: function (file, response) {
+
+                Swal.fire({
+                title: "NoOK!",
+                text: response,
+                icon: "error"
+                });
+            }
+        };
 
 </script>
 @endsection
