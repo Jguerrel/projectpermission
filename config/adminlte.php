@@ -296,6 +296,8 @@ return [
             'text'         => 'buscar',
             'topnav_right' => true,
         ],
+
+
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,

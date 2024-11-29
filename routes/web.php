@@ -23,7 +23,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LoginUsersController;
 use App\Http\Controllers\DiskstorageController;
 use App\Http\Controllers\NewsletterController;
-
+use App\Http\Controllers\PasswordController;
 
 
 /*
@@ -90,6 +90,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::post('/uploadinvoice', [DeviceController::class, 'uploadinvoice'])->name('uploadinvoice.file');
     Route::get('/cargarfacturamultiple', [DeviceController::class, 'cargarfacturamultiple'])->name('devices.cargarfacturamultiple');
     Route::post('/cargarfacturamultiplepost', [DeviceController::class, 'cargarfacturamultiplepost'])->name('devices.cargarfacturamultiplepost');
+    Route::get('/reset-password', [PasswordController::class, 'edit'])->name('password.edit');
+    Route::post('/reset-password', [PasswordController::class, 'update'])->name('password.update');
 });
 
 //Rutas de paginacion////

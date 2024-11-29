@@ -30,6 +30,7 @@
     {{-- User menu dropdown --}}
     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
+
         {{-- User menu header --}}
         @if(!View::hasSection('usermenu_header') && config('adminlte.usermenu_header'))
             <li class="user-header {{ config('adminlte.usermenu_header_class', 'bg-primary') }}
@@ -59,7 +60,11 @@
                 @yield('usermenu_body')
             </li>
         @endif
-
+        <li class="user-footer">
+            <a class="btn btn-default btn-flat float-right @if(!$profile_url) btn-block @endif" href="{{ route('password.edit') }}">
+                <i class="fas fa-key"></i> Cambiar Contraseña
+            </a>
+        </li>
         {{-- User menu footer --}}
         <li class="user-footer">
             @if($profile_url)
