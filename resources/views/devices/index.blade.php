@@ -94,7 +94,7 @@ $(document).ready(function() {
                     { data: 'carmodel.name', name: 'carmodel.name' },
                     { data: 'datedevicepurchase', name: 'datedevicepurchase'},
                     { data: 'ipaddress.ip', name: 'ipaddress.ip' },
-                    { data: 'branch_offices.name', name: 'branch_offices.name'},
+                    { data: 'branch_office.name', name: 'branch_office.name'},
                     { data: 'microsoftoffice.name', name: 'microsoftoffice.name'},
                     { data: 'employee.name', name: 'employee.name' },
                     { data: 'diskstorage.name', name: 'diskstorage.name',visible: false },
