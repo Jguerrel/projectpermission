@@ -38,6 +38,7 @@
                             <th scope="col">Modelo</th>
                             <th scope="col">Fecha de compra</th>
                             <th scope="col">IP</th>
+                            <th scope="col">Sucursal</th>
                             <th scope="col">Office</th>
                             <th scope="col">Colaborador</th>
                             <th scope="col">Almacenamiento</th>
@@ -93,6 +94,7 @@ $(document).ready(function() {
                     { data: 'carmodel.name', name: 'carmodel.name' },
                     { data: 'datedevicepurchase', name: 'datedevicepurchase'},
                     { data: 'ipaddress.ip', name: 'ipaddress.ip' },
+                    { data: 'branch_offices.name', name: 'branch_offices.name'},
                     { data: 'microsoftoffice.name', name: 'microsoftoffice.name'},
                     { data: 'employee.name', name: 'employee.name' },
                     { data: 'diskstorage.name', name: 'diskstorage.name',visible: false },
