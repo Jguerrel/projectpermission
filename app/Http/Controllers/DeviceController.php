@@ -64,6 +64,16 @@ class DeviceController extends Controller
                     $btn =$btn.'<button type="submit" class="btn btn-danger btn-sm" onclick="'. $onclick.'"><i class="fas fa-trash"></i> Eliminar</button>';
                 }
 
+                if ($device->typedevice_id==3)
+                {
+
+                    $btn =$btn.'<a type="submit" class="btn btn-success btn-sm" href="https://'. $device->ipaddress->ip.'" target="_blank"><i class="fas fa-link"></i> Ir</a>';
+
+                }
+                if ($device->typedevice_id==1 or $device->typedevice_id==2 )
+                {
+                    $btn =$btn.'<a type="submit" class="btn btn-success btn-sm" href="anydesk://'. $device->anydesknumber.'"><i class="fas fa-link"></i> Anydesk</a>';
+                }
                   $btn =$btn .'</form>';
                   return $btn;
 

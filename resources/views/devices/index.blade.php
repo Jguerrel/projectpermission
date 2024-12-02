@@ -37,6 +37,7 @@
                             <th scope="col">Marca</th>
                             <th scope="col">Modelo</th>
                             <th scope="col">Fecha de compra</th>
+                            <th scope="col">Comentario</th>
                             <th scope="col">IP</th>
                             <th scope="col">Sucursal</th>
                             <th scope="col">Office</th>
@@ -93,6 +94,7 @@ $(document).ready(function() {
                     { data: 'brand.name', name: 'brand.name' },
                     { data: 'carmodel.name', name: 'carmodel.name' },
                     { data: 'datedevicepurchase', name: 'datedevicepurchase'},
+                    { data: 'devicecomment', name: 'devicecomment'},
                     { data: 'ipaddress.ip', name: 'ipaddress.ip' },
                     { data: 'branch_office.name', name: 'branch_office.name'},
                     { data: 'microsoftoffice.name', name: 'microsoftoffice.name'},
