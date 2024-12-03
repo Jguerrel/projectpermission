@@ -29,6 +29,11 @@
                             {{ session('success') }}
                         </div>
                     @endif
+                    <div id="custom-filter">
+                        <label for="filter-by-sucursal">Sucursal:</label>
+                        <input type="text" id="sucursal" name='sucursal' placeholder="Sucursal">
+                    </div>
+
                     <table class="table table-striped table-hover table-bordered table-sm dataTable dtr-inline fixed " style ='overflow-x: auto;' id ="dispositivos">
                         <thead>
                             <tr>
@@ -50,18 +55,20 @@
                             </tr>
                         </thead>
                     </table>
+
     </div>
 </div>
 
-
 <script type="text/javascript">
-let rutaTabla = "{{route('devices.index')}}";
-$(document).ready(function() {
+
+//let rutaTabla = "{{route('devices.index')}}";
+$(function () {
     $.ajaxSetup({
     headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
+
 
   var table =$('#dispositivos').DataTable({
 
@@ -79,10 +86,15 @@ $(document).ready(function() {
            autoWidth: false,
            responsive: true,
            serverSide: true,
-
+           orderCellsTop:true,
+           fixedHeader:true,
             ajax: {
                 url: "{{ route('devices.pagination') }}",
                 type: "GET",
+                data:function(d)
+                  {
+                    d.sucursal = $('#sucursal').val();
+                  },
                  error : function(xhr, textStatus, errorThrown){
 
                     console.log('error'+JSON.stringify(xhr))
@@ -109,12 +121,25 @@ $(document).ready(function() {
                  language: {
                     url:'/es-ES.json',
                     },
-       }).buttons().container().appendTo('#dispositivos_wrapper .col-md-6:eq(1)');
+       }).buttons().container().appendTo('#dispositivos_wrapper .col-md-6:eq(1)')
+
+
+       $('#sucursal').keyup(function() {
+
+            table= $('#dispositivos').DataTable().ajax.reload();
+        });
+
 
        // Ocultar el mensaje después de 5 segundos (5000 milisegundos)
         setTimeout(function() {
             $('#success-message').fadeOut('slow');
         }, 2000); // Cambiar 5000 por el número de milisegundos que desees
+
+        setTimeout(function(){
+            $('#custom-filter').appendTo('.dataTables_filter');
+        }, 2000);
+
+
 
 });
 </script>

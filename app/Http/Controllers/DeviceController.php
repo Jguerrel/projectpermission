@@ -37,12 +37,20 @@ class DeviceController extends Controller
         ]);
     }
 
-    public function pagination()
+    public function pagination(Request $request)
     {
         $user = Auth()->user();
-        if(request()->ajax()) {
 
-	        return Datatables()->of(Device::with('typedevice','branch_office','employee','disktype','ipaddress','carmodel','brand','diskstorage','operatingsystem','microsoftoffice')->select('*'))
+        $data=Device::with('typedevice','branch_office','employee','disktype','ipaddress','carmodel','brand','diskstorage','operatingsystem','microsoftoffice');
+
+        if ($request->filled('sucursal')) {
+
+            $data->whereHas('branch_office', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->sucursal . '%');  });
+
+        }
+
+        if($request->ajax()) {return Datatables()->of($data)
             ->editColumn('status', function(Device $device) {
                 return  ' <span class="text-'. ($device->status ? 'success' : 'danger') .'">Activo</span>';
             })
@@ -50,6 +58,7 @@ class DeviceController extends Controller
 
                 $btn = '<form action='.route("devices.destroy",$device->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';
                 $onclick='return confirm("Do you want to delete this user?");';
+
                 if ($user->can('ver-dispositivos'))
                 {
                    $btn  = $btn . '<a href="'.route("devices.show",$device->id).'" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> Ver</a>';
