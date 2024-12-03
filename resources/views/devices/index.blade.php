@@ -137,7 +137,7 @@ $(function () {
 
         setTimeout(function(){
             $('#custom-filter').appendTo('.dataTables_filter');
-        }, 2000);
+        }, 1000);
 
 
 

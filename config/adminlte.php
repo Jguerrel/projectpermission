@@ -716,6 +716,17 @@ return [
                     'asset' => false,
                     'location' => 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css',
                 ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/users/animate/style.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '/vendor/users/animate/estilo.js',
+                ],
+
             ],
 
         ]

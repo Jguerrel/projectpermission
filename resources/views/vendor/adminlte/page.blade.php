@@ -14,8 +14,9 @@
 @section('body_data', $layoutHelper->makeBodyData())
 
 @section('body')
-    <div class="wrapper" >
 
+    <div class="wrapper" >
+       <div id="snow-container"></div>
         {{-- Preloader Animation --}}
         @if($layoutHelper->isPreloaderEnabled())
             @include('adminlte::partials.common.preloader')
@@ -51,6 +52,8 @@
         @endif
 
     </div>
+
+
 @stop
 
 @section('adminlte_js')
