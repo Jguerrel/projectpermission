@@ -66,7 +66,7 @@ class DeviceController extends Controller
 
                 if ($user->can('editar-dispositivos'))
                 {
-                    $btn =$btn.'<a href="'.route("devices.edit",$device->id).'" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</a>';
+                    $btn =$btn.'<a href="'.route("devices.edit",$device->id).'" class="btn btn-info btn-sm" id="editar"><i class="fas fa-pencil-alt"></i> Editar</a>';
                 }
                 if ($user->can('eliminar-dispositivos'))
                 {
@@ -76,7 +76,7 @@ class DeviceController extends Controller
                 if ($device->typedevice_id==3)
                 {
 
-                    $btn =$btn.'<a type="submit" class="btn btn-success btn-sm" href="https://'. $device->ipaddress->ip.'" target="_blank"><i class="fas fa-link"></i> Ir</a>';
+                    $btn =$btn.'<a type="submit"  class="btn btn-success btn-sm" href="https://'. $device->ipaddress->ip.'" target="_blank"><i class="fas fa-link"></i> Ir</a>';
 
                 }
                 if ($device->typedevice_id==1 or $device->typedevice_id==2 )

@@ -81,6 +81,7 @@ $(function () {
                 pageLength: 10,
            processing: true,
            scrollX: true,
+           statesave: true,
            scrollY: '50vh', // Altura fija de la tabla
            scrollCollapse: true,
            autoWidth: false,
@@ -94,6 +95,8 @@ $(function () {
                 data:function(d)
                   {
                     d.sucursal = $('#sucursal').val();
+                    d.filtro = sessionStorage.getItem('datatable_filter') || '';
+
                   },
                  error : function(xhr, textStatus, errorThrown){
 
@@ -133,13 +136,42 @@ $(function () {
        // Ocultar el mensaje después de 5 segundos (5000 milisegundos)
         setTimeout(function() {
             $('#success-message').fadeOut('slow');
-        }, 2000); // Cambiar 5000 por el número de milisegundos que desees
+
+        }, 1500); // Cambiar 5000 por el número de milisegundos que desees
 
         setTimeout(function(){
             $('#custom-filter').appendTo('.dataTables_filter');
+            const filters = JSON.parse(localStorage.getItem('filters'));
+            if (filters && filters.name) {
+            document.getElementById("#sucursal").value  =filters.sucursal;
+
+            }
+            document.getElementById('editar').addEventListener('click', function() {
+                saveFilters(); // Llama a la función prueba
+            });
+
         }, 1000);
 
 
+
+                // Guardar filtros
+            function saveFilters() {
+                const filters = {
+                    name: document.querySelector('.dataTables_filter input').value,
+                    sucursal: document.querySelector('#sucursal').value,
+                };
+                localStorage.setItem('filters', JSON.stringify(filters));
+            }
+
+            // Recuperar filtros al cargar la página
+            document.addEventListener('DOMContentLoaded', () => {
+                const filters = JSON.parse(localStorage.getItem('filters'));
+
+                alert(JSON.stringify(filters));
+                if (filters && filters.name) {
+                    document.querySelector('input[name="name"]').value = filters.name;
+                }
+            });
 
 });
 </script>
