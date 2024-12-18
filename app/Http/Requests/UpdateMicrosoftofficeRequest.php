@@ -22,7 +22,7 @@ class UpdateMicrosoftofficeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required',Rule::unique('microsoftoffice','name')->ignore($this->microsoftoffice)]
+            'name' => ['required',Rule::unique('microsoftoffices','name')->ignore($this->microsoftoffice)]
 
         ];
     }
