@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 class UpdateMicrosoftofficeRequest extends FormRequest
 {
     /**
@@ -11,7 +11,7 @@ class UpdateMicrosoftofficeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,24 @@ class UpdateMicrosoftofficeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required',Rule::unique('microsoftoffice','name')->ignore($this->microsoftoffice)]
+
+        ];
+    }
+    public function messages()
+    {
+        return [
+
+            'name.required' => 'El :attribute es obligatorio.',
+            'name.unique' => 'El :attribute ya existe.',
+        ];
+
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'Office ',
         ];
     }
 }
