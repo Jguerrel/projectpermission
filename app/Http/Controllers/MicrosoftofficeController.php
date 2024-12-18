@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Microsoftoffice;
 use App\Http\Requests\StoreMicrosoftofficeRequest;
 use App\Http\Requests\UpdateMicrosoftofficeRequest;
-
+use Illuminate\Support\Facades\Redirect;
 class MicrosoftofficeController extends Controller
 {
 
@@ -119,8 +119,14 @@ class MicrosoftofficeController extends Controller
      */
     public function destroy(Microsoftoffice $microsoftoffice)
     {
+        if($microsoftoffice->Devices->count()>=1)
+        {
+            return redirect()->route('microsoftoffices.index')
+                              ->withErrors('No se puede eliminar el office, tiene dispositivos asociadas');
+
+        }
         $microsoftoffice->delete();
-        return redirect()->route('microsoftoffices.index')
-                ->withSuccess('Office ha sido eliminado correctamente');
+            return redirect()->route('microsoftoffices.index')
+                              ->withSuccess('Office ha sido eliminado correctamente');
     }
 }
