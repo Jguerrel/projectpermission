@@ -119,8 +119,8 @@ class IpaddressController extends Controller
 
         $ipaddress->update($input);
 
-        return redirect()->route('branchoffices.index')
-                ->withSuccess('Sucursal ha sido actualizada correctamente.');
+        return redirect()->route('ipaddresses.index')
+                ->withSuccess('Direccion IP ha sido actualizada correctamente.');
     }
 
     /**
@@ -130,6 +130,6 @@ class IpaddressController extends Controller
     {
         $ipaddress->delete();
         return redirect()->route('ipaddresses.index')
-                ->withSuccess('Direccion ha sido eliminado correctamente');
+                ->withSuccess('Direccion ip ha sido eliminado correctamente');
     }
 }

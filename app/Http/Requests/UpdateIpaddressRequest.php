@@ -23,7 +23,13 @@ class UpdateIpaddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ip'=>'required|unique:ipaddresses,ip|string',
+            'ip' => [
+                'required',
+                'ip', // Valida que sea una dirección IP válida
+                Rule::unique('ipaddresses')->where(function ($query) {
+                    return $query->where('branch_office_id', $this->branch_office_id);
+                })->ignore($this->route('ipaddress')),
+            ],
             'branch_office_id' => 'required|exists:branch_offices,id',
         ];
     }
@@ -31,8 +37,10 @@ class UpdateIpaddressRequest extends FormRequest
     {
         return [
             'ip.required' => 'El :attribute es obligatorio.',
-            'branch_office_id.required' => 'El :attribute es obligatorio.',
-            'ip.unique' => 'El :attribute ya existe.',
+            'ip.unique' => 'La combinacion de IP y Oficina ya existe.',
+            'ip.ipv4' => 'El :attribute debe ser un ip valido.',
+            'branch_office_id.exists' => 'El :attribute es obligatorio.',
+            'branch_office_id.required' => 'El :attribute es obligatorio.'
         ];
 
     }

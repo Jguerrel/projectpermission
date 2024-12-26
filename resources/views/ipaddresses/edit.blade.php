@@ -34,17 +34,17 @@
                         <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">IP</label>
                             <div class="col-md-6">
-                            <input type="text" class="form-control @error('ip') is-invalid @enderror" id="ip" name="ip" value="{{ $ipaddress->ip }}">
-                                @if ($errors->has('ip'))
-                                    <span class="text-danger">{{ $errors->first('ip') }}</span>
-                                @endif
+                            <input type="text" class="form-control @error('ip') is-invalid @enderror" required id="ip" name="ip" value="{{ $ipaddress->ip }}">
+                                 @if ($errors->has('ip'))
+                                        <span class="text-danger">{{ $errors->first('ip')}}</span>
+                                    @endif
                             </div>
                         </div>
 
                         <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Sucursal</label>
                             <div class="col-md-6">
-                            <select class="form-control js-example-basic-single select2 @error('branchoffices') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="branches" id="branch_id" name="branch_id">
+                            <select class="form-control js-example-basic-single select2 @error('branchoffices') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="branches" id="branch_id" name="branch_office_id">
                                         <option value="" disabled selected>Seleccione Item</option>
                                         @foreach ($branch_offices  as $branch_office)
                                          <option value="{{ $branch_office->id }}"  {{ $ipaddress->branch_office->id == $branch_office->id ? 'selected' : '' }}>
@@ -55,8 +55,6 @@
                                    </select>
                         </div>
                       </div>
-
-
                     <div class="mb-3 row">
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-info" value="Actualizar">
                     </div>

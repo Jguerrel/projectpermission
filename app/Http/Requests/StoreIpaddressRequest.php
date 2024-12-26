@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 class StoreIpaddressRequest extends FormRequest
 {
     /**
@@ -23,14 +23,20 @@ class StoreIpaddressRequest extends FormRequest
     {
         return [
 
-            'ip'=>'required|ipv4|unique:ipaddresses,ip|string',
+            'ip' => [
+                'required',
+                'ip', // Valida que sea una dirección IP válida
+                Rule::unique('ipaddresses','ip')->where(function ($query) {
+                    return $query->where('branch_office_id', $this->branch_office_id);
+                })->ignore($this->route('ipaddress')),
+            ],
             'branch_office_id' => 'required|exists:branch_offices,id',
         ];
     }
     public function messages()
     {
         return [
-            'ip.required' => 'El :attribute es obligatorio.',
+            'ip.unique' => 'La combinación de IP y Oficina ya existe.',
             'branch_office_id.required' => 'El :attribute es obligatorio.',
             'ip.unique' => 'El :attribute ya existe.',
             'ip.ipv4' => 'El :attribute debe ser un ip valido.',
