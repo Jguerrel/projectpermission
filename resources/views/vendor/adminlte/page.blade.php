@@ -16,7 +16,7 @@
 @section('body')
 
     <div class="wrapper" >
-       <div id="snow-container"></div>
+     <!-- <div id="snow-container"></div> -->
         {{-- Preloader Animation --}}
         @if($layoutHelper->isPreloaderEnabled())
             @include('adminlte::partials.common.preloader')
