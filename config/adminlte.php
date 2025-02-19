@@ -315,6 +315,18 @@ return [
         //     'can'         => 'ver-departamentos',
         // ],
         [
+            'text' => 'Tallas',
+            'url'  => 'admin/sizes',
+            'icon'    => 'fas fa-fw fa-up-right-and-down-left-from-center ',
+            'can'         => 'ver-tallas',
+        ],
+        [
+            'text' => 'Uniformes',
+            'url'  => 'admin/uniforms',
+            'icon'    => 'fas fa-fw fa-up-right-and-down-left-from-center ',
+            'can'         => 'ver-uniformes',
+        ],
+        [
             'text' => 'Departamentos',
             'url'  => 'admin/departments',
             'icon'    => 'fas fa-fw fa-building ',
@@ -721,11 +733,7 @@ return [
                     'asset' => true,
                     'location' => 'vendor/users/animate/style.css',
                 ],
-                [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '/vendor/users/animate/estilo.js',
-                ],
+
 
             ],
 

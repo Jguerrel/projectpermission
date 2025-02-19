@@ -24,6 +24,20 @@
        @can('crear-cuentas')
             <a href="{{ route('accounts.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
+
+        <div class="card my-2 col-md-4">
+
+                <div class="form-group">
+                    <label><strong>Filter by Estado :</strong></label>
+                    <select id='status' class="form-control" >
+                        <option value="">Select Status</option>
+                        <option value="1">Active</option>
+                        <option value="0">Deactive</option>
+                    </select>
+                </div>
+
+        </div>
+
         <table class="table table-striped table-bordered dataTable dtr-inline" id='cuentas'>
         <thead>
                 <tr>

@@ -19,6 +19,8 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CarModelController;
 use App\Http\Controllers\OperatingSystemController;
 use App\Http\Controllers\MicrosoftofficeController;
+use App\Http\Controllers\SizeController;
+use App\Http\Controllers\UniformController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LoginUsersController;
 use App\Http\Controllers\DiskstorageController;
@@ -70,6 +72,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::resource('carmodels',CarModelController::class);
     Route::resource('operatingsystems',OperatingSystemController::class);
     Route::resource('microsoftoffices',MicrosoftofficeController::class);
+    Route::resource('sizes',SizeController::class);
+    Route::resource('uniforms',UniformController::class);
     //Route::resource('newsletters',NewsletterController::class);
     Route::resource('diskstorages',DiskstorageController::class);
     /*Paginacion*/
@@ -92,6 +96,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::post('/cargarfacturamultiplepost', [DeviceController::class, 'cargarfacturamultiplepost'])->name('devices.cargarfacturamultiplepost');
     Route::get('/reset-password', [PasswordController::class, 'edit'])->name('password.edit');
     Route::post('/reset-password', [PasswordController::class, 'update'])->name('password.update');
+   // Route::get('sizes', [SizeController::class, 'index'])->name('sizes.index');
 });
 
 //Rutas de paginacion////

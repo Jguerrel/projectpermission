@@ -7,7 +7,7 @@ use Illuminate\View\View;
 use App\Http\Requests\UpdateDepartamentoRequest;
 use Illuminate\Http\RedirectResponse;
 use App\http\Requests\StoreDepartamentoRequest;
-
+use Illuminate\Support\Facades\Log;
 
 class DepartmentController extends Controller
 {
@@ -92,6 +92,14 @@ class DepartmentController extends Controller
     public function update(UpdateDepartamentoRequest $request, Department $department): RedirectResponse
     {
         $department->update($request->all());
+
+        Log::channel('Registro actualizado en la tabla users:', [
+            'id' => $department->id,
+            'name' => $department->name,
+            'email' => $user->email,
+            'updated_at' => $user->updated_at
+        ]);
+
         return redirect()->route('departments.index')
                 ->withSuccess('Departamento ha sido actualizado correctamente.');
     }
