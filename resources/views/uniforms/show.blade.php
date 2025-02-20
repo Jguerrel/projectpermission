@@ -62,9 +62,9 @@
                                         <thead>
                                             <tr>
                                                 <th>Talla</th>
-                                                <th>Tamaño</th>
-                                                <th>Stock</th>
                                                 <th>Existencia</th>
+                                                <th>Salidas</th>
+                                                <th>Stock</th>
                                             </tr>
                                         </thead>
                                         <tbody>
