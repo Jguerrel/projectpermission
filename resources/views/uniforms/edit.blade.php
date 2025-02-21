@@ -73,10 +73,10 @@
                                             <td>
                                             <button type="button" class="btn btn-remove" onclick="quitarDetalle(this)"><i class="fa fa-xmark"></i></button>
                                             </td>
-                                            <td> <input type="text" class="form-control @error('status') is-invalid @enderror" name="levels[{{ $i }}][size]" placeholder="Talla" value="{{$level->size}}" required></td>
-                                            <td><input type="number" class="form-control @error('status') is-invalid @enderror" name="levels[{{ $i }}][existence]" placeholder="Existencia"  value="{{$level->existence}}" required></td>
-                                            <td><input type="number" class="form-control @error('status') is-invalid @enderror" name="levels[{{ $i }}][departure]" placeholder="Salidas"  value="{{$level->departure}}" required></td>
-                                            <td><input type="number" class="form-control @error('status') is-invalid @enderror" name="levels[{{ $i }}][stock]" placeholder="Stock"   value="{{$level->stock}}" required></td>
+                                            <td> <input type="text" class="form-control @error('status') is-invalid @enderror" name="levels[{{ $i }}][size]" placeholder="Talla" value="{{$level->size}}"  required></td>
+                                            <td><input type="number"  id='existencia'  class=" existencia form-control @error('status') is-invalid @enderror " name="levels[{{ $i }}][existence]" placeholder="Existencia"  value="{{$level->existence}}" required></td>
+                                            <td><input type="number" id ='salidas' class="salidas form-control @error('status') is-invalid @enderror " name="levels[{{ $i }}][departure]" placeholder="Salidas"  value="{{$level->departure}}"   required></td>
+                                            <td><input type="number"  id="existencia_restante" class="existencia_restante form-control @error('status') is-invalid @enderror stock" name="levels[{{ $i }}][stock]" placeholder="Stock"   value="{{$level->existence-$level->departure}}" required readonly></td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -104,10 +104,10 @@
                 <td>
                 <button type="button" class="btn btn-remove" onclick="quitarDetalle(this)"><i class="fa fa-xmark"></i></button>
                 </td>
-                <td> <input type="text" class="form-control @error('status') is-invalid @enderror" name="levels[${index}][size]" placeholder="Talla"  required></td>
-                <td><input type="number" class="form-control @error('status') is-invalid @enderror" name="levels[${index}][existence]" placeholder="Existencia"   required></td>
-                <td><input type="number" class="form-control @error('status') is-invalid @enderror" name="levels[${index}][departure]" placeholder="Salidas"   required></td>
-                <td><input type="number" class="form-control @error('status') is-invalid @enderror" name="levels[${index}][stock]" placeholder="Stock"    required></td>
+                <td> <input type="text"  class="form-control @error('status') is-invalid @enderror" name="levels[${index}][size]" placeholder="Talla"   required></td>
+                <td><input type="number"  id='existencia' class="existencia form-control @error('status') is-invalid @enderror" name="levels[${index}][existence]" placeholder="Existencia"  value=0 required></td>
+                <td><input type="number" id ='salidas' class="salidas form-control @error('status') is-invalid @enderror" name="levels[${index}][departure]" placeholder="Salidas" value=0  required></td>
+                <td><input type="number"  id="existencia_restante" class="stock form-control @error('status') is-invalid @enderror" name="levels[${index}][stock]" placeholder="Stock"  value=0   required readonly></td>
 
             `;
             tbody.appendChild(row);
@@ -117,5 +117,28 @@
         function quitarDetalle(button) {
             button.closest('tr').remove();
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector("table").addEventListener("input", function (event) {
+        if (event.target.tagName === "INPUT") {
+            let row = event.target.closest("tr"); // Obtiene la fila actual
+
+            let existencia = parseFloat(row.querySelector(".existencia")?.value) || 0;
+            let salidas = parseFloat(row.querySelector(".salidas")?.value) || 0;
+            let stockInput = row.querySelector(".stock");
+
+            if (stockInput) {
+                stockInput.value = existencia - salidas; // Calcula stock automáticamente
+            }
+
+            console.log("Valores de la fila:");
+            console.log("Talla:", row.querySelector(".size")?.value);
+            console.log("Existencia:", existencia);
+            console.log("Salidas:", salidas);
+            console.log("Stock:", stockInput?.value);
+        }
+    });
+});
+
  </script>
 @endsection

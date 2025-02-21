@@ -73,7 +73,7 @@
                                                     <td>{{ $level->size }}</td>
                                                     <td>{{ $level->existence }}</td>
                                                     <td>{{ $level->departure }}</td>
-                                                    <td>{{ $level->stock }}</td>
+                                                    <td>{{ $level->existence-$level->departure }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

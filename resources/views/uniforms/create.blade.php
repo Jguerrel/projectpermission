@@ -55,31 +55,43 @@
                             <div class="card-header">
                                     <h3 class="card-title">Detalle</h3>
                             </div>
-                                <div class="card-body" id ='detalles'>
-                                    <div class="mb-3 row">
-                                            <button type="button" class="btn btn-remove" onclick="quitarDetalle(this)"><i class="fa fa-xmark"></i></button>
-                                            <div class="col-md-2">
-                                                <input type="text" class="form-control @error('status') is-invalid @enderror" name="uniformlevels[0][size]" placeholder="Talla" required>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <input type="text" class="form-control @error('status') is-invalid @enderror" name="uniformlevels[0][existence]" placeholder="Existencia" required>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <input type="text" class="form-control @error('status') is-invalid @enderror" name="uniformlevels[0][departure]" placeholder="Salidas" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="text" class="form-control @error('status') is-invalid @enderror" name="uniformlevels[0][stock]" placeholder="Stock" required>
-                                            </div>
 
-                                    </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="table-info">
+                                            <tr>
+                                                <th>Acción</th>
+                                                <th>Talla</th>
+                                                <th>Existencia</th>
+                                                <th>Salidas</th>
+                                                <th>Stock</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="detalles">
+
+                                            <tr>
+                                                <td>
+                                                <button type="button" class="btn btn-remove" onclick="quitarDetalle(this)"><i class="fa fa-xmark"></i></button>
+                                                </td>
+                                                <td> <input type="text" class="form-control @error('status') is-invalid @enderror" name="uniformlevels[0][size]" placeholder="Talla" required></td>
+                                                <td><input type="number" class="existencia form-control @error('status') is-invalid @enderror" name="uniformlevels[0][existence]" placeholder="Existencia" required></td>
+                                                <td><input type="number" class="salidas form-control @error('status') is-invalid @enderror" name="uniformlevels[0][departure]" placeholder="Salidas" required></td>
+                                                <td><input type="number" class="stock form-control @error('status') is-invalid @enderror" name="uniformlevels[0][stock]" placeholder="Stock" required readonly></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
                                 </div>
+
+
                         </div>
-                    <div class=" col-md-1">
-                        <button type="button" class="btn btn-block btn-outline-info btn-xs" onclick="agregarDetalle()"><i class="fa fa-plus"></i>NUEVA LINEA</button>
-                    </div>
-                    <div class="mb-3 row">
-                        <input type="submit" class="col-md-3 offset-md-5 btn btn-info" value="Confirmar">
-                    </div>
+                        <div class=" col-md-1">
+                            <button type="button" class="btn btn-block btn-outline-info btn-xs" onclick="agregarDetalle()"><i class="fa fa-plus"></i>NUEVA LINEA</button>
+                        </div>
+                        <div class="mb-3 row">
+                            <input type="submit" class="col-md-3 offset-md-5 btn btn-info" value="Confirmar">
+                        </div>
 
                 </form>
             </div>
@@ -91,21 +103,46 @@
 <script>
         let index = 1;
         function agregarDetalle() {
-            let div = document.createElement('div');
-            div.innerHTML = `
-            <div class="mb-3 row">
-            <div class="col-md-3"><input type="text"  class="form-control @error('status') is-invalid @enderror" name="uniformlevels[${index}][size]" placeholder="Talla" required></div>
-            <div class="col-md-3"><input type="text"  class="form-control @error('status') is-invalid @enderror" name="uniformlevels[${index}][existence]" placeholder="Existencia" required></div>
-            <div class="col-md-3"><input type="text"  class="form-control @error('status') is-invalid @enderror" name="uniformlevels[${index}][departure]" placeholder="Salidas" required></div>
-            <div class="col-md-3"><input type="text"  class="form-control @error('status') is-invalid @enderror" name="uniformlevels[${index}][stock]" placeholder="Stock" required></div>
-            </div>
+            let tbody = document.getElementById('detalles');
+            let row = document.createElement('tr');
+            row.innerHTML =`
+
+                <td>
+                <button type="button" class="btn btn-remove" onclick="quitarDetalle(this)"><i class="fa fa-xmark"></i></button>
+                </td>
+                <td> <input type="text"  class="form-control @error('status') is-invalid @enderror" name="levels[${index}][size]" placeholder="Talla"   required></td>
+                <td><input type="number"  id='existencia' class="existencia form-control @error('status') is-invalid @enderror" name="levels[${index}][existence]" placeholder="Existencia"  value=0 required></td>
+                <td><input type="number" id ='salidas' class="salidas form-control @error('status') is-invalid @enderror" name="levels[${index}][departure]" placeholder="Salidas" value=0  required></td>
+                <td><input type="number"  id="existencia_restante" class="stock form-control @error('status') is-invalid @enderror" name="levels[${index}][stock]" placeholder="Stock"  value=0   required readonly></td>
+
             `;
-            document.getElementById('detalles').appendChild(div);
+            tbody.appendChild(row);
             index++;
         }
+
 
         function quitarDetalle(button) {
             button.parentElement.remove();
         }
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector("table").addEventListener("input", function (event) {
+        if (event.target.tagName === "INPUT") {
+            let row = event.target.closest("tr"); // Obtiene la fila actual
+
+            let existencia = parseFloat(row.querySelector(".existencia")?.value) || 0;
+            let salidas = parseFloat(row.querySelector(".salidas")?.value) || 0;
+            let stockInput = row.querySelector(".stock");
+
+            if (stockInput) {
+                stockInput.value = existencia - salidas; // Calcula stock automáticamente
+            }
+
+s
+        }
+    });
+});
  </script>
 @endsection
