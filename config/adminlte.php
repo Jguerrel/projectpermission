@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/LogoBahiaMotors.png',
+            'path' => 'vendor/adminlte/dist/img/icono_logo.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
