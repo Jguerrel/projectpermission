@@ -24,18 +24,18 @@ class ForgotPasswordController extends Controller
     use SendsPasswordResetEmails;
 
     protected function sendResetLinkEmail(Request $request)
-{
-    $request->validate(['email' => 'required|email']);
+    {
+        $request->validate(['email' => 'required|email']);
 
-    $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
 
-    if ($user) {
-        $token = app('auth.password.broker')->createToken($user);
+        if ($user) {
+            $token = app('auth.password.broker')->createToken($user);
 
-        // Enviar el correo con el nuevo Mailable
-        Mail::to($user->email)->send(new CustomResetPasswordMail($user, $token));
+            // Enviar el correo con el nuevo Mailable
+            Mail::to($user->email)->send(new CustomResetPasswordMail($user, $token));
+        }
+
+        return back()->with('status', 'We have emailed your password reset link!');
     }
-
-    return back()->with('status', 'We have emailed your password reset link!');
-}
 }

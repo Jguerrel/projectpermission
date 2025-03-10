@@ -31,7 +31,7 @@ class CustomResetPasswordMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Noptificacion de cambio de contraseña',
+            subject: 'Notificacion de cambio de contraseña',
         );
     }
 
@@ -41,7 +41,7 @@ class CustomResetPasswordMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.passwords.reset',
         );
     }
 
@@ -53,5 +53,16 @@ class CustomResetPasswordMail extends Mailable
     public function attachments(): array
     {
         return [];
+    }
+
+
+    public function build()
+    {
+        return $this->subject('Restablecimiento de Contraseña')
+                    ->view('emails.passwords.reset') // Verifica que esta vista exista
+                    ->with([
+                        'resetUrl' => url(route('password.reset', ['token' => $this->token])),
+                        'user' => $this->user
+                    ]);
     }
 }
