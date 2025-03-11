@@ -95,7 +95,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::get('/cargarfacturamultiple', [DeviceController::class, 'cargarfacturamultiple'])->name('devices.cargarfacturamultiple');
     Route::post('/cargarfacturamultiplepost', [DeviceController::class, 'cargarfacturamultiplepost'])->name('devices.cargarfacturamultiplepost');
     Route::get('/reset-password', [PasswordController::class, 'edit'])->name('password.edit');
-    Route::post('/reset-password', [PasswordController::class, 'update'])->name('password.update');
+    //Route::post('/reset-password', [PasswordController::class, 'update'])->name('password.update');
    // Route::get('sizes', [SizeController::class, 'index'])->name('sizes.index');
 });
 
