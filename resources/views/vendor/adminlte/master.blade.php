@@ -112,6 +112,101 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
+    {{-- Fuegos artificiales globales --}}
+<canvas id="fireworks"></canvas>
+
+<style>
+  #fireworks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* no bloquea clics */
+    z-index: 9999; /* siempre encima */
+  }
+</style>
+
+<script>
+
+  const PANAMA_COLORS = ['#d21034', '#0050a4', '#ffffff']; // rojo, azul, blanco (tonos oficiales aprox.)
+  const pickColor = () => PANAMA_COLORS[Math.floor(Math.random() * PANAMA_COLORS.length)];
+
+  const canvas = document.getElementById('fireworks');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  function random(min, max) { return Math.random() * (max - min) + min; }
+
+  let fireworks = [];
+
+  function Firework(x, y) {
+    this.x = x;
+    this.y = y;
+    this.particles = [];
+    for (let i = 0; i < 100; i++) {
+      this.particles.push({
+        x, y,
+        angle: random(0, Math.PI * 2),
+        speed: random(2, 8),
+        radius: 2,
+        opacity: 1,
+       // color: `hsl(${random(0, 360)},100%,60%)`
+        color: pickColor()
+      });
+    }
+  }
+
+  Firework.prototype.update = function() {
+    this.particles.forEach(p => {
+      p.x += Math.cos(p.angle) * p.speed;
+      p.y += Math.sin(p.angle) * p.speed;
+      p.opacity -= 0.02;
+    });
+    this.particles = this.particles.filter(p => p.opacity > 0);
+  };
+
+  Firework.prototype.draw = function() {
+    this.particles.forEach(p => {
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.opacity;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+  };
+
+  function animate() {
+    requestAnimationFrame(animate);
+    // ctx.fillStyle = 'rgba(0,0,0,0.1)';
+    // ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // AGREGA esta línea
+     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // probabilidad de crear un nuevo fuego
+    if (Math.random() < 0.05) {
+      fireworks.push(new Firework(random(100, canvas.width - 100), random(100, canvas.height / 2)));
+    }
+
+    fireworks.forEach(fw => {
+      fw.update();
+      fw.draw();
+    });
+    fireworks = fireworks.filter(fw => fw.particles.length > 0);
+  }
+
+  animate();
+
+  // Ajuste al redimensionar
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+{{-- Fin de fuegos artificiales --}}
 
 </body>
 
