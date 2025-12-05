@@ -21,7 +21,6 @@
 
     {{-- Custom stylesheets (pre AdminLTE) --}}
     @yield('adminlte_css_pre')
-
     {{-- Base Stylesheets --}}
     @if(!config('adminlte.enabled_laravel_mix'))
 
@@ -78,6 +77,7 @@
 
     <script src="{{ asset('vendor/adminlte/dist/js/jquery-3.7.1.slim.min.js') }}"></script>
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
@@ -94,6 +94,7 @@
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/JQuery-Snowfall/1.7.4/snowfall.jquery.min.js"></script>
             @else
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
     @endif
@@ -115,7 +116,20 @@
     {{-- Fuegos artificiales globales --}}
 <canvas id="fireworks"></canvas>
 
-<style>
+
+<script>
+    // Se ejecuta el efecto de nieve en el cuerpo de la página
+    $(document).ready(function() {
+        $('body').snowfall({
+            flakeCount: 100, // Número de copos de nieve
+            minSize: 1,      // Tamaño mínimo (píxeles)
+            maxSize: 5,      // Tamaño máximo (píxeles)
+            shadow: false,   // Desactivar sombra para mejor rendimiento
+            round: true      // Copos redondos
+        });
+    });
+</script>
+<!-- <style>
   #fireworks {
     position: fixed;
     top: 0;
@@ -206,7 +220,7 @@
     canvas.height = window.innerHeight;
   });
 </script>
-{{-- Fin de fuegos artificiales --}}
+{{-- Fin de fuegos artificiales --}} -->
 
 </body>
 
