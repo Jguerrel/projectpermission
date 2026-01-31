@@ -113,22 +113,22 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
-    {{-- Fuegos artificiales globales --}}
-<canvas id="fireworks"></canvas>
+    <!-- {{-- Fuegos artificiales globales --}}
+<canvas id="fireworks"></canvas> -->
 
 
-<script>
+<!-- <script>
     // Se ejecuta el efecto de nieve en el cuerpo de la página
     $(document).ready(function() {
         $('body').snowfall({
             flakeCount: 100, // Número de copos de nieve
-            minSize: 1,      // Tamaño mínimo (píxeles)
-            maxSize: 5,      // Tamaño máximo (píxeles)
+            minSize: 6,      // Tamaño mínimo (píxeles)
+            maxSize: 12,      // Tamaño máximo (píxeles)
             shadow: false,   // Desactivar sombra para mejor rendimiento
             round: true      // Copos redondos
         });
     });
-</script>
+</script> -->
 <!-- <style>
   #fireworks {
     position: fixed;
