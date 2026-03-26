@@ -22,7 +22,7 @@
     <!-- <div class="card-header">Manage Roles</div> -->
     <div class="card-body">
         @can('crear-roles')
-            <a href="{{ route('roles.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
+            <a href="{{ route('roles.create') }}" class="btn btn-sidebar btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
         <table class="table table-striped table-bordered datatable dtr-inline" id ="roles">
             <thead>

@@ -37,12 +37,24 @@ class DiskstorageController extends Controller
     }
 
     /*Paginacion de datos*/
-    public function pagination()
+    public function pagination(\Illuminate\Http\Request $request)
     {
         $user = Auth()->user();
         if(request()->ajax()) {
-
-	        return Datatables()->of(Diskstorage::select('*'))
+            $data = Diskstorage::select('*');
+            if ($request->filled('name')) {
+                $data->where('name', 'like', '%' . $request->name . '%');
+            }
+            if ($request->filled('name_sw')) {
+                $data->where('name', 'like', $request->name_sw . '%');
+            }
+            if ($request->filled('name_nc')) {
+                $data->where('name', 'not like', '%' . $request->name_nc . '%');
+            }
+            if ($request->filled('status')) {
+                $data->where('status', $request->status);
+            }
+	        return Datatables()->of($data)
             ->editColumn('status', function(Diskstorage $diskstorage) {
                 return  '<span class="text-'. ($diskstorage->status ? 'success' : 'danger') .'">'. ($diskstorage->status ? 'Activo' : 'Inactivo').'</span>';
             })

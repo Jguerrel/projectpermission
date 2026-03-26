@@ -36,12 +36,30 @@ class IpaddressController extends Controller
 
     }
 
-    public function pagination()
+    public function pagination(Request $request)
     {
         $user = Auth()->user();
         if(request()->ajax()) {
-
-	        return Datatables()->of(Ipaddress::with('branch_office')->select('*'))
+            $data = Ipaddress::with('branch_office')->select('*');
+            if ($request->filled('ip')) {
+                $data->where('ip', 'like', '%' . $request->ip . '%');
+            }
+            if ($request->filled('ip_sw')) {
+                $data->where('ip', 'like', $request->ip_sw . '%');
+            }
+            if ($request->filled('ip_nc')) {
+                $data->where('ip', 'not like', '%' . $request->ip_nc . '%');
+            }
+            if ($request->filled('sucursal')) {
+                $data->whereHas('branch_office', fn($q) => $q->where('name', 'like', '%' . $request->sucursal . '%'));
+            }
+            if ($request->filled('sucursal_sw')) {
+                $data->whereHas('branch_office', fn($q) => $q->where('name', 'like', $request->sucursal_sw . '%'));
+            }
+            if ($request->filled('sucursal_nc')) {
+                $data->whereHas('branch_office', fn($q) => $q->where('name', 'not like', '%' . $request->sucursal_nc . '%'));
+            }
+	        return Datatables()->of($data)
 	        ->addColumn('action', function (Ipaddress $ipaddress) use ($user) {
 
                 $btn = '<form action='.route("ipaddresses.destroy",$ipaddress->id).' method="post"><input type="hidden" name="_token"  value=" '.csrf_token().' " autocomplete="off"><input type="hidden" name="_method" value="DELETE">';

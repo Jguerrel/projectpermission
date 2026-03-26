@@ -21,20 +21,22 @@
 <div class="card card-info card-outline">
     <div class="card-body ">
          @can('crear-dispositivos')
-            <a href="{{ route('devices.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
-            <a href="{{ route('devices.cargarfacturamultiple') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Cargar Factura</a>
+            <a href="{{ route('devices.create') }}" class="btn btn-sidebar btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
                      @if(session('success'))
                         <div class="alert alert-success" id='success-message'>
                             {{ session('success') }}
                         </div>
                     @endif
-                    <div id="custom-filter">
-                        <label for="filter-by-sucursal">Sucursal:</label>
-                        <input type="text" id="sucursal" name='sucursal' placeholder="Sucursal">
-                    </div>
+                    <x-dynamic-filter
+                        table-id="dispositivos"
+                        :filters="[
+                            ['id' => 'sucursal', 'label' => 'Sucursal', 'type' => 'text', 'placeholder' => 'Buscar sucursal...'],
+                            ['id' => 'status',   'label' => 'Estado',   'type' => 'select', 'options' => ['' => 'Todos', '1' => 'Activo', '0' => 'Inactivo']],
+                        ]"
+                    />
 
-                    <table class="table table-striped table-hover table-bordered table-sm dataTable dtr-inline fixed " style ='overflow-x: auto;' id ="dispositivos">
+                    <table class="table table-striped table-hover table-bordered table-sm fixed " style ='overflow-x: auto;' id ="dispositivos">
                         <thead>
                             <tr>
                             <th scope="col">#</th>
@@ -92,12 +94,9 @@ $(function () {
             ajax: {
                 url: "{{ route('devices.pagination') }}",
                 type: "GET",
-                data:function(d)
-                  {
-                    d.sucursal = $('#sucursal').val();
-                    d.filtro = sessionStorage.getItem('datatable_filter') || '';
-
-                  },
+                data: function(d) {
+                    $.extend(d, window.getTableFilters('dispositivos'));
+                },
                  error : function(xhr, textStatus, errorThrown){
 
                     console.log('error'+JSON.stringify(xhr))
@@ -127,51 +126,10 @@ $(function () {
        }).buttons().container().appendTo('#dispositivos_wrapper .col-md-6:eq(1)')
 
 
-       $('#sucursal').keyup(function() {
-
-            table= $('#dispositivos').DataTable().ajax.reload();
-        });
-
-
-       // Ocultar el mensaje después de 5 segundos (5000 milisegundos)
+       // Ocultar el mensaje de éxito después de 1.5 segundos
         setTimeout(function() {
             $('#success-message').fadeOut('slow');
-
-        }, 1500); // Cambiar 5000 por el número de milisegundos que desees
-
-        setTimeout(function(){
-            $('#custom-filter').appendTo('.dataTables_filter');
-            const filters = JSON.parse(localStorage.getItem('filters'));
-            if (filters && filters.name) {
-            document.getElementById("#sucursal").value  =filters.sucursal;
-
-            }
-            document.getElementById('editar').addEventListener('click', function() {
-                saveFilters(); // Llama a la función prueba
-            });
-
-        }, 1000);
-
-
-
-                // Guardar filtros
-            function saveFilters() {
-                const filters = {
-                    name: document.querySelector('.dataTables_filter input').value,
-                    sucursal: document.querySelector('#sucursal').value,
-                };
-                localStorage.setItem('filters', JSON.stringify(filters));
-            }
-
-            // Recuperar filtros al cargar la página
-            document.addEventListener('DOMContentLoaded', () => {
-                const filters = JSON.parse(localStorage.getItem('filters'));
-
-                alert(JSON.stringify(filters));
-                if (filters && filters.name) {
-                    document.querySelector('input[name="name"]').value = filters.name;
-                }
-            });
+        }, 1500);
 
 });
 </script>

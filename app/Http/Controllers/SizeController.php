@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Size;
 use Illuminate\Http\Request;
+
 use Illuminate\View\View;
 use App\http\Requests\StoreSizeRequest;
 
@@ -23,12 +24,24 @@ class SizeController extends Controller
      }
 
 
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth()->user();
         if(request()->ajax()) {
-
-	        return Datatables()->of(Size::select('*'))
+            $data = Size::select('*');
+            if ($request->filled('name')) {
+                $data->where('name', 'like', '%' . $request->name . '%');
+            }
+            if ($request->filled('name_sw')) {
+                $data->where('name', 'like', $request->name_sw . '%');
+            }
+            if ($request->filled('name_nc')) {
+                $data->where('name', 'not like', '%' . $request->name_nc . '%');
+            }
+            if ($request->filled('status')) {
+                $data->where('status', $request->status);
+            }
+	        return Datatables()->of($data)
             ->editColumn('status', function(Size $size) {
                 return  '<span class="text-'. ($size->status ? 'success' : 'danger') .'">'. ($size->status ? 'Activo' : 'Inactivo').'</span>';
             })

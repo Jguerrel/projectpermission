@@ -22,23 +22,18 @@
 
     <div class="card-body">
        @can('crear-cuentas')
-            <a href="{{ route('accounts.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
+            <a href="{{ route('accounts.create') }}" class="btn btn-sidebar btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
 
-        <div class="card my-2 col-md-4">
+        <x-dynamic-filter
+            table-id="cuentas"
+            :filters="[
+                ['id' => 'name',   'label' => 'Cuenta',  'type' => 'text',   'placeholder' => 'Buscar cuenta...'],
+                ['id' => 'status', 'label' => 'Estado',  'type' => 'select', 'options' => ['' => 'Todos', '1' => 'Activo', '0' => 'Inactivo']],
+            ]"
+        />
 
-                <div class="form-group">
-                    <label><strong>Filter by Estado :</strong></label>
-                    <select id='status' class="form-control" >
-                        <option value="">Select Status</option>
-                        <option value="1">Active</option>
-                        <option value="0">Deactive</option>
-                    </select>
-                </div>
-
-        </div>
-
-        <table class="table table-striped table-bordered dataTable dtr-inline" id='cuentas'>
+        <table class="table table-striped table-bordered" id='cuentas'>
         <thead>
                 <tr>
                 <th scope="col">#</th>
@@ -70,10 +65,8 @@ $(document).ready(function() {
            ajax: {
                 url: "{{ route('accounts.pagination') }}",
                 type: "GET",
-                 error : function(xhr, textStatus, errorThrown){
-
-                    console.log('error'+JSON.stringify(xhr))
-                }
+                data: function(d) { $.extend(d, window.getTableFilters('cuentas')); },
+                error: function(xhr) { console.log('error' + JSON.stringify(xhr)); }
             },
            columns: [
                     { data: 'id', name: 'id' },

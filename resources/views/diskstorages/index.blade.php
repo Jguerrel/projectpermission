@@ -22,9 +22,16 @@
 
     <div class="card-body">
        @can('crear-tamanio_de_discos')
-            <a href="{{ route('diskstorages.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
+            <a href="{{ route('diskstorages.create') }}" class="btn btn-sidebar btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
-        <table class="table table-striped dataTable table-bordered"  id ="tamaniodisco">
+        <x-dynamic-filter
+            table-id="tamaniodisco"
+            :filters="[
+                ['id' => 'name',   'label' => 'Tamaño',  'type' => 'text',   'placeholder' => 'Buscar tamaño...'],
+                ['id' => 'status', 'label' => 'Estado',  'type' => 'select', 'options' => ['' => 'Todos', '1' => 'Activo', '0' => 'Inactivo']],
+            ]"
+        />
+        <table class="table table-striped table-bordered" id ="tamaniodisco">
         <thead>
                 <tr>
                 <th scope="col">#</th>
@@ -52,11 +59,8 @@ $(document).ready(function() {
            ajax: {
                 url: "{{ route('diskstorages.pagination') }}",
                 type: "GET",
-
-                 error : function(xhr, textStatus, errorThrown){
-
-                    console.log('error'+JSON.stringify(xhr))
-                }
+                data: function(d) { $.extend(d, window.getTableFilters('tamaniodisco')); },
+                error: function(xhr) { console.log('error' + JSON.stringify(xhr)); }
             },
            columns: [
                     { data: 'id', name: 'id' },

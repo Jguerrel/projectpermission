@@ -44,12 +44,33 @@ class CarModelController extends Controller
 
     }
 
-    public function pagination()
+    public function pagination(Request $request)
     {
         $user = Auth()->user();
         if(request()->ajax()) {
-
-	        return Datatables()->of(CarModel::with('brand')->select('*'))
+            $data = CarModel::with('brand')->select('*');
+            if ($request->filled('name')) {
+                $data->where('name', 'like', '%' . $request->name . '%');
+            }
+            if ($request->filled('name_sw')) {
+                $data->where('name', 'like', $request->name_sw . '%');
+            }
+            if ($request->filled('name_nc')) {
+                $data->where('name', 'not like', '%' . $request->name_nc . '%');
+            }
+            if ($request->filled('brand')) {
+                $data->whereHas('brand', fn($q) => $q->where('name', 'like', '%' . $request->brand . '%'));
+            }
+            if ($request->filled('brand_sw')) {
+                $data->whereHas('brand', fn($q) => $q->where('name', 'like', $request->brand_sw . '%'));
+            }
+            if ($request->filled('brand_nc')) {
+                $data->whereHas('brand', fn($q) => $q->where('name', 'not like', '%' . $request->brand_nc . '%'));
+            }
+            if ($request->filled('status')) {
+                $data->where('status', $request->status);
+            }
+	        return Datatables()->of($data)
             ->editColumn('status', function(CarModel $carmodel) {
                 return  '<span class="text-'. ($carmodel->status ? 'success' : 'danger') .'">'. ($carmodel->status ? 'Activo' : 'Inactivo').'</span>';
             })

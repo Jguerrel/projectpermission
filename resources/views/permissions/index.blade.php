@@ -22,9 +22,15 @@
 
     <div class="card-body">
        @can('crear-permisos')
-            <a href="{{ route('permissions.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
+            <a href="{{ route('permissions.create') }}" class="btn btn-sidebar btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
-        <table class="table table-striped table-bordered dataTable dtr-inline" id ='tablepermiso'>
+        <x-dynamic-filter
+            table-id="tablepermiso"
+            :filters="[
+                ['id' => 'name', 'label' => 'Permiso', 'type' => 'text', 'placeholder' => 'Buscar permiso...'],
+            ]"
+        />
+        <table class="table table-striped table-bordered" id ='tablepermiso'>
         <thead>
                 <tr>
                 <th scope="col">#</th>
@@ -53,13 +59,8 @@ $(document).ready(function() {
            ajax: {
                 url: "{{ route('permissions.pagination') }}",
                 type: "GET",
-                //  success:function(data){
-                //  alert(JSON.stringify(data))
-                // },
-                 error : function(xhr, textStatus, errorThrown){
-
-                    console.log('error'+JSON.stringify(xhr))
-                }
+                data: function(d) { $.extend(d, window.getTableFilters('tablepermiso')); },
+                error: function(xhr) { console.log('error' + JSON.stringify(xhr)); }
             },
            columns: [
                     { data: 'id', name: 'id' },

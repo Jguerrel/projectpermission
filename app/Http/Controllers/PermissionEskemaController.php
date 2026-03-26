@@ -2,43 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use GuzzleHttp\Client;
 
 class PermissionEskemaController extends Controller
 {
- 
+
     public function acccessobjeto(): View
     {
-
         $parametros = [
-            'usrcod' => 'jean'
+            'usrcod' => Auth::user()->name
         ];
-        $url  =env('API_ENDPOINT');
-        $token=env('API_TOKEN');
+        $url   = config('services.eskema.endpoint');
+        $token = config('services.eskema.token');
         $client = new Client();
+        $data = [];
+
         try {
-            $response = $client->request('POST',$url . '/api_servicesapp/mobile/consultaobjetos', [
+            $response = $client->request('POST', $url . '/api_servicesapp/mobile/consultaobjetos', [
                 'headers' => [
-                    'Authorization' => 'Bearer '. $token,
-                    'Content-Type' => 'application/json', // Cambia el tipo de contenido según lo que requiera la API
+                    'Authorization' => 'Bearer ' . $token,
+                    'Content-Type'  => 'application/json',
                 ],
                 'json' => $parametros
             ]);
-            $body = $response->getBody()->getContents();
 
-            $data = json_decode($body, true);
-
-            print_r($data);
+            $data = json_decode($response->getBody()->getContents(), true) ?? [];
+        } catch (\Exception $e) {
+            Log::error('Error consultando API Eskema: ' . $e->getMessage());
         }
-        catch  (\Exception $e) {
-            // Manejar cualquier error que ocurra durante la solicitud
-            echo 'Error: ' . $e->getMessage();
 
-
-        }
         return view('permissioneskema.acccessobjeto', ['data' => $data]);
     }
 }

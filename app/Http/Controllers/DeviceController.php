@@ -44,10 +44,16 @@ class DeviceController extends Controller
         $data=Device::with('typedevice','branch_office','employee','disktype','ipaddress','carmodel','brand','diskstorage','operatingsystem','microsoftoffice');
 
         if ($request->filled('sucursal')) {
-
-            $data->whereHas('branch_office', function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->sucursal . '%');  });
-
+            $data->whereHas('branch_office', fn($q) => $q->where('name', 'like', '%' . $request->sucursal . '%'));
+        }
+        if ($request->filled('sucursal_sw')) {
+            $data->whereHas('branch_office', fn($q) => $q->where('name', 'like', $request->sucursal_sw . '%'));
+        }
+        if ($request->filled('sucursal_nc')) {
+            $data->whereHas('branch_office', fn($q) => $q->where('name', 'not like', '%' . $request->sucursal_nc . '%'));
+        }
+        if ($request->filled('status')) {
+            $data->where('status', $request->status);
         }
 
         if($request->ajax()) {return Datatables()->of($data)

@@ -522,7 +522,12 @@ return [
                         'icon'    => 'fas fa-lock',
                         'can'         => 'ver-permisos',
                     ],
-
+                    [
+                        'text' => 'Registro de Actividad',
+                        'url'  => 'admin/activitylogs',
+                        'icon' => 'fas fa-history',
+                        'can'  => 'ver-logs',
+                    ],
                 ]
         ]
     ],

@@ -29,12 +29,24 @@ class AccountController extends Controller
             'accounts' => Account::orderBy('id','ASC')->paginate(400)
         ]);
     }
-    public function pagination()
+    public function pagination(Request $request)
     {
         $user = Auth()->user();
         if(request()->ajax()) {
-
-	        return Datatables()->of(Account::select('*'))
+            $data = Account::select('*');
+            if ($request->filled('name')) {
+                $data->where('name', 'like', '%' . $request->name . '%');
+            }
+            if ($request->filled('name_sw')) {
+                $data->where('name', 'like', $request->name_sw . '%');
+            }
+            if ($request->filled('name_nc')) {
+                $data->where('name', 'not like', '%' . $request->name_nc . '%');
+            }
+            if ($request->filled('status')) {
+                $data->where('status', $request->status);
+            }
+	        return Datatables()->of($data)
             ->editColumn('status', function(Account $account) {
                 return  '<span class="text-'. ($account->status ? 'success' : 'danger') .'">'. ($account->status ? 'Activo' : 'Inactivo').'</span>';
             })

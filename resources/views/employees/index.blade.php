@@ -21,9 +21,17 @@
 <div class="card card-info card-outline">
     <div class="card-body">
          @can('crear-colaboradores')
-            <a href="{{ route('employees.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
+            <a href="{{ route('employees.create') }}" class="btn btn-sidebar btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
-        <table class="table table-striped table-bordered dataTable dtr-inline" id ="employeedatatable">
+        <x-dynamic-filter
+            table-id="employeedatatable"
+            :filters="[
+                ['id' => 'name',       'label' => 'Nombre',       'type' => 'text',   'placeholder' => 'Buscar colaborador...'],
+                ['id' => 'department', 'label' => 'Departamento', 'type' => 'text',   'placeholder' => 'Buscar departamento...'],
+                ['id' => 'status',     'label' => 'Estado',       'type' => 'select', 'options' => ['' => 'Todos', '1' => 'Activo', '0' => 'Inactivo']],
+            ]"
+        />
+        <table class="table table-striped table-bordered" id ="employeedatatable">
             <thead>
                 <tr>
                 <th scope="col">#</th>
@@ -60,13 +68,8 @@ $(document).ready(function() {
            ajax: {
                 url: "{{ route('employees.pagination') }}",
                 type: "GET",
-                // success:function(data){
-                //  alert(JSON.stringify(data))
-                // },
-                 error : function(xhr, textStatus, errorThrown){
-
-                    console.log('error'+JSON.stringify(xhr))
-                }
+                data: function(d) { $.extend(d, window.getTableFilters('employeedatatable')); },
+                error: function(xhr) { console.log('error' + JSON.stringify(xhr)); }
             },
            columns: [
                     { data: 'id', name: 'id' },

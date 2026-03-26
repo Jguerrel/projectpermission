@@ -21,9 +21,16 @@
 <div class="card card-info card-outline">
     <div class="card-body">
          @can('crear-direccionesip')
-            <a href="{{ route('ipaddresses.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
+            <a href="{{ route('ipaddresses.create') }}" class="btn btn-sidebar btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
-        <table class="table table-striped table-bordered dataTable dtr-inline" id ="direccionesip">
+        <x-dynamic-filter
+            table-id="direccionesip"
+            :filters="[
+                ['id' => 'ip',       'label' => 'Dirección IP', 'type' => 'text', 'placeholder' => 'Buscar IP...'],
+                ['id' => 'sucursal', 'label' => 'Sucursal',     'type' => 'text', 'placeholder' => 'Buscar sucursal...'],
+            ]"
+        />
+        <table class="table table-striped table-bordered" id ="direccionesip">
             <thead>
                 <tr>
                 <th scope="col">#</th>
@@ -52,10 +59,8 @@ $(document).ready(function() {
            ajax: {
                 url: "{{ route('ipaddresses.pagination') }}",
                 type: "GET",
-                 error : function(xhr, textStatus, errorThrown){
-
-                    console.log('error'+JSON.stringify(xhr))
-                }
+                data: function(d) { $.extend(d, window.getTableFilters('direccionesip')); },
+                error: function(xhr) { console.log('error' + JSON.stringify(xhr)); }
             },
            columns: [
                     { data: 'id', name: 'id' },

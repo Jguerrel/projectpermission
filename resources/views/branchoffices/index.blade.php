@@ -22,9 +22,16 @@
 
     <div class="card-body">
        @can('create-sucursales')
-            <a href="{{ route('branchoffices.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
+            <a href="{{ route('branchoffices.create') }}" class="btn btn-sidebar btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
-        <table class="table table-striped table-bordered dataTable dtr-inline" id ="branchoffices">
+        <x-dynamic-filter
+            table-id="branchoffices"
+            :filters="[
+                ['id' => 'name',   'label' => 'Sucursal', 'type' => 'text',   'placeholder' => 'Buscar sucursal...'],
+                ['id' => 'status', 'label' => 'Estado',   'type' => 'select', 'options' => ['' => 'Todos', '1' => 'Activo', '0' => 'Inactivo']],
+            ]"
+        />
+        <table class="table table-striped table-bordered" id ="branchoffices">
         <thead>
                 <tr>
                 <th scope="col">#</th>
@@ -52,13 +59,8 @@ $(document).ready(function() {
            ajax: {
                 url: "{{ route('branchoffices.pagination') }}",
                 type: "GET",
-                // success:function(data){
-                //  alert(JSON.stringify(data))
-                // },
-                 error : function(xhr, textStatus, errorThrown){
-
-                    console.log('error'+JSON.stringify(xhr))
-                }
+                data: function(d) { $.extend(d, window.getTableFilters('branchoffices')); },
+                error: function(xhr) { console.log('error' + JSON.stringify(xhr)); }
             },
            columns: [
                     { data: 'id', name: 'id' },

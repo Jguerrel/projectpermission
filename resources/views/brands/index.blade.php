@@ -22,9 +22,16 @@
 
     <div class="card-body">
        @can('crear-marcas')
-            <a href="{{ route('brands.create') }}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
+            <a href="{{ route('brands.create') }}" class="btn btn-sidebar btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
-        <table class="table table-striped dataTable table-bordered "  id ="brand">
+        <x-dynamic-filter
+            table-id="brand"
+            :filters="[
+                ['id' => 'name',   'label' => 'Marca',  'type' => 'text',   'placeholder' => 'Buscar marca...'],
+                ['id' => 'status', 'label' => 'Estado', 'type' => 'select', 'options' => ['' => 'Todos', '1' => 'Activo', '0' => 'Inactivo']],
+            ]"
+        />
+        <table class="table table-striped table-bordered" id ="brand">
         <thead>
                 <tr>
                 <th scope="col">#</th>
@@ -52,10 +59,8 @@ $(document).ready(function() {
            ajax: {
                 url: "{{ route('brands.pagination') }}",
                 type: "GET",
-                 error : function(xhr, textStatus, errorThrown){
-
-                    console.log('error'+JSON.stringify(xhr))
-                }
+                data: function(d) { $.extend(d, window.getTableFilters('brand')); },
+                error: function(xhr) { console.log('error' + JSON.stringify(xhr)); }
             },
            columns: [
                     { data: 'id', name: 'id' },

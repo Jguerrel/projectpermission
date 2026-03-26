@@ -33,12 +33,33 @@ class EmployeeController extends Controller
         return view('employees.index');
     }
 
-    public function pagination()
+    public function pagination(\Illuminate\Http\Request $request)
     {
         $user = Auth()->user();
         if(request()->ajax()) {
-
-	        return Datatables()->of(Employee::with('department','jobtitle')->select('*'))
+            $data = Employee::with('department', 'jobtitle')->select('*');
+            if ($request->filled('name')) {
+                $data->where('name', 'like', '%' . $request->name . '%');
+            }
+            if ($request->filled('name_sw')) {
+                $data->where('name', 'like', $request->name_sw . '%');
+            }
+            if ($request->filled('name_nc')) {
+                $data->where('name', 'not like', '%' . $request->name_nc . '%');
+            }
+            if ($request->filled('department')) {
+                $data->whereHas('department', fn($q) => $q->where('name', 'like', '%' . $request->department . '%'));
+            }
+            if ($request->filled('department_sw')) {
+                $data->whereHas('department', fn($q) => $q->where('name', 'like', $request->department_sw . '%'));
+            }
+            if ($request->filled('department_nc')) {
+                $data->whereHas('department', fn($q) => $q->where('name', 'not like', '%' . $request->department_nc . '%'));
+            }
+            if ($request->filled('status')) {
+                $data->where('status', $request->status);
+            }
+	        return Datatables()->of($data)
             ->editColumn('status', function(Employee $employee) {
                 return  '<span class="text-'. ($employee->status ? 'success' : 'danger') .'">'. ($employee->status ? 'Activo' : 'Inactivo').'</span>';
             })

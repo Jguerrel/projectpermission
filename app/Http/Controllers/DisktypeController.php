@@ -29,12 +29,24 @@ class DisktypeController extends Controller
         ]);
     }
 
-    public function pagination()
+    public function pagination(Request $request)
     {
         $user = Auth()->user();
         if(request()->ajax()) {
-
-	        return Datatables()->of(Disktype::select('*'))
+            $data = Disktype::select('*');
+            if ($request->filled('name')) {
+                $data->where('name', 'like', '%' . $request->name . '%');
+            }
+            if ($request->filled('name_sw')) {
+                $data->where('name', 'like', $request->name_sw . '%');
+            }
+            if ($request->filled('name_nc')) {
+                $data->where('name', 'not like', '%' . $request->name_nc . '%');
+            }
+            if ($request->filled('status')) {
+                $data->where('status', $request->status);
+            }
+	        return Datatables()->of($data)
             ->editColumn('status', function(Disktype $disktype) {
                 return  '<span class="text-'. ($disktype->status ? 'success' : 'danger') .'">'. ($disktype->status ? 'Activo' : 'Inactivo').'</span>';
             })

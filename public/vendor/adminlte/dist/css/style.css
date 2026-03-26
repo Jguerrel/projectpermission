@@ -13,3 +13,15 @@
      background-color: #0d4f48 !important;
      color: #e1e1e1 !important;
  }
+
+.btn-sidebar {
+    background-color: #0d4f48;
+    border-color: #0d4f48;
+    color: #fff;
+}
+.btn-sidebar:hover,
+.btn-sidebar:focus {
+    background-color: #0a3d37;
+    border-color: #0a3d37;
+    color: #fff;
+}

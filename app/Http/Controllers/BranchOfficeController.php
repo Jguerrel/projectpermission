@@ -31,12 +31,24 @@ class BranchOfficeController extends Controller
         return view('branchoffices.index', compact('branchoffices'));
     }
 
-    public function pagination()
+    public function pagination(Request $request)
     {
         $user = Auth()->user();
         if(request()->ajax()) {
-
-	        return Datatables()->of(BranchOffice::select('*'))
+            $data = BranchOffice::select('*');
+            if ($request->filled('name')) {
+                $data->where('name', 'like', '%' . $request->name . '%');
+            }
+            if ($request->filled('name_sw')) {
+                $data->where('name', 'like', $request->name_sw . '%');
+            }
+            if ($request->filled('name_nc')) {
+                $data->where('name', 'not like', '%' . $request->name_nc . '%');
+            }
+            if ($request->filled('status')) {
+                $data->where('status', $request->status);
+            }
+	        return Datatables()->of($data)
             ->editColumn('status', function(BranchOffice $branchoffice) {
                 return  '<span class="text-'. ($branchoffice->status ? 'success' : 'danger') .'">'. ($branchoffice->status ? 'Activo' : 'Inactivo').'</span>';
             })

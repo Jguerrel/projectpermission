@@ -22,7 +22,7 @@
 
     <div class="card-body">
        @can('crear-marcas')
-            <a href="{{ route('microsoftoffices.create')}}" class="btn btn-info btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
+            <a href="{{ route('microsoftoffices.create')}}" class="btn btn-sidebar btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
                      @if(session('success'))
                         <div class="alert alert-success" id='success-message'>
@@ -35,7 +35,14 @@
                         </div>
                     @endif
 
-        <table class="table table-striped dataTable table-bordered"  id ="office">
+        <x-dynamic-filter
+            table-id="office"
+            :filters="[
+                ['id' => 'name',   'label' => 'Office', 'type' => 'text',   'placeholder' => 'Buscar licencia...'],
+                ['id' => 'status', 'label' => 'Estado', 'type' => 'select', 'options' => ['' => 'Todos', '1' => 'Activo', '0' => 'Inactivo']],
+            ]"
+        />
+        <table class="table table-striped table-bordered" id ="office">
         <thead>
                 <tr>
                 <th scope="col">#</th>
@@ -65,10 +72,8 @@ $(document).ready(function() {
            ajax: {
                 url: "{{ route('microsoftoffices.pagination') }}",
                 type: "GET",
-                 error : function(xhr, textStatus, errorThrown){
-
-                    console.log('error'+JSON.stringify(xhr))
-                }
+                data: function(d) { $.extend(d, window.getTableFilters('office')); },
+                error: function(xhr) { console.log('error' + JSON.stringify(xhr)); }
             },
            columns: [
                     { data: 'id', name: 'id' },

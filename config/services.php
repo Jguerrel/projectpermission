@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'eskema' => [
+        'endpoint' => env('API_ENDPOINT'),
+        'token'    => env('API_TOKEN'),
+    ],
+
 ];

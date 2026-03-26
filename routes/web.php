@@ -21,14 +21,11 @@ use App\Http\Controllers\OperatingSystemController;
 use App\Http\Controllers\MicrosoftofficeController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\UniformController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\LoginUsersController;
 use App\Http\Controllers\DiskstorageController;
-use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\PasswordController;
 
 
-/*
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,7 +59,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::resource('jobtitles', JobTitleController::class);
     Route::resource('typedevices', TypedeviceController::class);
     Route::resource('employees', EmployeeController::class);
-    Route::resource('products', ProductController::class);
     Route::resource('accounts', AccountController::class);
     Route::resource('branchoffices', BranchOfficeController::class);
     Route::resource('devices', DeviceController::class);
@@ -74,7 +70,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::resource('microsoftoffices',MicrosoftofficeController::class);
     Route::resource('sizes',SizeController::class);
     Route::resource('uniforms',UniformController::class);
-    //Route::resource('newsletters',NewsletterController::class);
     Route::resource('diskstorages',DiskstorageController::class);
     /*Paginacion*/
     Route::get('employees.pagination', [EmployeeController::class, 'pagination'])->name('employees.pagination');
@@ -95,12 +90,12 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::get('/cargarfacturamultiple', [DeviceController::class, 'cargarfacturamultiple'])->name('devices.cargarfacturamultiple');
     Route::post('/cargarfacturamultiplepost', [DeviceController::class, 'cargarfacturamultiplepost'])->name('devices.cargarfacturamultiplepost');
     Route::get('/reset-password', [PasswordController::class, 'edit'])->name('password.edit');
-    //Route::post('/reset-password', [PasswordController::class, 'update'])->name('password.update');
-   // Route::get('sizes', [SizeController::class, 'index'])->name('sizes.index');
+    /*Rutas AJAX*/
+    Route::post('/direccionesip', [IpaddressController::class, 'direccionesip'])->name('ipaddresses.direccionesip');
+    Route::post('/modelos', [CarModelController::class, 'modelos'])->name('carmodels.modelos');
+    /*Logs de actividad*/
+    Route::get('activitylogs', [ActivityLogController::class, 'index'])->name('activitylogs.index');
+    Route::get('activitylogs/pagination', [ActivityLogController::class, 'pagination'])->name('activitylogs.pagination');
 });
 
-//Rutas de paginacion////
-
-Route::post('/direccionesip', [IpaddressController::class, 'direccionesip'])->name('ipaddresses.direccionesip');
-Route::post('/modelos', [CarModelController::class, 'modelos'])->name('carmodels.modelos');
 
