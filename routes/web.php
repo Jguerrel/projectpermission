@@ -51,6 +51,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
 
     Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('home/ip-stats', [App\Http\Controllers\HomeController::class, 'ipStats'])->name('home.ipStats');
 	Route::resource('roles', RoleController::class);
 	Route::resource('users', UserController::class);
 	Route::resource('permissions', PermissionController::class);

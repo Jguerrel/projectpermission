@@ -4,7 +4,8 @@
       "Bash(php artisan:*)",
       "Bash(php -r \"require ''vendor/autoload.php''; require ''app/Http/Controllers/ActivityLogController.php'';\")",
       "Bash(grep -n \"->index\\\\|->unique\" /c/xampp/htdocs/projectpermission/database/migrations/*.php)",
-      "Bash(xargs sed:*)"
+      "Bash(xargs sed:*)",
+      "Bash(grep -r \"Auth::routes\\\\|password\\\\|forgot\\\\|reset\" /c/xampp/htdocs/projectpermission/routes/*.php)"
     ]
   }
 }
