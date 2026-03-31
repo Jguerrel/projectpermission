@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\AccountApiController;
 use App\Http\Controllers\Api\AuthApiController;
+use App\Http\Controllers\Api\BranchOfficeApiController;
+use App\Http\Controllers\Api\BrandApiController;
 use App\Http\Controllers\Api\CarModelApiController;
 use App\Http\Controllers\Api\DeviceApiController;
 use App\Http\Controllers\Api\EmployeeApiController;
@@ -26,11 +28,14 @@ Route::prefix('auth')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
 
     // Dispositivos
-    Route::get ('devices',     [DeviceApiController::class, 'index']);
-    Route::post('devices',     [DeviceApiController::class, 'store']);
+    Route::get ('devices',      [DeviceApiController::class, 'index']);
+    Route::post('devices',      [DeviceApiController::class, 'store']);
+    Route::put ('devices/{id}', [DeviceApiController::class, 'update']);
 
-    // Cuentas (solo consulta)
-    Route::get('accounts',     [AccountApiController::class, 'index']);
+    // Cuentas
+    Route::get ('accounts',      [AccountApiController::class, 'index']);
+    Route::post('accounts',      [AccountApiController::class, 'store']);
+    Route::put ('accounts/{id}', [AccountApiController::class, 'update']);
 
     // Tipos de dispositivo
     Route::get ('typedevices',        [TypedeviceApiController::class, 'index']);
@@ -51,5 +56,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get ('employees',          [EmployeeApiController::class, 'index']);
     Route::post('employees',          [EmployeeApiController::class, 'store']);
     Route::put ('employees/{id}',     [EmployeeApiController::class, 'update']);
+
+    // Sucursales
+    Route::get ('branchoffices',      [BranchOfficeApiController::class, 'index']);
+    Route::post('branchoffices',      [BranchOfficeApiController::class, 'store']);
+    Route::put ('branchoffices/{id}', [BranchOfficeApiController::class, 'update']);
+
+    // Marcas
+    Route::get ('brands',             [BrandApiController::class, 'index']);
+    Route::post('brands',             [BrandApiController::class, 'store']);
+    Route::put ('brands/{id}',        [BrandApiController::class, 'update']);
 
 });

@@ -101,6 +101,20 @@ class TypedeviceController extends Controller
     }
 
 
+    /**
+     * GET /admin/typedevices/json  — lista para Select2 AJAX
+     */
+    public function listJson(Request $request)
+    {
+        $query = Typedevice::where('status', 1);
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+        return response()->json(
+            $query->orderBy('name')->get()->map(fn($t) => ['id' => $t->id, 'text' => $t->name])
+        );
+    }
+
     public function destroy(Typedevice $typedevice): RedirectResponse
     {
         $typedevice->delete();

@@ -41,31 +41,19 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Marca</label>
-                            <div class="col-md-6 ">
-                                    <select class="form-control js-example-basic-single select2 @error('brand_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="tmarca" id="brand" name="brand_id">
-                                        <option value="" disabled selected>Seleccione Item</option>
-                                        @foreach ($brands as $brand)
-                                         <option value="{{ $brand->id }}"  {{ $device->brand->id == $brand->id ? 'selected' : '' }}>
-                                               {{ $brand->name }}
-                                        </option>
-
-                                        @endforeach
-                                   </select>
+                            <label for="brand" class="col-md-4 col-form-label text-md-end text-start">Marca</label>
+                            <div class="col-md-6">
+                                <select class="form-control @error('brand_id') is-invalid @enderror" id="brand" name="brand_id">
+                                    <option value="{{ $device->brand->id }}" selected>{{ $device->brand->name }}</option>
+                                </select>
                             </div>
                       </div>
                       <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Marca</label>
-                            <div class="col-md-6 ">
-                                    <select class="form-control js-example-basic-single select2 @error('carmodel_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="tmodelo" id="carmodel" name="carmodel_id">
-                                        <option value="" disabled selected>Seleccione Item</option>
-                                        @foreach ($carmodels as $carmodel)
-                                         <option value="{{ $carmodel->id }}"  {{ $device->carmodel->id == $carmodel->id ? 'selected' : '' }}>
-                                               {{ $carmodel->name }}
-                                        </option>
-
-                                        @endforeach
-                                   </select>
+                            <label for="carmodel" class="col-md-4 col-form-label text-md-end text-start">Modelo</label>
+                            <div class="col-md-6">
+                                <select class="form-control js-example-basic-single select2 @error('carmodel_id') is-invalid @enderror" data-placeholder="Seleccione Item" aria-label="tmodelo" id="carmodel" name="carmodel_id">
+                                    <option value="{{ $device->carmodel->id }}" selected>{{ $device->carmodel->name }}</option>
+                                </select>
                             </div>
                       </div>
                         <div class="mb-3 row">
@@ -149,15 +137,10 @@
                          </div>
 
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Sucursal</label>
+                            <label for="sucursal" class="col-md-4 col-form-label text-md-end text-start">Sucursal</label>
                                 <div class="col-md-6">
-                                    <select class="form-control js-example-basic-single select2 @error('branch_offices') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="sucursal" id="sucursal" name="branch_office_id">
-                                        <option value="" disabled selected>Seleccione Item</option>
-                                        @foreach ($branch_offices as $branch_office)
-                                         <option value="{{ $branch_office->id }}"  {{ $device->branch_office->id == $branch_office->id ? 'selected' : '' }}>
-                                               {{ $branch_office->name }}
-                                        </option>
-                                        @endforeach
+                                    <select class="form-control @error('branch_office_id') is-invalid @enderror" id="sucursal" name="branch_office_id">
+                                        <option value="{{ $device->branch_office->id }}" selected>{{ $device->branch_office->name }}</option>
                                    </select>
                                </div>
                         </div>
@@ -191,18 +174,12 @@
                         </div>
                       </div>
                       <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Tipos de dispositivo</label>
-                            <div class="col-md-6 ">
-                            <select class="form-control js-example-basic-single select2 @error('typedevices') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="tipodis" id="tipodis" name="typedevice_id">
-                                        <option value="" disabled selected>Seleccione Item</option>
-                                        @foreach ($typedevices as $typedevice)
-                                         <option value="{{ $typedevice->id }}"  {{ $device->typedevice->id == $typedevice->id ? 'selected' : '' }}>
-                                               {{ $typedevice->name }}
-                                        </option>
-
-                                        @endforeach
-                                   </select>
-                        </div>
+                            <label for="tipodis" class="col-md-4 col-form-label text-md-end text-start">Tipos de dispositivo</label>
+                            <div class="col-md-6">
+                                <select class="form-control @error('typedevice_id') is-invalid @enderror" id="tipodis" name="typedevice_id">
+                                    <option value="{{ $device->typedevice->id }}" selected>{{ $device->typedevice->name }}</option>
+                                </select>
+                            </div>
                       </div>
                       <div class="mb-3 row">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-start">Tipos de Disco</label>
@@ -296,32 +273,55 @@
 <script>
     $(document).ready(function() {
 
+        var ajaxConfig = function(url) {
+            return {
+                url: url,
+                dataType: 'json',
+                delay: 250,
+                data: function(params) { return { search: params.term || '' }; },
+                processResults: function(data) { return { results: data }; },
+                cache: true
+            };
+        };
 
-        //Initialize Select2 Elements
-        $('.select2').select2({
-        placeholder: 'Select an option'
-    });
+        $('#brand').select2({
+            placeholder: 'Seleccione una marca',
+            allowClear: true,
+            ajax: ajaxConfig("{{ route('brands.json') }}")
+        });
 
+        $('#tipodis').select2({
+            placeholder: 'Seleccione tipo de dispositivo',
+            allowClear: true,
+            ajax: ajaxConfig("{{ route('typedevices.json') }}")
+        });
 
-    $('#sucursal').on('select2:select', function (e) {
+        $('#sucursal').select2({
+            placeholder: 'Seleccione una sucursal',
+            allowClear: true,
+            ajax: ajaxConfig("{{ route('branchoffices.json') }}")
+        });
+
+        // Selects con datos fijos del servidor
+        $('.select2').select2({ placeholder: 'Seleccione una opcion' });
+
+        $('#sucursal').on('select2:select', function (e) {
             url="{{route('ipaddresses.direccionesip')}}";
             ippaddres(e,url);
         });
 
-
         $('#brand').on('select2:select', function (e) {
             url="{{route('carmodels.modelos')}}";
-
             modelos(e,url);
         });
 
-    $.noConflict();
-    $('#fecha').datepicker({
+        $.noConflict();
+        $('#fecha').datepicker({
             language: 'es',
-                autoclose: true,
-                todayHighlight: true,
-                uiLibrary: 'bootstrap4'
-    });
+            autoclose: true,
+            todayHighlight: true,
+            uiLibrary: 'bootstrap4'
+        });
 
     });
 

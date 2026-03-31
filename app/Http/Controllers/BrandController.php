@@ -127,6 +127,20 @@ class BrandController extends Controller
     }
 
     /**
+     * GET /admin/brands/json  — lista para Select2 AJAX
+     */
+    public function listJson(Request $request)
+    {
+        $query = Brand::where('status', 1);
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+        return response()->json(
+            $query->orderBy('name')->get()->map(fn($b) => ['id' => $b->id, 'text' => $b->name])
+        );
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(Brand $brand)

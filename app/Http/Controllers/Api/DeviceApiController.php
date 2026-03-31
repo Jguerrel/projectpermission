@@ -62,7 +62,7 @@ class DeviceApiController extends Controller
         $data = $request->validate([
             'serialnumber'       => 'required|string|max:255|unique:devices,serialnumber',
             'typedevice_id'      => 'required|exists:typedevices,id',
-            'branch_office_id'   => 'required|exists:branchoffices,id',
+            'branch_office_id'   => 'required|exists:branch_offices,id',
             'brand_id'           => 'required|exists:brands,id',
             'carmodel_id'        => 'nullable|exists:carmodels,id',
             'operatingsystem_id' => 'nullable|exists:operatingsystems,id',
@@ -90,6 +90,41 @@ class DeviceApiController extends Controller
             'message' => 'Dispositivo registrado correctamente.',
             'data'    => $this->formatDevice($device),
         ], 201);
+    }
+
+    /**
+     * PUT /api/devices/{id}
+     */
+    public function update(Request $request, int $id): JsonResponse
+    {
+        $device = Device::findOrFail($id);
+
+        $data = $request->validate([
+            'serialnumber'       => 'sometimes|string|max:255|unique:devices,serialnumber,' . $id,
+            'typedevice_id'      => 'sometimes|exists:typedevices,id',
+            'branch_office_id'   => 'sometimes|exists:branch_offices,id',
+            'brand_id'           => 'sometimes|exists:brands,id',
+            'carmodel_id'        => 'nullable|exists:carmodels,id',
+            'ipaddress_id'       => 'nullable|exists:ipaddresses,id',
+            'employee_id'        => 'nullable|exists:employees,id',
+            'ram'                => 'nullable|string|max:50',
+            'anydesknumber'      => 'nullable|string|max:100',
+            'datedevicepurchase' => 'nullable|date',
+            'devicecomment'      => 'nullable|string|max:1000',
+            'status'             => 'sometimes|boolean',
+        ]);
+
+        $device->update($data);
+        $device->load([
+            'typedevice', 'branch_office', 'employee',
+            'brand', 'carmodel', 'operatingsystem',
+            'microsoftoffice', 'disktype', 'diskstorage', 'ipaddress',
+        ]);
+
+        return response()->json([
+            'message' => 'Dispositivo actualizado correctamente.',
+            'data'    => $this->formatDevice($device),
+        ]);
     }
 
     private function formatDevice(Device $d): array

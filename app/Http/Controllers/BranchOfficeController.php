@@ -117,6 +117,20 @@ class BranchOfficeController extends Controller
                 ->withSuccess('Sucursal ha sido agregado correctamente.');
     }
 
+    /**
+     * GET /admin/branchoffices/json  — lista para Select2 AJAX
+     */
+    public function listJson(Request $request)
+    {
+        $query = BranchOffice::where('status', 1);
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+        return response()->json(
+            $query->orderBy('name')->get()->map(fn($b) => ['id' => $b->id, 'text' => $b->name])
+        );
+    }
+
     public function destroy(BranchOffice $branchoffice): RedirectResponse
     {
         $branchoffice->delete();

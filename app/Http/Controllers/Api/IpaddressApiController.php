@@ -58,7 +58,7 @@ class IpaddressApiController extends Controller
     {
         $data = $request->validate([
             'ip'               => 'required|string|max:45|unique:ipaddresses,ip',
-            'branch_office_id' => 'required|exists:branchoffices,id',
+            'branch_office_id' => 'required|exists:branch_offices,id',
             'status'           => 'boolean',
         ]);
 
@@ -82,7 +82,7 @@ class IpaddressApiController extends Controller
 
         $data = $request->validate([
             'ip'               => 'sometimes|string|max:45|unique:ipaddresses,ip,' . $id,
-            'branch_office_id' => 'sometimes|exists:branchoffices,id',
+            'branch_office_id' => 'sometimes|exists:branch_offices,id',
             'status'           => 'sometimes|boolean',
         ]);
 

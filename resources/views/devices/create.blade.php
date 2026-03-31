@@ -42,18 +42,12 @@
                         </d iv>
                     </div>
                     <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Marca</label>
+                        <label for="brand_id" class="col-md-4 col-form-label text-md-end text-start">Marca</label>
                         <div class="col-md-6">
                           <div class="form-group">
-                                <select class="form-control js-example-basic-single select2 @error('brands') is-invalid @enderror"  data-placeholder="Seleccione una marca"   id="brand_id" name="brand_id">
-                                <option value="" disabled selected>Seleccione una opcion</option>
-                                  @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}" {{ in_array($brand->id, old('brands') ?? []) ? 'selected' : '' }}>
-                                            {{ $brand->name }}
-                                        </option>
-                                    @endforeach
+                                <select class="form-control @error('brand_id') is-invalid @enderror" id="brand_id" name="brand_id">
+                                    <option value=""></option>
                                 </select>
-                             <!-- Muestra el mensaje de error -->
                              @if ($errors->has('brand_id'))
                                 <span class="text-danger">{{ $errors->first('brand_id') }}</span>
                             @endif
@@ -174,16 +168,11 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Tipos de dispositivo</label>
+                        <label for="typedevice" class="col-md-4 col-form-label text-md-end text-start">Tipos de dispositivo</label>
                         <div class="col-md-6">
                           <div class="form-group">
-                                <select class="form-control js-example-basic-single select2 @error('typedevices') is-invalid @enderror"  data-placeholder="Seleccione tipo de dispositivo"   id="typedevice" name="typedevice_id">
-                                <option value="" disabled selected>Seleccione tipo de dispositivo</option>
-                                  @foreach ($typedevices as $typedevice)
-                                        <option value="{{ $typedevice->id }}" {{ in_array($typedevice->id, old('typedevices') ?? []) ? 'selected' : '' }}>
-                                            {{ $typedevice->name }}
-                                        </option>
-                                    @endforeach
+                                <select class="form-control @error('typedevice_id') is-invalid @enderror" id="typedevice" name="typedevice_id">
+                                    <option value=""></option>
                                 </select>
                                 @if ($errors->has('typedevice_id'))
                                     <span class="text-danger">{{ $errors->first('typedevice_id') }}</span>
@@ -193,18 +182,13 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Sucursal</label>
+                        <label for="sucursal" class="col-md-4 col-form-label text-md-end text-start">Sucursal</label>
                         <div class="col-md-6">
                           <div class="form-group">
-                                    <select class="form-control js-example-basic-single select2 @error('branch_offices') is-invalid @enderror" data-placeholder="Seleccione una sucursal"  aria-label="sucursal" id="sucursal" name="branch_office_id">
-                                        <option value="" disabled selected>Seleccione una sucursal</option>
-                                        @foreach ($branchoffices as $branchoffice)
-                                             <option value="{{ $branchoffice->id }}" {{ in_array($branchoffice->id, old('branchoffices') ?? []) ? 'selected' : '' }}>
-                                               {{ $branchoffice->name }}
-                                            </option>
-                                        @endforeach
-                                   </select>
-                                   @if ($errors->has('branch_office_id'))
+                                <select class="form-control @error('branch_office_id') is-invalid @enderror" id="sucursal" name="branch_office_id">
+                                    <option value=""></option>
+                                </select>
+                                @if ($errors->has('branch_office_id'))
                                     <span class="text-danger">{{ $errors->first('branch_office_id') }}</span>
                                 @endif
                              </div>
@@ -323,27 +307,51 @@
 <!-- JavaScript de Bootstrap -->
 
 <script src="{{ asset('vendor/jquery/jquerycustom.js') }}"></script>
- <script>
+<script>
 
 $(document).ready(function() {
 
-$('.select2').select2({
-placeholder: 'Seleccione una opcion'
-});
+    var ajaxConfig = function(url) {
+        return {
+            url: url,
+            dataType: 'json',
+            delay: 250,
+            data: function(params) { return { search: params.term || '' }; },
+            processResults: function(data) { return { results: data }; },
+            cache: true
+        };
+    };
 
-        $('#sucursal').on('select2:select', function (e) {
-            url="{{route('ipaddresses.direccionesip')}}";
-            ippaddres(e,url);
-        });
+    $('#brand_id').select2({
+        placeholder: 'Seleccione una marca',
+        allowClear: true,
+        ajax: ajaxConfig("{{ route('brands.json') }}")
+    });
 
+    $('#typedevice').select2({
+        placeholder: 'Seleccione tipo de dispositivo',
+        allowClear: true,
+        ajax: ajaxConfig("{{ route('typedevices.json') }}")
+    });
 
-        $('#brand_id').on('select2:select', function (e) {
-            url="{{route('carmodels.modelos')}}";
+    $('#sucursal').select2({
+        placeholder: 'Seleccione una sucursal',
+        allowClear: true,
+        ajax: ajaxConfig("{{ route('branchoffices.json') }}")
+    });
 
-            modelos(e,url);
-        });
+    // Selects con datos fijos del servidor
+    $('.js-example-basic-single').select2({ placeholder: 'Seleccione una opcion' });
 
+    $('#sucursal').on('select2:select', function (e) {
+        url="{{route('ipaddresses.direccionesip')}}";
+        ippaddres(e,url);
+    });
 
+    $('#brand_id').on('select2:select', function (e) {
+        url="{{route('carmodels.modelos')}}";
+        modelos(e,url);
+    });
 
 });
 //Dropzone.autoDiscover = false;

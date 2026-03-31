@@ -94,6 +94,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     /*Rutas AJAX*/
     Route::post('/direccionesip', [IpaddressController::class, 'direccionesip'])->name('ipaddresses.direccionesip');
     Route::post('/modelos', [CarModelController::class, 'modelos'])->name('carmodels.modelos');
+    Route::get('/brands/json', [BrandController::class, 'listJson'])->name('brands.json');
+    Route::get('/branchoffices/json', [BranchOfficeController::class, 'listJson'])->name('branchoffices.json');
+    Route::get('/typedevices/json', [TypedeviceController::class, 'listJson'])->name('typedevices.json');
     /*Logs de actividad*/
     Route::get('activitylogs', [ActivityLogController::class, 'index'])->name('activitylogs.index');
     Route::get('activitylogs/pagination', [ActivityLogController::class, 'pagination'])->name('activitylogs.pagination');
