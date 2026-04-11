@@ -55,10 +55,15 @@
                       </div>
                       <div class="mb-3 row">
                             <label for="carmodel" class="col-md-4 col-form-label text-md-end text-start">Modelo</label>
-                            <div class="col-md-6">
-                                <select class="form-control js-example-basic-single select2 @error('carmodel_id') is-invalid @enderror" data-placeholder="Seleccione Item" aria-label="tmodelo" id="carmodel" name="carmodel_id">
-                                    <option value="{{ $device->carmodel->id }}" selected>{{ $device->carmodel->name }}</option>
-                                </select>
+                            <div class="col-md-6 ">
+                                    <select class="form-control js-example-basic-single select2 @error('carmodel_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="tmodelo" id="carmodel" name="carmodel_id">
+                                        <option value="" disabled selected>Seleccione Item</option>
+                                        @foreach ($carmodels as $carmodel)
+                                         <option value="{{ $carmodel->id }}"  {{ $device->carmodel->id == $carmodel->id ? 'selected' : '' }}>
+                                               {{ $carmodel->name }}
+                                        </option>
+                                        @endforeach
+                                   </select>
                             </div>
                       </div>
                         <div class="mb-3 row">
@@ -302,8 +307,8 @@
 
         $('#brand').on('select2:select', function (e) {
             url="{{route('carmodels.modelos')}}";
-
             modelos(e,url);
+            setTimeout(function(){ $('#carmodel').select2('destroy').select2({ placeholder: 'Seleccione un modelo' }); }, 500);
         });
 
     $.noConflict();

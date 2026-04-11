@@ -5,7 +5,7 @@ use App\Models\Size;
 use Illuminate\Http\Request;
 
 use Illuminate\View\View;
-use App\http\Requests\StoreSizeRequest;
+use App\Http\Requests\StoreSizeRequest;
 
 class SizeController extends Controller
 {
