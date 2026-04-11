@@ -37,10 +37,11 @@ class IpaddressApiController extends Controller
 
         return response()->json([
             'data' => $items->map(fn($i) => [
-                'id'       => $i->id,
-                'ip'       => $i->ip,
-                'status'   => (bool) $i->status,
-                'sucursal' => $i->branch_office?->name,
+                'id'               => $i->id,
+                'ip'               => $i->ip,
+                'status'           => (bool) $i->status,
+                'branch_office_id' => $i->branch_office_id,
+                'sucursal'         => $i->branch_office?->name,
             ]),
             'pagination' => [
                 'total'        => $items->total(),
@@ -69,7 +70,7 @@ class IpaddressApiController extends Controller
 
         return response()->json([
             'message' => 'Dirección IP creada correctamente.',
-            'data'    => ['id' => $ip->id, 'ip' => $ip->ip, 'sucursal' => $ip->branch_office?->name, 'status' => (bool) $ip->status],
+            'data'    => ['id' => $ip->id, 'ip' => $ip->ip, 'branch_office_id' => $ip->branch_office_id, 'sucursal' => $ip->branch_office?->name, 'status' => (bool) $ip->status],
         ], 201);
     }
 
@@ -91,7 +92,7 @@ class IpaddressApiController extends Controller
 
         return response()->json([
             'message' => 'Dirección IP actualizada correctamente.',
-            'data'    => ['id' => $ip->id, 'ip' => $ip->ip, 'sucursal' => $ip->branch_office?->name, 'status' => (bool) $ip->status],
+            'data'    => ['id' => $ip->id, 'ip' => $ip->ip, 'branch_office_id' => $ip->branch_office_id, 'sucursal' => $ip->branch_office?->name, 'status' => (bool) $ip->status],
         ]);
     }
 }

@@ -37,10 +37,11 @@ class CarModelApiController extends Controller
 
         return response()->json([
             'data' => $items->map(fn($m) => [
-                'id'     => $m->id,
-                'name'   => $m->name,
-                'status' => (bool) $m->status,
-                'marca'  => $m->brand?->name,
+                'id'       => $m->id,
+                'name'     => $m->name,
+                'status'   => (bool) $m->status,
+                'brand_id' => $m->brand_id,
+                'marca'    => $m->brand?->name,
             ]),
             'pagination' => [
                 'total'        => $items->total(),
@@ -69,7 +70,7 @@ class CarModelApiController extends Controller
 
         return response()->json([
             'message' => 'Modelo creado correctamente.',
-            'data'    => ['id' => $model->id, 'name' => $model->name, 'marca' => $model->brand?->name, 'status' => (bool) $model->status],
+            'data'    => ['id' => $model->id, 'name' => $model->name, 'brand_id' => $model->brand_id, 'marca' => $model->brand?->name, 'status' => (bool) $model->status],
         ], 201);
     }
 
@@ -91,7 +92,7 @@ class CarModelApiController extends Controller
 
         return response()->json([
             'message' => 'Modelo actualizado correctamente.',
-            'data'    => ['id' => $model->id, 'name' => $model->name, 'marca' => $model->brand?->name, 'status' => (bool) $model->status],
+            'data'    => ['id' => $model->id, 'name' => $model->name, 'brand_id' => $model->brand_id, 'marca' => $model->brand?->name, 'status' => (bool) $model->status],
         ]);
     }
 }

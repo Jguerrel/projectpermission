@@ -17,7 +17,7 @@ class BranchOfficeController extends Controller
     {
 
         $this->middleware('auth');
-         $this->middleware('permission:ver-sucursales', ['only' => ['index']]);
+         $this->middleware('permission:ver-sucursales', ['only' => ['index','listJson']]);
          $this->middleware('permission:crear-sucursales', ['only' => ['create','store']]);
          $this->middleware('permission:editar-sucursales', ['only' => ['edit','update']]);
         $this->middleware('permission:eliminar-sucursales', ['only' => ['destroy']]);

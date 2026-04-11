@@ -137,6 +137,14 @@ class DeviceApiController extends Controller
             'status'             => (bool) $d->status,
             'datedevicepurchase' => $d->datedevicepurchase,
             'devicecomment'      => $d->devicecomment,
+            // IDs para formulario de edición
+            'branch_office_id'   => $d->branch_office_id,
+            'typedevice_id'      => $d->typedevice_id,
+            'brand_id'           => $d->brand_id,
+            'carmodel_id'        => $d->carmodel_id,
+            'ipaddress_id'       => $d->ipaddress_id,
+            'employee_id'        => $d->employee_id,
+            // Nombres para visualización en la tabla
             'ip'                 => $d->ipaddress?->ip,
             'tipo'               => $d->typedevice?->name,
             'sucursal'           => $d->branch_office?->name,
