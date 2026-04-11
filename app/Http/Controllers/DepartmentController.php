@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Requests\UpdateDepartamentoRequest;
 use Illuminate\Http\RedirectResponse;
-use App\http\Requests\StoreDepartamentoRequest;
+use App\Http\Requests\StoreDepartamentoRequest;
 use Illuminate\Support\Facades\Log;
 
 class DepartmentController extends Controller
