@@ -167,6 +167,45 @@
     </div>
 </div>
 
+{{-- ============ GRÁFICOS POR SUCURSAL ============ --}}
+<div class="row">
+    {{-- Bar: Usuarios (colaboradores) por Sucursal --}}
+    <div class="col-12 col-lg-6">
+        <div class="card card-outline card-info">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-users mr-1"></i> Usuarios por Sucursal</h3>
+            </div>
+            <div class="card-body">
+                @if($usersByBranch->isEmpty())
+                    <p class="text-muted text-center">No hay colaboradores con dispositivos asignados.</p>
+                @else
+                    <div class="chart-container">
+                        <canvas id="chartUsersBranch"></canvas>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+
+    {{-- Bar apilado: IPs por Sucursal (usadas vs disponibles) --}}
+    <div class="col-12 col-lg-6">
+        <div class="card card-outline card-danger">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-network-wired mr-1"></i> IPs por Sucursal</h3>
+            </div>
+            <div class="card-body">
+                @if($ipsByBranch->isEmpty())
+                    <p class="text-muted text-center">No hay IPs registradas por sucursal.</p>
+                @else
+                    <div class="chart-container">
+                        <canvas id="chartIpsBranch"></canvas>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
 {{-- Accesos rápidos existentes --}}
 @if (session('status'))
     <div class="alert alert-success" role="alert">{{ session('status') }}</div>
@@ -248,6 +287,66 @@ function colorSlice(n) {
                         label: ctx => ` ${ctx.label}: ${ctx.parsed} dispositivo(s)`
                     }
                 }
+            }
+        }
+    });
+})();
+@endif
+
+// ── Bar: Usuarios por Sucursal ─────────────────────────────────────────────
+@if(!$usersByBranch->isEmpty())
+(function () {
+    const labels = {!! $usersByBranch->pluck('label')->toJson() !!};
+    const data   = {!! $usersByBranch->pluck('count')->toJson() !!};
+    new Chart(document.getElementById('chartUsersBranch'), {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [{
+                label: 'Colaboradores',
+                data,
+                backgroundColor: colorSlice(data.length),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y} colaborador(es)` } }
+            },
+            scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+        }
+    });
+})();
+@endif
+
+// ── Bar apilado: IPs por Sucursal ──────────────────────────────────────────
+@if(!$ipsByBranch->isEmpty())
+(function () {
+    const labels      = {!! $ipsByBranch->pluck('label')->toJson() !!};
+    const usadas      = {!! $ipsByBranch->pluck('usadas')->toJson() !!};
+    const disponibles = {!! $ipsByBranch->pluck('disponibles')->toJson() !!};
+    new Chart(document.getElementById('chartIpsBranch'), {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [
+                { label: 'Usadas',      data: usadas,      backgroundColor: '#d45f5f' },
+                { label: 'Disponibles', data: disponibles, backgroundColor: '#6bcba5' }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom' },
+                tooltip: { mode: 'index', intersect: false }
+            },
+            scales: {
+                x: { stacked: true },
+                y: { stacked: true, beginAtZero: true, ticks: { precision: 0 } }
             }
         }
     });

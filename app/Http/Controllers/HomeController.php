@@ -49,7 +49,31 @@ class HomeController extends Controller
                 'count' => $d->total,
             ]);
 
-        return view('home', compact('branches', 'ipStats', 'devicesByBrand', 'devicesByModel'));
+        // Colaboradores (usuarios) distintos por sucursal — derivado de los
+        // dispositivos asignados (Device tiene employee_id + branch_office_id).
+        $usersByBranch = $branches->map(fn($b) => [
+            'label' => $b->name,
+            'count' => Device::where('branch_office_id', $b->id)
+                ->whereNotNull('employee_id')
+                ->distinct('employee_id')
+                ->count('employee_id'),
+        ])->filter(fn($r) => $r['count'] > 0)->values();
+
+        // IPs por sucursal: usadas (con dispositivo) vs disponibles.
+        $ipsByBranch = $branches->map(function ($b) {
+            $total  = Ipaddress::where('branch_office_id', $b->id)->count();
+            $usadas = Ipaddress::where('branch_office_id', $b->id)->whereHas('device')->count();
+            return [
+                'label'       => $b->name,
+                'usadas'      => $usadas,
+                'disponibles' => $total - $usadas,
+            ];
+        })->filter(fn($r) => ($r['usadas'] + $r['disponibles']) > 0)->values();
+
+        return view('home', compact(
+            'branches', 'ipStats', 'devicesByBrand', 'devicesByModel',
+            'usersByBranch', 'ipsByBranch'
+        ));
     }
 
     /**
