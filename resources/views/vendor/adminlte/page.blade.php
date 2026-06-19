@@ -41,10 +41,18 @@
             @include('adminlte::partials.cwrapper.cwrapper-iframe')
         @endempty
 
-        {{-- Footer --}}
-        @hasSection('footer')
-            @include('adminlte::partials.footer.footer')
-        @endif
+        {{-- Footer (siempre visible para cerrar el layout) --}}
+        <footer class="main-footer">
+            @hasSection('footer')
+                @yield('footer')
+            @else
+                <strong>&copy; {{ date('Y') }} Bahia Motors.</strong>
+                Sistema de Inventario y Activos.
+                <div class="float-right d-none d-sm-inline-block">
+                    <b>Versión</b> 1.0
+                </div>
+            @endif
+        </footer>
 
         {{-- Right Control Sidebar --}}
         @if(config('adminlte.right_sidebar'))
