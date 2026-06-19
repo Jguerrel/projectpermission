@@ -38,10 +38,14 @@ return new class extends Migration
             }
         });
 
-        // 2) Ampliar la columna: el texto cifrado es mucho más largo que 50 chars.
-        Schema::table('accounts', function (Blueprint $table) {
-            $table->text('password')->nullable()->change();
-        });
+        // 2) Limpiar fechas legadas '0000-00-00' poniéndoles la fecha de hoy, y ampliar
+        //    la columna a TEXT (el texto cifrado es mucho mayor a 50 chars).
+        //    sql_mode relajado (por-conexión, no persiste) para poder corregir filas con
+        //    fechas inválidas y para que el ALTER no las revalide.
+        DB::statement("SET SESSION sql_mode=''");
+        DB::statement("UPDATE accounts SET created_at = NOW() WHERE created_at = '0000-00-00 00:00:00'");
+        DB::statement("UPDATE accounts SET updated_at = NOW() WHERE updated_at = '0000-00-00 00:00:00'");
+        DB::statement('ALTER TABLE accounts MODIFY password TEXT NULL');
 
         // 3) Cifrar las contraseñas existentes (idempotente: salta las ya cifradas).
         DB::table('accounts')->orderBy('id')->chunkById(200, function ($accounts) {
@@ -85,9 +89,8 @@ return new class extends Migration
             }
         });
 
-        Schema::table('accounts', function (Blueprint $table) {
-            $table->string('password', 50)->nullable()->change();
-        });
+        DB::statement("SET SESSION sql_mode=''");
+        DB::statement('ALTER TABLE accounts MODIFY password VARCHAR(50) NULL');
 
         Schema::dropIfExists('accounts_password_backup');
     }
