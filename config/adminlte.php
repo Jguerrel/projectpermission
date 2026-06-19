@@ -528,6 +528,12 @@ return [
                         'icon' => 'fas fa-history',
                         'can'  => 'ver-logs',
                     ],
+                    [
+                        'text' => 'Configuración',
+                        'url'  => 'admin/settings/setup',
+                        'icon' => 'fas fa-cogs',
+                        'can'  => 'ver-configuracion',
+                    ],
                 ]
         ]
     ],

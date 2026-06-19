@@ -24,6 +24,7 @@ use App\Http\Controllers\UniformController;
 use App\Http\Controllers\DiskstorageController;
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\SettingController;
 
 
 /*
@@ -45,6 +46,12 @@ Auth::routes();
 Route::get('/', function () {
     return view('auth.login');
 });
+
+// Login SSO con Google (Socialite)
+Route::get('/auth/google/redirect', [App\Http\Controllers\Auth\GoogleController::class, 'redirect'])
+    ->name('google.redirect');
+Route::get('/auth/google/callback', [App\Http\Controllers\Auth\GoogleController::class, 'callback'])
+    ->name('google.callback');
 
 
 
@@ -91,6 +98,10 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']], function() {
     Route::get('/cargarfacturamultiple', [DeviceController::class, 'cargarfacturamultiple'])->name('devices.cargarfacturamultiple');
     Route::post('/cargarfacturamultiplepost', [DeviceController::class, 'cargarfacturamultiplepost'])->name('devices.cargarfacturamultiplepost');
     Route::get('/reset-password', [PasswordController::class, 'edit'])->name('password.edit');
+    /*Pantalla de configuracion / Setup*/
+    Route::get('settings/setup', [SettingController::class, 'edit'])->name('settings.edit');
+    Route::put('settings/setup', [SettingController::class, 'update'])->name('settings.update');
+    Route::post('settings/testmail', [SettingController::class, 'testMail'])->name('settings.testmail');
     /*Rutas AJAX*/
     Route::post('/direccionesip', [IpaddressController::class, 'direccionesip'])->name('ipaddresses.direccionesip');
     Route::post('/modelos', [CarModelController::class, 'modelos'])->name('carmodels.modelos');

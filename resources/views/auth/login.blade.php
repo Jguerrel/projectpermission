@@ -81,6 +81,17 @@
         </div>
 
     </form>
+
+    {{-- Login SSO con Google --}}
+    <div class="text-center my-2">
+        <span class="text-muted">o</span>
+    </div>
+    <a href="{{ route('google.redirect') }}"
+       class="btn btn-block btn-flat"
+       style="background:#fff;border:1px solid #dadce0;color:#3c4043;display:flex;align-items:center;justify-content:center;gap:8px;">
+        <img src="https://www.google.com/favicon.ico" alt="Google" width="18" height="18">
+        <span>Iniciar sesión con Google</span>
+    </a>
 @stop
 
 @section('auth_footer')

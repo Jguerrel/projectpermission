@@ -31,6 +31,7 @@ class PermissionSeeder extends Seeder
             'editar-productos',
             'eliminar-productos',
             'ver-logs',
+            'ver-configuracion',
          ];
 
          foreach ($permissions as $permission) {

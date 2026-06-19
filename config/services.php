@@ -36,4 +36,15 @@ return [
         'token'    => env('API_TOKEN'),
     ],
 
+    'google' => [
+        'client_id'     => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect'      => env('GOOGLE_REDIRECT_URI'),
+        // Dominios de Google Workspace autorizados para iniciar sesion.
+        'allowed_domains' => array_values(array_filter(array_map(
+            'trim',
+            explode(',', (string) env('GOOGLE_ALLOWED_DOMAINS', ''))
+        ))),
+    ],
+
 ];
