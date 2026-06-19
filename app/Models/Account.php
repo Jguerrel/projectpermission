@@ -18,4 +18,12 @@ class Account extends Model
 
     ];
 
+    /**
+     * El password de la cuenta se cifra en reposo (bóveda de credenciales).
+     * Se descifra de forma transparente al leerlo. Depende de APP_KEY.
+     */
+    protected $casts = [
+        'password' => 'encrypted',
+    ];
+
 }
