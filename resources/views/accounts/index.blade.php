@@ -80,18 +80,39 @@ $(document).ready(function() {
                  order: [[0, 'desc']],
         columnDefs: [
             {
-                "targets": 2, // Índice de la columna de contraseña
+                "targets": 2, // Columna de contraseña: enmascarada con botón mostrar/ocultar
+                "orderable": false,
+                "searchable": false,
                 "render": function ( data, type, row ) {
-                    // Si el tipo es display, renderiza el input password
-                    if(type === 'display') {
-                        return '<span  style="-webkit-text-security:disc;">' + data + '" </span>';
+                    if (type !== 'display') {
+                        return data;
                     }
-                    // De lo contrario, devuelve el dato tal cual
-                    return data;
+                    if (!data) {
+                        return '';
+                    }
+                    // Escapar el valor antes de meterlo en el atributo
+                    var safe = $('<div>').text(data).html();
+                    return '<span class="acct-pass" data-pass="' + safe + '">••••••••</span>' +
+                           ' <button type="button" class="btn btn-xs btn-link p-0 ml-1 toggle-pass" ' +
+                           'title="Mostrar/ocultar"><i class="fas fa-eye"></i></button>';
                 }
             }
         ]
        });
+
+    // Mostrar/ocultar contraseña (delegado, funciona con paginación AJAX)
+    $('#cuentas tbody').on('click', '.toggle-pass', function () {
+        var $btn  = $(this);
+        var $span = $btn.siblings('.acct-pass').first();
+        var $icon = $btn.find('i');
+        if ($span.data('shown')) {
+            $span.text('••••••••').data('shown', false);
+            $icon.removeClass('fa-eye-slash').addClass('fa-eye');
+        } else {
+            $span.text($span.attr('data-pass')).data('shown', true);
+            $icon.removeClass('fa-eye').addClass('fa-eye-slash');
+        }
+    });
 
 });
 </script>

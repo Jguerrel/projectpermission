@@ -39,7 +39,10 @@
                     <div class="mb-3 row">
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Contraseña:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                            {{ $account->password }}
+                            <span class="acct-pass" id="showPass" data-pass="{{ $account->password }}">••••••••</span>
+                            <button type="button" class="btn btn-sm btn-link p-0 ml-1" id="showPassBtn" title="Mostrar/ocultar">
+                                <i class="fas fa-eye" id="showPassIcon"></i>
+                            </button>
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -71,3 +74,21 @@
     </div>
 </div>
 @endsection
+
+@section('js')
+<script>
+    document.getElementById('showPassBtn').addEventListener('click', function () {
+        var span = document.getElementById('showPass');
+        var icon = document.getElementById('showPassIcon');
+        if (span.dataset.shown === '1') {
+            span.textContent = '••••••••';
+            span.dataset.shown = '0';
+            icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye');
+        } else {
+            span.textContent = span.getAttribute('data-pass');
+            span.dataset.shown = '1';
+            icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash');
+        }
+    });
+</script>
+@stop
