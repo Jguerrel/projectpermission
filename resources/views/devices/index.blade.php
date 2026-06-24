@@ -1,22 +1,11 @@
 @extends('adminlte::page')
 
+@section('content_header')
+    <h1>Dispositivos</h1>
+@stop
+
 @section('content')
 
-<section class="content-header" >
-            <div class="container-fluid">
-                <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Dispositivos</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active"><a href="#">Dispositivos</a></li>
-
-                    </ol>
-                </div>
-                </div>
-            </div><!-- /.container-fluid -->
-</section>
 
 <div class="card card-info card-outline">
     <div class="card-body ">
@@ -24,7 +13,8 @@
             <a href="{{ route('devices.create') }}" class="btn btn-sidebar btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
                      @if(session('success'))
-                        <div class="alert alert-success" id='success-message'>
+                        <div class="alert alert-success alert-dismissible fade show" id="success-message">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             {{ session('success') }}
                         </div>
                     @endif
@@ -83,7 +73,7 @@ $(function () {
                 pageLength: 10,
            processing: true,
            scrollX: true,
-           statesave: true,
+           stateSave: true,
            scrollY: '50vh', // Altura fija de la tabla
            scrollCollapse: true,
            autoWidth: false,
@@ -129,7 +119,7 @@ $(function () {
        // Ocultar el mensaje de éxito después de 1.5 segundos
         setTimeout(function() {
             $('#success-message').fadeOut('slow');
-        }, 1500);
+        }, 4000);
 
 });
 </script>

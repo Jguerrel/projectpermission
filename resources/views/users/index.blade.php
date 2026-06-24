@@ -1,21 +1,11 @@
 @extends('adminlte::page')
 
-@section('content')
-<section class="content-header" >
-            <div class="container-fluid">
-                <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Usuarios</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active"><a href="#">Usuarios</a></li>
+@section('content_header')
+    <h1>Usuarios</h1>
+@stop
 
-                    </ol>
-                </div>
-                </div>
-            </div><!-- /.container-fluid -->
-</section>
+@section('content')
+
 <div class="card card-info card-outline">
     <!-- <div class="card-header">Usuarios</div> -->
     <div class="card-body">

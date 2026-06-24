@@ -1,29 +1,19 @@
 @extends('adminlte::page')
 
+@section('content_header')
+    <h1>Sucursal</h1>
+@stop
+
 @section('content')
-<section class="content-header" >
-            <div class="container-fluid">
-                <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Sucursal</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Direccion IP</li>
-                    </ol>
-                </div>
-                </div>
-            </div><!-- /.container-fluid -->
-</section>
+
 <div class="row justify-content-center">
     <div class="col-md-12">
-        <div class="card car-info">
+        <div class="card card-info card-outline">
             <div class="card-header">
-                <div class="float-start">
+                <div class="float-left">
                     Editar Direccion IP
                 </div>
-                <div class="float-end">
+                <div class="float-right">
                     <a href="{{ route('ipaddresses.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
                 </div>
             </div>
@@ -32,7 +22,7 @@
                     @csrf
                     @method("PUT")
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">IP</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right text-left">IP</label>
                             <div class="col-md-6">
                             <input type="text" class="form-control @error('ip') is-invalid @enderror" required id="ip" name="ip" value="{{ $ipaddress->ip }}">
                                  @if ($errors->has('ip'))
@@ -42,7 +32,7 @@
                         </div>
 
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Sucursal</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right text-left">Sucursal</label>
                             <div class="col-md-6">
                             <select class="form-control js-example-basic-single select2 @error('branchoffices') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="branches" id="branch_id" name="branch_office_id">
                                         <option value="" disabled selected>Seleccione Item</option>

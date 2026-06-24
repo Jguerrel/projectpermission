@@ -19,12 +19,12 @@
 
     <div class="row justify-content-center animate__animated animate__zoomInDown">
         <div class="col-md-12">
-            <div class="card car-info">
+            <div class="card card-info card-outline">
                 <div class="card-header">
-                        <div class="float-start">
+                        <div class="float-left">
                             Nuevo Dispositivo
                         </div>
-                        <div class="float-end">
+                        <div class="float-right">
                             <a href="{{ route('devices.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
                         </div>
                 </div>
@@ -33,11 +33,11 @@
                        @csrf
 
                        <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Dispositivos</label>
+                        <label for="cargarfacturamultiples" class="col-md-4 col-form-label text-md-right text-left">Dispositivos</label>
                             <div class="col-md-6  form-group">
-                            <select class="form-control select2 @error('cargarfacturamultiples') is-invalid @enderror "  multiple  aria-label="cargarfacturamultiples" id="cargarfacturamultiples" name="ids[]">
+                            <select class="form-control select2 @error('ids') is-invalid @enderror "  multiple  aria-label="cargarfacturamultiples" id="cargarfacturamultiples" name="ids[]">
                                     @forelse ($cargarfacturamultiples as $cargarfacturamultiple)
-                                        <option value="{{ $cargarfacturamultiple->id }}" {{ in_array($cargarfacturamultiple->id, old('cargarfacturamultiples') ?? []) ? 'selected' : '' }}>
+                                        <option value="{{ $cargarfacturamultiple->id }}" {{ in_array($cargarfacturamultiple->id, old('ids') ?? []) ? 'selected' : '' }}>
                                             {{ $cargarfacturamultiple->serialnumber }}
                                         </option>
                                     @empty
@@ -48,9 +48,9 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="text" class="col-md-4 col-form-label text-md-end text-start">Factura</label>
+                            <label for="invoicepath" class="col-md-4 col-form-label text-md-right text-left">Factura</label>
                             <div class="col-md-6 input-group mb-3">
-                                <button class="btn btn btn-info" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">Cargar documento</button>
+                                <button class="btn btn btn-info" type="button"  data-toggle="modal" data-target="#exampleModal">Cargar documento</button>
                                 <input type="text" class="form-control @error('invoicepath') is-invalid @enderror" id="invoicepath" name="invoicepath" value="{{ old('invoicepath') }}" readonly>
                                     @if ($errors->has('invoicepath'))
                                         <span class="text-danger">{{ $errors->first('invoicepath') }}</span>

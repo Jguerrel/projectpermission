@@ -1,30 +1,19 @@
 @extends('adminlte::page')
 
+@section('content_header')
+    <h1>Direccion IP</h1>
+@stop
+
 @section('content')
 
-<section class="content-header" >
-            <div class="container-fluid">
-                <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Direccion IP</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Direccion IP</li>
-                    </ol>
-                </div>
-                </div>
-            </div><!-- /.container-fluid -->
-</section>
 <div class="row justify-content-center">
     <div class="col-md-12">
-        <div class="card car-info">
+        <div class="card card-info card-outline">
             <div class="card-header">
-                <div class="float-start">
+                <div class="float-left">
                     Nuevo Direccion IP
                 </div>
-                <div class="float-end">
+                <div class="float-right">
                     <a href="{{ route('ipaddresses.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
                 </div>
             </div>
@@ -33,7 +22,7 @@
                     @csrf
 
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Direccion IP</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-right text-left">Direccion IP</label>
                         <div class="col-md-6">
                           <input type="text" class="form-control @error('ip') is-invalid @enderror" required  pattern="^((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])$" id="ip" name="ip" value="{{ old('ip') }}">
                             @if ($errors->has('ip'))
@@ -42,13 +31,13 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Sucursal</label>
+                        <label for="sucursal" class="col-md-4 col-form-label text-md-right text-left">Sucursal</label>
                         <div class="col-md-6">
                           <div class="form-group">
                                     <select class="form-control js-example-basic-single select2 @error('branch_office_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="sucursal" id="sucursal" name="branch_office_id">
-                                               <option value="" disabled selected>Seleccione Item</option>
+                                               <option value="" disabled {{ old('branch_office_id') ? '' : 'selected' }}>Seleccione Item</option>
                                         @foreach ($branch_offices as $branch_office)
-                                             <option value="{{ $branch_office->id }}" {{ in_array($branch_office->id, old('branch_offices') ?? []) ? 'selected' : '' }}>
+                                             <option value="{{ $branch_office->id }}" {{ old('branch_office_id') == $branch_office->id ? 'selected' : '' }}>
                                                {{ $branch_office->name }}
                                             </option>
 

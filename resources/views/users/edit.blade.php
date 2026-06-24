@@ -1,31 +1,21 @@
 @extends('adminlte::page')
 
 
+@section('content_header')
+    <h1>Editar Usuario</h1>
+@stop
+
 @section('content')
-<section class="content-header" >
-            <div class="container-fluid">
-                <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Editar Usuario</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Usuarios</a></li>
-                    <li class="breadcrumb-item active">Ver Usuario</li>
-                    </ol>
-                </div>
-                </div>
-            </div><!-- /.container-fluid -->
-</section>
+
 
 <div class="row justify-content-center">
     <div class="col-md-12">
         <div class="card card-info card-outline">
             <div class="card-header">
-                <div class="float-start">
+                <div class="float-left">
                     Editar Usuario
                 </div>
-                <div class="float-end">
+                <div class="float-right">
                     <a href="{{ route('users.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
                 </div>
             </div>
@@ -35,7 +25,7 @@
                     @method("PUT")
 
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Nombre</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-right text-left">Nombre</label>
                         <div class="col-md-6">
                           <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $user->name }}">
                             @if ($errors->has('name'))
@@ -45,7 +35,7 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="email" class="col-md-4 col-form-label text-md-end text-start">Correo</label>
+                        <label for="email" class="col-md-4 col-form-label text-md-right text-left">Correo</label>
                         <div class="col-md-6">
                           <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ $user->email }}">
                             @if ($errors->has('email'))
@@ -55,9 +45,9 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="password" class="col-md-4 col-form-label text-md-end text-start">Contraseña</label>
+                        <label for="password" class="col-md-4 col-form-label text-md-right text-left">Contraseña</label>
                         <div class="col-md-6">
-                          <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" value="{{ $user->password }}">
+                          <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" autocomplete="new-password" placeholder="Dejar en blanco para no cambiar">
                             @if ($errors->has('password'))
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                             @endif
@@ -65,14 +55,14 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="password_confirmation" class="col-md-4 col-form-label text-md-end text-start">Confirmar Contraseña</label>
+                        <label for="password_confirmation" class="col-md-4 col-form-label text-md-right text-left">Confirmar Contraseña</label>
                         <div class="col-md-6">
-                          <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"  value="{{ $user->password }}">
+                          <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" autocomplete="new-password" placeholder="Dejar en blanco para no cambiar">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Roles</label>
+                        <label for="roles" class="col-md-4 col-form-label text-md-right text-left">Roles</label>
                         <div class="col-md-6 form-group">
                             <select class="form-control select2  @error('roles') is-invalid @enderror"  aria-label="Roles" id="roles" name="roles[]">
                                 @forelse ($roles as $role)

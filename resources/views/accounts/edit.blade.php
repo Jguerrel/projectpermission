@@ -1,30 +1,20 @@
 @extends('adminlte::page')
 
+@section('content_header')
+    <h1>Cuenta</h1>
+@stop
+
 @section('content')
-<section class="content-header" >
-            <div class="container-fluid">
-                <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Cuenta</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Cuentas</li>
-                    </ol>
-                </div>
-                </div>
-            </div><!-- /.container-fluid -->
-</section>
+
 
 <div class="row justify-content-center">
     <div class="col-md-12">
-        <div class="card car-info">
+        <div class="card card-info card-outline">
             <div class="card-header">
-                <div class="float-start">
+                <div class="float-left">
                     Editar Cuenta
                 </div>
-                <div class="float-end">
+                <div class="float-right">
                     <a href="{{ route('accounts.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
                 </div>
             </div>
@@ -33,7 +23,7 @@
                     @csrf
                     @method("PUT")
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Cuenta</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right text-left">Cuenta</label>
                             <div class="col-md-6">
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $account->name }}">
                                 @if ($errors->has('name'))
@@ -42,7 +32,7 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Contraseña</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right text-left">Contraseña</label>
                             <div class="col-md-6">
                             <input type="text" class="form-control @error('password') is-invalid @enderror" id="password" name="password" value="{{ $account->password }}">
                                 @if ($errors->has('password'))
@@ -51,7 +41,7 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Link</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right text-left">Link</label>
                             <div class="col-md-6">
                             <input type="text" class="form-control @error('link') is-invalid @enderror" id="link" name="link" value="{{ $account->link }}">
                                 @if ($errors->has('link'))
@@ -60,7 +50,7 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Descripcion</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right text-left">Descripcion</label>
                             <div class="col-md-6">
                             <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ $account->description }}">
                                 @if ($errors->has('description'))

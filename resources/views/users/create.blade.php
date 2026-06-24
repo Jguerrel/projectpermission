@@ -3,12 +3,12 @@
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-12">
-        <div class="card car-info">
+        <div class="card card-info card-outline">
             <div class="card-header">
-                <div class="float-start">
+                <div class="float-left">
                     Add New User
                 </div>
-                <div class="float-end">
+                <div class="float-right">
                     <a href="{{ route('users.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                     @csrf
 
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Nombre</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-right text-left">Nombre</label>
                         <div class="col-md-6">
                           <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
                             @if ($errors->has('name'))
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="email" class="col-md-4 col-form-label text-md-end text-start">Correo</label>
+                        <label for="email" class="col-md-4 col-form-label text-md-right text-left">Correo</label>
                         <div class="col-md-6">
                           <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}">
                             @if ($errors->has('email'))
@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="password" class="col-md-4 col-form-label text-md-end text-start">Contraseña</label>
+                        <label for="password" class="col-md-4 col-form-label text-md-right text-left">Contraseña</label>
                         <div class="col-md-6">
                           <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
                             @if ($errors->has('password'))
@@ -47,16 +47,16 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="password_confirmation" class="col-md-4 col-form-label text-md-end text-start">Confirmar Contraseña</label>
+                        <label for="password_confirmation" class="col-md-4 col-form-label text-md-right text-left">Confirmar Contraseña</label>
                         <div class="col-md-6">
                           <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
                         </div>
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Roles</label>
+                        <label for="roles" class="col-md-4 col-form-label text-md-right text-left">Roles</label>
                         <div class="col-md-6">
-                            <select class="form-select @error('roles') is-invalid @enderror" multiple aria-label="Roles" id="roles" name="roles[]">
+                            <select class="form-control select2 @error('roles') is-invalid @enderror" multiple aria-label="Roles" id="roles" name="roles[]">
                                 @forelse ($roles as $role)
 
                                     @if ($role!='Super Admin')

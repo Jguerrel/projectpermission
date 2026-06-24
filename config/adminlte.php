@@ -657,13 +657,6 @@ return [
                     'location' => 'vendor/datatables/moment.min.js',
                 ],
 
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js',
-                ],
-
-
             ],
         ],
         'Select2' => [

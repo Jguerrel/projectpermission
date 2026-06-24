@@ -1,29 +1,19 @@
 @extends('adminlte::page')
 
+@section('content_header')
+    <h1>Dispositivo</h1>
+@stop
+
 @section('content')
-<section class="content-header" >
-            <div class="container-fluid">
-                <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Dispositivo</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Dispositivo</li>
-                    </ol>
-                </div>
-                </div>
-            </div><!-- /.container-fluid -->
-</section>
+
 <div class="row justify-content-center">
     <div class="col-md-12">
-        <div class="card car-info">
+        <div class="card card-info card-outline">
             <div class="card-header">
-                <div class="float-start">
+                <div class="float-left">
                     Editar Dispositivo
                 </div>
-                <div class="float-end">
+                <div class="float-right">
                     <a href="{{ route('devices.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
                 </div>
             </div>
@@ -32,7 +22,7 @@
                     @csrf
                     @method("PUT")
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Numero de Serie</label>
+                            <label for="serie" class="col-md-4 col-form-label text-md-right text-left">Numero de Serie</label>
                             <div class="col-md-6">
                             <input type="text" class="form-control @error('serialnumber') is-invalid @enderror" id="serie" name="serialnumber" value="{{ $device->serialnumber }}">
                                 @if ($errors->has('serialnumber'))
@@ -41,7 +31,7 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="brand" class="col-md-4 col-form-label text-md-end text-start">Marca</label>
+                            <label for="brand" class="col-md-4 col-form-label text-md-right text-left">Marca</label>
                             <div class="col-md-6 ">
                                     <select class="form-control js-example-basic-single select2 @error('brand_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="tmarca" id="brand" name="brand_id">
                                         <option value="" disabled selected>Seleccione Item</option>
@@ -54,7 +44,7 @@
                             </div>
                       </div>
                       <div class="mb-3 row">
-                            <label for="carmodel" class="col-md-4 col-form-label text-md-end text-start">Modelo</label>
+                            <label for="carmodel" class="col-md-4 col-form-label text-md-right text-left">Modelo</label>
                             <div class="col-md-6 ">
                                     <select class="form-control js-example-basic-single select2 @error('carmodel_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="tmodelo" id="carmodel" name="carmodel_id">
                                         <option value="" disabled selected>Seleccione Item</option>
@@ -67,16 +57,16 @@
                             </div>
                       </div>
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Ram</label>
+                            <label for="ram" class="col-md-4 col-form-label text-md-right text-left">Ram</label>
                             <div class="col-md-6">
-                            <input type="numeric" class="form-control @error('ram') is-invalid @enderror" id="ram" name="ram" value="{{ $device->ram }}" min="1" max="100" step="1">
+                            <input type="number" class="form-control @error('ram') is-invalid @enderror" id="ram" name="ram" value="{{ $device->ram }}" min="1" max="100" step="1">
                                 @if ($errors->has('ram'))
                                     <span class="text-danger">{{ $errors->first('ram') }}</span>
                                 @endif
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Número de AnyDesk</label>
+                            <label for="anydesknumber" class="col-md-4 col-form-label text-md-right text-left">Número de AnyDesk</label>
                             <div class="col-md-6">
                             <input type="text" class="form-control @error('anydesknumber') is-invalid @enderror" id="anydesknumber" name="anydesknumber" value="{{ $device->anydesknumber }}" >
                                 @if ($errors->has('anydesknumber'))
@@ -85,7 +75,7 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Sistema Operativo</label>
+                            <label for="sistema" class="col-md-4 col-form-label text-md-right text-left">Sistema Operativo</label>
                             <div class="col-md-6 ">
                                     <select class="form-control js-example-basic-single select2 @error('operatingsystem_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="Tsistema" id="sistema" name="operatingsystem_id">
                                         <option value="" disabled selected>Seleccione Item</option>
@@ -99,7 +89,7 @@
                             </div>
                       </div>
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Tamaño de Disco</label>
+                            <label for="diskstorage" class="col-md-4 col-form-label text-md-right text-left">Tamaño de Disco</label>
                             <div class="col-md-6 ">
                                     <select class="form-control js-example-basic-single select2 @error('diskstorage_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="Tdisco" id="diskstorage" name="diskstorage_id">
                                         <option value="" disabled selected>Seleccione Item</option>
@@ -113,7 +103,7 @@
                             </div>
                       </div>
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Office</label>
+                            <label for="microsoftoffice" class="col-md-4 col-form-label text-md-right text-left">Office</label>
                             <div class="col-md-6 ">
                                     <select class="form-control js-example-basic-single select2 @error('microsoftoffice_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="Toffice" id="microsoftoffice" name="microsoftoffice_id">
                                         <option value="" disabled selected>Seleccione Item</option>
@@ -127,7 +117,7 @@
                             </div>
                       </div>
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Fecha de Compra</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right text-left">Fecha de Compra</label>
                             <div class="col-md-6 input-group-addon datepicker" style ='display: inline-flex;'>
                             <input type="text" class="form-control @error('datedevicepurchase') is-invalid @enderror" id="fecha" name="datedevicepurchase" value="{{ $device->datedevicepurchase }}">
                                 @if ($errors->has('datedevicepurchase'))
@@ -139,7 +129,7 @@
                             </div>
                         </div>
                         <div class="mb-3 row input-group">
-                          <label for="textarea" class="col-md-4 col-form-label text-md-end text-start">Comentarios</label>
+                          <label for="comentario" class="col-md-4 col-form-label text-md-right text-left">Comentarios</label>
                                 <div class="col-md-6">
                                    <textarea  type="text" rows="3" cols="1" class="form-control @error('devicecomment') is-invalid @enderror" id="comentario" name="devicecomment" value="{{ $device->devicecomment}}">{{ $device->devicecomment}}</textarea>
 
@@ -147,7 +137,7 @@
                          </div>
 
                         <div class="mb-3 row">
-                            <label for="sucursal" class="col-md-4 col-form-label text-md-end text-start">Sucursal</label>
+                            <label for="sucursal" class="col-md-4 col-form-label text-md-right text-left">Sucursal</label>
                                 <div class="col-md-6">
                                     <select class="form-control js-example-basic-single select2 @error('branch_office_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="sucursal" id="sucursal" name="branch_office_id">
                                         <option value="" disabled selected>Seleccione Item</option>
@@ -160,7 +150,7 @@
                                </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="roles" class="col-md-4 col-form-label text-md-end text-start">IP</label>
+                            <label for="direccionip" class="col-md-4 col-form-label text-md-right text-left">IP</label>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <select id="direccionip" name="ipaddress_id" class="form-control js-example-basic-single select2">
@@ -175,9 +165,9 @@
                             </div>
                         </div>
                       <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Colaborador</label>
+                            <label for="colaborador" class="col-md-4 col-form-label text-md-right text-left">Colaborador</label>
                             <div class="col-md-6 ">
-                            <select class="form-control js-example-basic-single select2 @error('employees') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="colaborador" id="colaborador" name="employee_id">
+                            <select class="form-control js-example-basic-single select2 @error('employee_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="colaborador" id="colaborador" name="employee_id">
                                         <option value="" disabled selected>Seleccione Item</option>
                                         @foreach ($employees as $employee)
                                          <option value="{{ $employee->id }}"  {{ $device->employee->id == $employee->id ? 'selected' : '' }}>
@@ -189,7 +179,7 @@
                         </div>
                       </div>
                       <div class="mb-3 row">
-                            <label for="tipodis" class="col-md-4 col-form-label text-md-end text-start">Tipos de dispositivo</label>
+                            <label for="tipodis" class="col-md-4 col-form-label text-md-right text-left">Tipos de dispositivo</label>
                             <div class="col-md-6 ">
                             <select class="form-control js-example-basic-single select2 @error('typedevice_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="tipodis" id="tipodis" name="typedevice_id">
                                         <option value="" disabled selected>Seleccione Item</option>
@@ -202,9 +192,9 @@
                         </div>
                       </div>
                       <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Tipos de Disco</label>
+                            <label for="disktype_id" class="col-md-4 col-form-label text-md-right text-left">Tipos de Disco</label>
                             <div class="col-md-6 ">
-                            <select class="form-control js-example-basic-single select2 @error('disktypes') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="tdisco" id="disktype_id" name="disktype_id">
+                            <select class="form-control js-example-basic-single select2 @error('disktype_id') is-invalid @enderror " data-placeholder="Seleccione Item"  aria-label="tdisco" id="disktype_id" name="disktype_id">
                                         <option value="" disabled selected>Seleccione Item</option>
                                         @foreach ($disktypes as $disktype)
                                          <option value="{{ $disktype->id }}"  {{ $device->disktype->id == $disktype->id ? 'selected' : '' }}>
@@ -216,19 +206,21 @@
                         </div>
                       </div>
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Foto</label>
+                            <label for="foto" class="col-md-4 col-form-label text-md-right text-left">Foto</label>
                             <div class="col-md-6">
-                            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="foto" name="photo" value="{{ $device->photo }}"  placeholder="foto">
+                            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="foto" name="photo" accept="image/*">
                             @if ($errors->has('photo'))
-                                 <img src="{{asset( $device->photo)}}" width="300px">
+                                 <span class="text-danger">{{ $errors->first('photo') }}</span>
                             @endif
-
+                            @if ($device->photo)
+                                 <img src="{{ asset($device->photo) }}" class="img-fluid mt-2" style="max-width:300px;" alt="Foto del dispositivo">
+                            @endif
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="text" class="col-md-4 col-form-label text-md-end text-start">Factura</label>
+                            <label for="invoicepath" class="col-md-4 col-form-label text-md-right text-left">Factura</label>
                                 <div class="col-md-6 input-group mb-3">
-                                    <button class="btn btn btn-info" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">Cambiar factura</button>
+                                    <button class="btn btn btn-info" type="button"  data-toggle="modal" data-target="#exampleModal">Cambiar factura</button>
                                     <input type="text" class="form-control @error('invoicepath') is-invalid @enderror" id="invoicepath" name="invoicepath" value="{{ $device->invoicepath }}" readonly>
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Ver Factura</button>
                                 </div>
@@ -267,7 +259,7 @@
                 </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>

@@ -28,7 +28,7 @@
             <i class="fas fa-plus"></i> Agregar filtro
         </button>
         <button type="button"
-            class="btn btn-outline-secondary btn-sm qb-clear-all ms-1"
+            class="btn btn-outline-secondary btn-sm qb-clear-all ml-1"
             data-table="{{ $tableId }}">
             <i class="fas fa-times"></i> Limpiar
         </button>
@@ -95,12 +95,12 @@
 
         var valueInput = buildValueInput(firstField, rowId);
 
-        return '<div class="row g-2 align-items-center mb-2 qb-row" data-row-id="' + rowId + '" data-table="' + TABLE_ID + '">'
-            + '<div class="col-auto"><span class="text-muted small fw-semibold">Buscar en</span></div>'
+        return '<div class="form-row align-items-center mb-2 qb-row" data-row-id="' + rowId + '" data-table="' + TABLE_ID + '">'
+            + '<div class="col-auto"><span class="text-muted small font-weight-bold">Buscar en</span></div>'
             + '<div class="col-md-3 col-sm-4">'
             +   '<select class="form-control form-control-sm qb-field" data-row="' + rowId + '">' + fieldOpts + '</select>'
             + '</div>'
-            + '<div class="col-auto"><span class="text-muted small fw-semibold">valor</span></div>'
+            + '<div class="col-auto"><span class="text-muted small font-weight-bold">valor</span></div>'
             + '<div class="col-md-2 col-sm-3">'
             +   '<select class="form-control form-control-sm qb-op" data-row="' + rowId + '">' + opOpts + '</select>'
             + '</div>'

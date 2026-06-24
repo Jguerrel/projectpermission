@@ -1,22 +1,11 @@
 @extends('adminlte::page')
 
+@section('content_header')
+    <h1>Licencia office</h1>
+@stop
+
 @section('content')
 
-<section class="content-header" >
-            <div class="container-fluid">
-                <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Licencia office</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active"><a href="#">Licencia office</a></li>
-
-                    </ol>
-                </div>
-                </div>
-            </div>
-</section>
 
 <div class="card card-info card-outline">
 
@@ -25,12 +14,14 @@
             <a href="{{ route('microsoftoffices.create')}}" class="btn btn-sidebar btn-sm my-2"><i class="fas fa-plus-circle"></i> Nuevo</a>
         @endcan
                      @if(session('success'))
-                        <div class="alert alert-success" id='success-message'>
+                        <div class="alert alert-success alert-dismissible fade show" id="success-message">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             {{ session('success') }}
                         </div>
                     @endif
                     @if(session('errors'))
-                        <div class="alert alert-danger" id='success-message'>
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             {{ session('errors') }}
                         </div>
                     @endif
@@ -67,7 +58,7 @@ $(document).ready(function() {
                     },
            processing: true,
            serverSide: true,
-           statesave: true,
+           stateSave: true,
            stateDuration: 0,
            ajax: {
                 url: "{{ route('microsoftoffices.pagination') }}",
@@ -88,7 +79,7 @@ $(document).ready(function() {
        setTimeout(function() {
             $('#success-message').fadeOut('slow');
 
-        }, 1500); // Cambiar 5000 por el número de milisegundos que desees
+        }, 4000); // tiempo antes de auto-ocultar el mensaje (ms)
 
 });
 </script>

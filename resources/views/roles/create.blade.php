@@ -1,30 +1,19 @@
 @extends('adminlte::page')
 
+@section('content_header')
+    <h1>Rol</h1>
+@stop
+
 @section('content')
 
-<section class="content-header" >
-            <div class="container-fluid">
-                <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Rol</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Rol</li>
-                    </ol>
-                </div>
-                </div>
-            </div><!-- /.container-fluid -->
-</section>
 <div class="row justify-content-center">
     <div class="col-md-12">
-        <div class="card car-info">
+        <div class="card card-info card-outline">
             <div class="card-header">
-                <div class="float-start">
+                <div class="float-left">
                     Nuevo Rol
                 </div>
-                <div class="float-end">
+                <div class="float-right">
                     <a href="{{ route('roles.index') }}" class="btn btn-info btn-sm">&larr; Volver</a>
                 </div>
             </div>
@@ -33,7 +22,7 @@
                     @csrf
 
                     <div class="mb-3 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start">Name</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-right text-left">Name</label>
                         <div class="col-md-6">
                           <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
                             @if ($errors->has('name'))
@@ -42,7 +31,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Permisos</label>
+                        <label for="permissions" class="col-md-4 col-form-label text-md-right text-left">Permisos</label>
                         <div class="col-md-6 form-group">
                             <select class="form-control select2 @error('permissions') is-invalid @enderror "  multiple  aria-label="permissions" id="permissions" name="permissions[]">
                                 @foreach ($permissions as $permission)
@@ -65,7 +54,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script>
  $(function () {
     //Initialize Select2 Elements

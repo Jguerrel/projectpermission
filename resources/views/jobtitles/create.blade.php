@@ -1,22 +1,11 @@
 @extends('adminlte::page')
 
+@section('content_header')
+    <h1>Cargos</h1>
+@stop
+
 @section('content')
 
-<section class="content-header" >
-            <div class="container-fluid">
-                <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Cargos</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('jobtitles.index') }}">Cargos</a></li>
-                    <li class="breadcrumb-item active">Nuevo</li>
-                    </ol>
-                </div>
-                </div>
-            </div><!-- /.container-fluid -->
-</section>
 
         <section class="content">
             <div class="container-fluid">
@@ -34,7 +23,7 @@
                          @csrf
                            <div class="card-body">
                                 <div class="mb-3 row">
-                                    <label for="name" class="col-md-4 col-form-label text-md-end text-start">Cargo</label>
+                                    <label for="name" class="col-md-4 col-form-label text-md-right text-left">Cargo</label>
                                     <div class="col-md-6">
                                     <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
                                         @if ($errors->has('name'))
@@ -43,9 +32,9 @@
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                        <label for="status" class="col-md-4 col-form-label text-md-end text-start">Estado</label>
+                                        <label for="status" class="col-md-4 col-form-label text-md-right text-left">Estado</label>
                                             <div class="col-md-6">
-                                                <input type="checkbox" class="@error('status') is-invalid @enderror" name="status" id='status' value="1" checked/>
+                                                <div class="custom-control custom-switch mt-2"><input type="checkbox" class="custom-control-input @error('status') is-invalid @enderror" name="status" id='status' value="1" checked/><label class="custom-control-label" for="status">Activo</label></div>
                                                     @if ($errors->has('status'))
                                                             <span class="text-danger">{{ $errors->first('status') }}</span>
                                                         @endif
